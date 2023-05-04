@@ -12,6 +12,7 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
     private static NetworkingManager _instance;
     [SerializeField] private TMP_InputField if_playerNickname;
     [SerializeField] private GameObject waitingForPlayersPanel;
+    [SerializeField] private String GameplaySceneName;
 
     // public variables
     public static NetworkingManager Instance { get => _instance; }
@@ -52,7 +53,7 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
         Debug.Log(newPlayer.NickName + " has joined the room");
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
-            PhotonNetwork.LoadLevel("Gameplay Scene");
+            PhotonNetwork.LoadLevel(GameplaySceneName);
         }
     }
 

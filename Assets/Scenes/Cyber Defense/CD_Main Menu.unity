@@ -2298,6 +2298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   if_playerNickname: {fileID: 551378327}
   waitingForPlayersPanel: {fileID: 1246022355}
+  GameplaySceneName: CD_Gameplay Scene
 --- !u!1 &1325035326
 GameObject:
   m_ObjectHideFlags: 0
