@@ -16,13 +16,15 @@ public class GridBuildingSystem3D : MonoBehaviour
     [SerializeField] private List<PlacedObjectTypeSO> placedObjectTypeSOList = null;
     private PlacedObjectTypeSO placedObjectTypeSO;
     private PlacedObjectTypeSO.Dir dir;
-
+    [SerializeField] private int gridWidth;
+    [SerializeField] private int gridHeight;
+    [SerializeField] private float cellSize;
     private void Awake() {
         Instance = this;
 
-        int gridWidth = 10;
-        int gridHeight = 10;
-        float cellSize = 5f;
+        //gridWidth = 10;
+        //gridHeight = 10;
+        //cellSize = 5f;
         grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, new Vector3(transform.position.x, transform.position.y, transform.position.z), (GridXZ<GridObject> g, int x, int y) => new GridObject(g, x, y));
 
         placedObjectTypeSO = null;// placedObjectTypeSOList[0];
@@ -61,6 +63,7 @@ public class GridBuildingSystem3D : MonoBehaviour
         }
 
         public bool CanBuild() {
+
             return placedObject == null;
         }
 
@@ -106,7 +109,7 @@ public class GridBuildingSystem3D : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) {
             dir = PlacedObjectTypeSO.GetNextDir(dir);
         }
-
+        placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType();//added to test on soska's phone to delete later
         if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); }
         if (Input.GetKeyDown(KeyCode.Alpha2)) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); }
         if (Input.GetKeyDown(KeyCode.Alpha3)) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); }
