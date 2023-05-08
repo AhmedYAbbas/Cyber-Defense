@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680d877661376e74bb63648a2300020b, type: 3}
   m_Name: Virus
   m_EditorClassIdentifier: 
-  CardColor: {r: 0.5283019, g: 0.48306352, b: 0, a: 1}
-  CardImage: {fileID: 0}
-  MalwareName: Virus
+  Name: 
+  Image: {fileID: 0}
   AttackDamage: 0
   MovementSpeed: 0
   AttackSpeed: 0
-  EnergyCost: 15
   IsRanged: 0
