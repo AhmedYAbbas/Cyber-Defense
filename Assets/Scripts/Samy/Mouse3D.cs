@@ -45,4 +45,22 @@ public class Mouse3D : MonoBehaviour {
         //}
     }
 
+    public static bool CANBUILD()
+    {
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        bool found = false;
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            print(hit.collider.tag);
+
+            if (hit.transform.CompareTag("Buildable"))
+            {
+                found = true;
+            }
+        }
+        return found;
+    }
 }
