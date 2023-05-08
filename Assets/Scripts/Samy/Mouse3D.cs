@@ -23,11 +23,26 @@ public class Mouse3D : MonoBehaviour {
 
     private Vector3 GetMouseWorldPosition_Instance() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, mouseColliderLayerMask)) {
-            return raycastHit.point;
-        } else {
-            return Vector3.zero;
-        }
+
+        bool found = false;
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            print(hit.collider.tag);
+            return hit.point;
+            //if (hit.transform.CompareTag("Buildable"))
+            //{
+            //    found = true;
+            //}
+        }return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //if (found)
+        //{
+        //    return hit.point;
+        //}
+        //else
+        //{
+        //    return Vector3.zero;
+        //}
     }
 
 }
