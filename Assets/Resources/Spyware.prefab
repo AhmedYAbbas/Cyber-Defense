@@ -15,8 +15,10 @@ GameObject:
   - component: {fileID: 3146226787724037271}
   - component: {fileID: 8848534014275555285}
   - component: {fileID: -4412060083471391132}
+  - component: {fileID: -3623829776962801455}
+  - component: {fileID: -2556976482329418256}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Spyware
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,9 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9d79abe79a3804e9d0d822b211b6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _malwareData: {fileID: 11400000, guid: 09b070ecbf149f54589e4008575219c9, type: 2}
-<<<<<<<< HEAD:Assets/Resources/Virus.prefab
---- !u!114 &2705675335273448647
+  _malwareData: {fileID: 11400000, guid: a40e017ccf1541f49a5b90e9f4317494, type: 2}
+--- !u!114 &-3623829776962801455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,11 +168,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 2791371688672372525}
+  - {fileID: -2556976482329418256}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2791371688672372525
+--- !u!114 &-2556976482329418256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,5 +188,3 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
-========
->>>>>>>> Development:Assets/Prefabs/Sphere.prefab
