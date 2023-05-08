@@ -28,7 +28,7 @@ public class Mouse3D : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            print(hit.collider.tag);
+            print(hit.collider.tag + " v "+hit.collider.name);
             return hit.point;
             //if (hit.transform.CompareTag("Buildable"))
             //{

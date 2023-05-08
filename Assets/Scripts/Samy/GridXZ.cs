@@ -66,7 +66,7 @@ public class GridXZ<TGridObject> {
     }
 
     public Vector3 GetWorldPosition(int x, int z) {
-        return new Vector3(x, 0, z) * cellSize + originPosition;
+        return new Vector3(x ,0, z) * cellSize + originPosition;
     }
 
     public void GetXZ(Vector3 worldPosition, out int x, out int z) {

@@ -87,7 +87,7 @@ public class GridBuildingSystem3D : MonoBehaviour
                 }
             }
             bool shit = Mouse3D.CANBUILD();
-            print("Can biuild shidsaihisa" + shit);
+            print("Can build ===============================" + shit);
             if (canBuild && shit)
             {
                 Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
