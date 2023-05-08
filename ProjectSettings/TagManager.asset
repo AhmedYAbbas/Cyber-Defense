@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Road
   - Tower
-  - Buildable
   layers:
   - Default
   - TransparentFX
@@ -15,7 +14,7 @@ TagManager:
   - Water
   - UI
   - 
-  - Buildable
+  - 
   - 
   - 
   - 

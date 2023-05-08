@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256622814342812294}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 1}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 1.25, y: 1.25, z: 1.25}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1494383052549586539}
@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 1460355326290766105}
   - component: {fileID: 8843172822022724078}
   - component: {fileID: 8318947086595861584}
-  - component: {fileID: -3945783566386751352}
   m_Layer: 0
   m_Name: TOWERSHIT
   m_TagString: Untagged
@@ -147,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
+  m_SynchronizeScale: 0
   m_UseLocal: 1
 --- !u!114 &8843172822022724078
 MonoBehaviour:
@@ -184,16 +183,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc20383c45d8c64e83dacec1e6d067e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &-3945783566386751352
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9003858127428695650}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
