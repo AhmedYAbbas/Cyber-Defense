@@ -47,7 +47,7 @@ public class SpawnManager : MonoBehaviour
                 //Instantiate(characterPrefab, spawnPosition, Quaternion.identity);
                 if (ObjectEnergyCost <= EnergyManager.Instance._energy)
                 {
-                    MalwaresManager.Instance.SpawnMalware(ObjectName, spawnPosition);
+                    PhotonNetwork.Instantiate(ObjectName, spawnPosition, Quaternion.identity);
                     EnergyManager.Instance.DecreaseEnergy(ObjectEnergyCost);
                 }
             }
