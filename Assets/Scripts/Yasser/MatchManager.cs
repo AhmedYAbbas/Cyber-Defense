@@ -38,7 +38,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
 
     #region Private Variables
 
-    private const string GAMEPLAY_SCENE_NAME = "CD_Gameplay Scene";
+    [SerializeField] string GAMEPLAY_SCENE_NAME;
 
     private Side _pSide = Side.Defender;
 
@@ -135,7 +135,9 @@ public class MatchManager : MonoBehaviourPunCallbacks
     private void ResetTime(EventData obj)
     {
         if (obj.Code == TimeEndedEventCode)
+        {
             roundTime = 5f;
+        }
     }
 
     private void SwitchSide(EventData obj)
