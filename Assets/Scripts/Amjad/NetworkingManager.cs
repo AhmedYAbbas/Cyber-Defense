@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
@@ -12,7 +10,7 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
     private static NetworkingManager _instance;
     [SerializeField] private TMP_InputField if_playerNickname;
     [SerializeField] private GameObject waitingForPlayersPanel;
-    [SerializeField] private String GameplaySceneName;
+    [SerializeField] private string _gameplaySceneName;
 
     // public variables
     public static NetworkingManager Instance { get => _instance; }
@@ -53,7 +51,7 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
         Debug.Log(newPlayer.NickName + " has joined the room");
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
-            PhotonNetwork.LoadLevel(GameplaySceneName);
+            PhotonNetwork.LoadLevel(_gameplaySceneName);
         }
     }
 
