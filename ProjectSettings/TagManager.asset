@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Road
   - Tower
+  - Buildable
+  - GHOSTSHIT
   layers:
   - Default
   - TransparentFX
