@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 3146226787724037271}
   - component: {fileID: 8848534014275555285}
   - component: {fileID: -4412060083471391132}
-  - component: {fileID: 7420049462820915494}
-  - component: {fileID: -8466256644926736494}
+  - component: {fileID: 999438071683363152}
+  - component: {fileID: 884059800596427982}
   m_Layer: 0
-  m_Name: Adware
+  m_Name: Trojan Horse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,8 +148,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9d79abe79a3804e9d0d822b211b6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _malwareData: {fileID: 11400000, guid: 88f4637d202b45e409542982a1b5b867, type: 2}
---- !u!114 &7420049462820915494
+  _malwareData: {fileID: 11400000, guid: 643a19e3cc8c6e84b90e6cfbc01d51a7, type: 2}
+  Name: 
+  AttackDamage: 0
+  MovementSpeed: 0
+  AttackSpeed: 0
+  EnergyCost: 0
+  IsRanged: 0
+--- !u!114 &999438071683363152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,11 +174,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: -8466256644926736494}
+  - {fileID: 884059800596427982}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-8466256644926736494
+--- !u!114 &884059800596427982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

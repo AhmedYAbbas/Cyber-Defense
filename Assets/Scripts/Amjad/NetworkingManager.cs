@@ -18,6 +18,7 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        PhotonNetwork.GameVersion = "v1.0";
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.ConnectUsingSettings();
         if (!_instance)
