@@ -33,7 +33,7 @@ public class GridXZ<TGridObject> {
             }
         }
 
-        bool showDebug = false;//HEEEEEEEEEEEEEEERRRRRRRRRRREEEEEEEEEEEEEEEEEEEEEEEEEEEEEe
+        bool showDebug = false;
         if (showDebug) {
             TextMesh[,] debugTextArray = new TextMesh[width, height];
 

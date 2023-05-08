@@ -80,16 +80,14 @@ public class GridBuildingSystem3D : MonoBehaviour
             // Test Can Build
             List<Vector2Int> gridPositionList = placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, dir);
             bool canBuild = true;
-            print(gridPositionList[0]);
             foreach (Vector2Int gridPosition in gridPositionList) {
                 if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild()) {
                     canBuild = false;
                     break;
                 }
             }
-            bool shit = Mouse3D.CANBUILD();
-            print("Can biuild shidsaihisa"+ shit);
-            if (canBuild && shit) {
+
+            if (canBuild) {
                 Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
                 Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
 
