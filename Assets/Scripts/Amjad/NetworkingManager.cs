@@ -18,7 +18,7 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
     private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-        PhotonNetwork.GameVersion = "v0.1";
+        PhotonNetwork.GameVersion = "v0.2";
         PhotonNetwork.ConnectUsingSettings();
 
         if (!_instance)
@@ -61,4 +61,5 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.NickName = if_playerNickname.text;
     }
+
 }

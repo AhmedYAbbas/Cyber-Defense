@@ -150,6 +150,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
             }
 
             UILayer.Instance.LoadPlayerUI((Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE]);
+            StartMatch();
         }
 
     }

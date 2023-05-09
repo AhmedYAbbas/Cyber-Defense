@@ -40,7 +40,7 @@ public class SpawnManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.transform.CompareTag("Road"))
+            if (hit.transform.CompareTag("Road")&&(MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker )
             {
                 Vector3 spawnPosition = hit.point;
                 spawnPosition.y += .3f;
@@ -51,6 +51,7 @@ public class SpawnManager : MonoBehaviour
                     EnergyManager.Instance.DecreaseEnergy(ObjectEnergyCost);
                 }
             }
+
         }
     }
 }
