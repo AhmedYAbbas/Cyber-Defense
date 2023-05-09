@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using CodeMonkey.Utils;
+using Photon.Pun;
 
 public class GridBuildingSystem3D : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GridBuildingSystem3D : MonoBehaviour
     [SerializeField] private int gridWidth;
     [SerializeField] private int gridHeight;
     [SerializeField] private float cellSize;
+    [SerializeField] bool isDefender;
     private void Awake() {
         Instance = this;
 
@@ -70,7 +72,12 @@ public class GridBuildingSystem3D : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(0) && placedObjectTypeSO != null) {
+            InputHandler();
+    }
+    private void InputHandler()
+    {
+        if (Input.GetMouseButtonDown(0) && placedObjectTypeSO != null)
+        {
             Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
             grid.GetXZ(mousePosition, out int x, out int z);
 
@@ -80,8 +87,10 @@ public class GridBuildingSystem3D : MonoBehaviour
             // Test Can Build
             List<Vector2Int> gridPositionList = placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, dir);
             bool canBuild = true;
-            foreach (Vector2Int gridPosition in gridPositionList) {
-                if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild()) {
+            foreach (Vector2Int gridPosition in gridPositionList)
+            {
+                if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild())
+                {
                     canBuild = false;
                     break;
                 }
@@ -95,49 +104,59 @@ public class GridBuildingSystem3D : MonoBehaviour
 
                 PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, dir, placedObjectTypeSO);
 
-                foreach (Vector2Int gridPosition in gridPositionList) {
+                foreach (Vector2Int gridPosition in gridPositionList)
+                {
                     grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
                 }
 
                 OnObjectPlaced?.Invoke(this, EventArgs.Empty);
 
                 //DeselectObjectType();
-            } else {
+            }
+            else
+            {
                 // Cannot build here
                 UtilsClass.CreateWorldTextPopup("Cannot Build Here!", mousePosition);
             }
         }
+        //if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); }
 
-        if (Input.GetKeyDown(KeyCode.R)) {
-            dir = PlacedObjectTypeSO.GetNextDir(dir);
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha0)) { DeselectObjectType(); }
+
+        placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType();
+
+
+
+
+
+        /////////////////////////////////////////////////// TO DELETE THE TOWER
+        //if (Input.GetMouseButtonDown(1)) {
+        //    Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
+        //    if (grid.GetGridObject(mousePosition) != null) {
+        //        // Valid Grid Position
+        //        PlacedObject_Done placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
+        //        if (placedObject != null) {
+        //            // Demolish
+        //            placedObject.DestroySelf();
+
+        //            List<Vector2Int> gridPositionList = placedObject.GetGridPositionList();
+        //            foreach (Vector2Int gridPosition in gridPositionList) {
+        //                grid.GetGridObject(gridPosition.x, gridPosition.y).ClearPlacedObject();
+        //            }
+        //        }
+        //    }
+        //}
+
+
+
+
+
+        /////////////////////////////////////// TO ROTATE THE TOWER
+        //if (Input.GetKeyDown(KeyCode.R)) {
+        //    dir = PlacedObjectTypeSO.GetNextDir(dir);
+        //}
         //placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType();//added to test on soska's phone to delete later
-        if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); }
-        if (Input.GetKeyDown(KeyCode.Alpha3)) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); }
-        if (Input.GetKeyDown(KeyCode.Alpha4)) { placedObjectTypeSO = placedObjectTypeSOList[3]; RefreshSelectedObjectType(); }
-        if (Input.GetKeyDown(KeyCode.Alpha5)) { placedObjectTypeSO = placedObjectTypeSOList[4]; RefreshSelectedObjectType(); }
-        if (Input.GetKeyDown(KeyCode.Alpha6)) { placedObjectTypeSO = placedObjectTypeSOList[5]; RefreshSelectedObjectType(); }
 
-        if (Input.GetKeyDown(KeyCode.Alpha0)) { DeselectObjectType(); }
-
-
-        if (Input.GetMouseButtonDown(1)) {
-            Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
-            if (grid.GetGridObject(mousePosition) != null) {
-                // Valid Grid Position
-                PlacedObject_Done placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
-                if (placedObject != null) {
-                    // Demolish
-                    placedObject.DestroySelf();
-
-                    List<Vector2Int> gridPositionList = placedObject.GetGridPositionList();
-                    foreach (Vector2Int gridPosition in gridPositionList) {
-                        grid.GetGridObject(gridPosition.x, gridPosition.y).ClearPlacedObject();
-                    }
-                }
-            }
-        }
     }
 
     private void DeselectObjectType() {

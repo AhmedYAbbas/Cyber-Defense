@@ -149,6 +149,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _malwareData: {fileID: 11400000, guid: 88f4637d202b45e409542982a1b5b867, type: 2}
+  Name: 
+  AttackDamage: 0
+  MovementSpeed: 0
+  AttackSpeed: 0
+  EnergyCost: 0
+  IsRanged: 0
 --- !u!114 &7420049462820915494
 MonoBehaviour:
   m_ObjectHideFlags: 0

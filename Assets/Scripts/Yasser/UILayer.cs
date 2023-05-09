@@ -1,17 +1,24 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class UILayer : MonoBehaviour
 {
-    public GameObject timerGameObject;
-
     #region Serialized Fields
 
     [SerializeField] private GameObject attackerUI;
     [SerializeField] private GameObject defenderUI;
+    [SerializeField] private GameObject switchingSidesPanel;
 
     #endregion
 
     #region Public Variables
+
+    public GameObject timerGameObject;
+    public TextMeshProUGUI roundText;
+    public TextMeshProUGUI p1WinsText;
+    public TextMeshProUGUI p2WinsText;
+    public GameObject GameEndedPanel;
 
     public static UILayer Instance { get; private set; }
 
@@ -55,32 +62,11 @@ public class UILayer : MonoBehaviour
         }
     }
 
-    public void SwitchPlayerUI(MatchManager.Side side)
+    public IEnumerator EnableSwitchingSidesPanel()
     {
-        switch (side)
-        {
-            case MatchManager.Side.Attacker:
-                defenderUI.SetActive(false);
-                attackerUI.SetActive(true);
-                break;
-            case MatchManager.Side.Defender:
-                attackerUI.SetActive(false);
-                defenderUI.SetActive(true);
-                break;
-        }
-    }
-
-    public void DisablePlayerUI(MatchManager.Side side)
-    {
-        switch (side)
-        {
-            case MatchManager.Side.Attacker:
-                attackerUI.SetActive(false);
-                break;
-            case MatchManager.Side.Defender:
-                defenderUI.SetActive(false);
-                break;
-        }
+        switchingSidesPanel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        switchingSidesPanel.gameObject.SetActive(false);
     }
 
     #endregion
