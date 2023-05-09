@@ -170,7 +170,6 @@ public class MatchManager : MonoBehaviourPunCallbacks
                 player.CustomProperties[CustomKeys.P_SIDE] = 1 - (Side)player.CustomProperties[CustomKeys.P_SIDE];
             }
 
-
             if (currentRound >= 2)
             {
                 if (_p1Wins > _p2Wins)

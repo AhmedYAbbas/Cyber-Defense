@@ -6,8 +6,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     #region Public Variables
 
-    public GameManager Instance { get; private set; }
-
+    public static GameManager Instance { get; private set; }
+    public GameObject TowerManager;
     #endregion
 
     #region Unity Callbacks
@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             MatchManager.Instance.BaseDestroyedRaiseEvent();
         }
     }
-
     #endregion
 
     public void UpdateUI()
