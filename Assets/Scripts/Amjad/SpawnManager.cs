@@ -54,6 +54,10 @@ public class SpawnManager : MonoBehaviour
                         EnergyManager.Instance.DecreaseEnergy(ObjectEnergyCost);
                     }
                 }
+                else
+                {
+                    //TODO: Add defender spawning logic
+                }
             }
             else
             {

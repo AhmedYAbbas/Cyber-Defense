@@ -23,7 +23,6 @@ public class Timer : MonoBehaviour
             }
         }
 
-        Debug.Log(_canRaiseEvent);
         DisplayTime(MatchManager.Instance.roundTime);
     }
 
