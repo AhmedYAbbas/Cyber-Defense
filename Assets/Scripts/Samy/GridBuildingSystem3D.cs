@@ -119,10 +119,11 @@ public class GridBuildingSystem3D : MonoBehaviour
                 UtilsClass.CreateWorldTextPopup("Cannot Build Here!", mousePosition);
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); }
+        //if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); }
 
-        if (Input.GetKeyDown(KeyCode.Alpha0)) { DeselectObjectType(); }
+        //if (Input.GetKeyDown(KeyCode.Alpha0)) { DeselectObjectType(); }
 
+        placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType();
 
 
 
