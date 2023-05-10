@@ -1,5 +1,4 @@
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine;
 
 public class GameManager : MonoBehaviourPunCallbacks
@@ -24,8 +23,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    private void Start()
+    public override void OnEnable()
     {
+        base.OnEnable();
         UpdateUI();
     }
 

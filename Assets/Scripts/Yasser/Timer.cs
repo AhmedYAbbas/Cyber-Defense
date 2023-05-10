@@ -1,11 +1,11 @@
-using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
-    private bool _canRaiseEvent = false;
+    private bool _canRaiseEvent;
+    private float remainingTime;
 
     private void Update()
     {
@@ -13,6 +13,8 @@ public class Timer : MonoBehaviour
         {
             MatchManager.Instance.roundTime -= Time.deltaTime;
             _canRaiseEvent = true;
+
+            Debug.Log(MatchManager.Instance.roundTime);
         }
         else
         {

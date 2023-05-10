@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -70,4 +71,10 @@ public class UILayer : MonoBehaviour
     }
 
     #endregion
+
+    public void ReturnToMainMenu()
+    {
+        PhotonNetwork.LoadLevel(0);
+        Destroy(gameObject, 2.0f);
+    }
 }
