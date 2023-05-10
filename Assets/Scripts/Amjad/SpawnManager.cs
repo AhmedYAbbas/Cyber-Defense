@@ -1,3 +1,4 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -43,7 +44,7 @@ public class SpawnManager : MonoBehaviour
             if ((MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker)
             {
                 GameManager.Instance.TowerManager.SetActive(false);
-                if (hit.transform.CompareTag("Road"))
+                if (hit.transform.CompareTag("Road") && !String.IsNullOrEmpty(ObjectName))
                 {
                     Vector3 spawnPosition = hit.point;
                     spawnPosition.y += .3f;
@@ -53,10 +54,6 @@ public class SpawnManager : MonoBehaviour
                         MalwaresManager.Instance.SpawnMalware(ObjectName, spawnPosition);
                         EnergyManager.Instance.DecreaseEnergy(ObjectEnergyCost);
                     }
-                }
-                else
-                {
-                    //TODO: Add defender spawning logic
                 }
             }
             else

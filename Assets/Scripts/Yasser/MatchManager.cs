@@ -1,4 +1,3 @@
-using System.Collections;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
@@ -12,6 +11,8 @@ public class MatchManager : MonoBehaviourPunCallbacks
 
     private const byte TimeEndedEventCode = 1;
     private const byte BaseDestroyedEventCode = 2;
+    private const byte MatchEndedEventCode = 3;
+    private const byte MatchStartedEventCode = 4;
 
     #endregion
 
@@ -22,8 +23,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
         Attacker,
         Defender
     }
-
-    public float roundTime = 12f;
+    public float roundTime;
     public int currentRound = 1;
 
     // TODO: Define a setter maybe and change it to be private
@@ -40,7 +40,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
     private Side _pSide = Side.Defender;
 
     private const int WINS_REQUIRED = 2;
-    private const float ROUND_START_TIME = 13f;
+    public static float ROUND_START_TIME = 13f;
     private int _p1Wins;
     private int _p2Wins;
 
@@ -53,13 +53,16 @@ public class MatchManager : MonoBehaviourPunCallbacks
     {
         base.OnEnable();
         PhotonNetwork.NetworkingClient.EventReceived += SwitchSide;
+        PhotonNetwork.NetworkingClient.EventReceived += DisconnectPlayers;
+        PhotonNetwork.NetworkingClient.EventReceived += StartMatchDataSet;
     }
 
     public override void OnDisable()
     {
         base.OnDisable();
         PhotonNetwork.NetworkingClient.EventReceived -= SwitchSide;
-
+        PhotonNetwork.NetworkingClient.EventReceived -= DisconnectPlayers;
+        PhotonNetwork.NetworkingClient.EventReceived -= StartMatchDataSet;
     }
 
     private void Awake()
@@ -111,16 +114,28 @@ public class MatchManager : MonoBehaviourPunCallbacks
         newPlayer.CustomProperties[CustomKeys.P_SIDE] = 1 - (Side)PhotonNetwork.MasterClient.CustomProperties[CustomKeys.P_SIDE];
         newPlayer.CustomProperties[CustomKeys.WINS] = _p2Wins;
 
+        MatchStartedRaiseEvent();
+
         StartMatch();
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        ResetMatch();
     }
 
     #endregion
 
     #region Public Methods
 
+    // TODO: we need an event that is called once the game is ready to start so that it resets the data before entering the gameplay scene.
     public void ResetMatch()
     {
-        _p1Wins = _p2Wins = 0;
+        _p1Wins = 0;
+        _p2Wins = 0;
+        currentRound = 1;
+        _destroyedDefenderBase = false;
+        ResetTime();
     }
 
     public void SwitchSideRaiseEvent()
@@ -138,11 +153,23 @@ public class MatchManager : MonoBehaviourPunCallbacks
         PhotonNetwork.RaiseEvent(BaseDestroyedEventCode, null, raiseEventOptions, SendOptions.SendReliable);
     }
 
+    public void MatchEndedRaiseEvent()
+    {
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+        PhotonNetwork.RaiseEvent(MatchEndedEventCode, null, raiseEventOptions, SendOptions.SendReliable);
+    }
+
+    public void MatchStartedRaiseEvent()
+    {
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+        PhotonNetwork.RaiseEvent(MatchStartedEventCode, null, raiseEventOptions, SendOptions.SendReliable);
+    }
+
     #endregion
 
     #region Private Methods
 
-    public void StartMatch()
+    private void StartMatch()
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
@@ -160,33 +187,23 @@ public class MatchManager : MonoBehaviourPunCallbacks
     {
         if (obj.Code == TimeEndedEventCode || obj.Code == BaseDestroyedEventCode)
         {
+            CheckWinner(PhotonNetwork.LocalPlayer);
+
             foreach (Player player in PhotonNetwork.PlayerList)
             {
-                // Not sure if that's the right thing and I need more testing with advanced cases
-                // Maybe when we add the main logic??
-                //if (PhotonNetwork.IsMasterClient)
-                CheckWinner(player);
-
                 player.CustomProperties[CustomKeys.P_SIDE] = 1 - (Side)player.CustomProperties[CustomKeys.P_SIDE];
             }
 
-            if (currentRound >= 2)
+            if (currentRound >= WINS_REQUIRED)
             {
-                if (_p1Wins > _p2Wins)
+                if (_p1Wins > _p2Wins || _p2Wins > _p1Wins)
                 {
-                    Debug.Log("P1 Wins");
-                    //UILayer.Instance.GameEndedPanel.SetActive(true);
-                    //Time.timeScale = 0;
-                }
-                else if (_p2Wins > _p1Wins)
-                {
-                    Debug.Log("P2 Wins");
-                    //UILayer.Instance.GameEndedPanel.SetActive(true);
-                    //Time.timeScale = 0;
+                    UILayer.Instance.GameEndedPanel.SetActive(true);
+
+                    // Disconnects the player
+                    MatchEndedRaiseEvent();
                 }
             }
-
-            print(currentRound + " " + _p1Wins + " " + _p2Wins);
 
             StartCoroutine(UILayer.Instance.EnableSwitchingSidesPanel());
 
@@ -224,7 +241,29 @@ public class MatchManager : MonoBehaviourPunCallbacks
         {
             RecordRoundWinner(player);
         }
+        else
+        {
+            RecordRoundWinner(PhotonNetwork.PlayerListOthers[0]);
+        }
     }
 
     #endregion
+
+
+    private void DisconnectPlayers(EventData obj)
+    {
+        if (obj.Code == MatchEndedEventCode)
+        {
+            PhotonNetwork.Disconnect();
+        }
+    }
+
+    // Reset Match Data
+    private void StartMatchDataSet(EventData obj)
+    {
+        if (obj.Code == MatchStartedEventCode)
+        {
+            ResetMatch();
+        }
+    }
 }
