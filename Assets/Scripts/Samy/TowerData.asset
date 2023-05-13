@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameString: TESTSHIT
   prefab: {fileID: 1494383052549586539, guid: ca4911d0a84940e45a40ce9f56503142, type: 3}
-  visual: {fileID: 1494383052549586539, guid: ca4911d0a84940e45a40ce9f56503142, type: 3}
+  visual: {fileID: 1494383052549586539, guid: c96d310c154b25a46b68bcc1f420de83, type: 3}
   width: 1
   height: 1
+  range: 2

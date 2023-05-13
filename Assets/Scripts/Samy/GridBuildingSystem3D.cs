@@ -20,7 +20,6 @@ public class GridBuildingSystem3D : MonoBehaviour
     [SerializeField] private int gridWidth;
     [SerializeField] private int gridHeight;
     [SerializeField] private float cellSize;
-    [SerializeField] bool isDefender;
     private void Awake() {
         Instance = this;
 
@@ -29,7 +28,8 @@ public class GridBuildingSystem3D : MonoBehaviour
         //cellSize = 5f;
         grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, new Vector3(transform.position.x, transform.position.y, transform.position.z), (GridXZ<GridObject> g, int x, int y) => new GridObject(g, x, y));
 
-        placedObjectTypeSO = null;// placedObjectTypeSOList[0];
+        //placedObjectTypeSO = null;
+        placedObjectTypeSO = placedObjectTypeSOList[0];
     }
 
     public class GridObject {
@@ -76,7 +76,7 @@ public class GridBuildingSystem3D : MonoBehaviour
     }
     private void InputHandler()
     {
-        if (Input.GetMouseButtonDown(0) && placedObjectTypeSO != null)
+        if (/*Input.GetMouseButtonDown(0)*/TouchInputManager.Instance.GetTouchPhase()==TouchPhase.Ended && placedObjectTypeSO != null)
         {
             Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
             grid.GetXZ(mousePosition, out int x, out int z);
@@ -95,7 +95,7 @@ public class GridBuildingSystem3D : MonoBehaviour
                     break;
                 }
             }
-            bool shit = Mouse3D.CANBUILD();
+            bool shit = TouchInputManager.Instance.CANBUILD();
             print("Can build ===============================" + shit);
             if (canBuild && shit)
             {
@@ -123,13 +123,16 @@ public class GridBuildingSystem3D : MonoBehaviour
 
         //if (Input.GetKeyDown(KeyCode.Alpha0)) { DeselectObjectType(); }
 
-        placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType();
+        placedObjectTypeSO = placedObjectTypeSOList[0]; 
+        RefreshSelectedObjectType();
 
 
 
 
 
-        /////////////////////////////////////////////////// TO DELETE THE TOWER
+        /////////////////////////////////////////////////// TO DELETE THE TOWER ////////////////////////
+        ///
+
         //if (Input.GetMouseButtonDown(1)) {
         //    Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
         //    if (grid.GetGridObject(mousePosition) != null) {
@@ -151,7 +154,9 @@ public class GridBuildingSystem3D : MonoBehaviour
 
 
 
-        /////////////////////////////////////// TO ROTATE THE TOWER
+        /////////////////////////////////////// TO ROTATE THE TOWER //////////////////////////////////
+        ///
+
         //if (Input.GetKeyDown(KeyCode.R)) {
         //    dir = PlacedObjectTypeSO.GetNextDir(dir);
         //}
@@ -174,7 +179,8 @@ public class GridBuildingSystem3D : MonoBehaviour
     }
 
     public Vector3 GetMouseWorldSnappedPosition() {
-        Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
+        //Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
+        Vector3 mousePosition = TouchInputManager.Instance.GetTouchWorldPosition();
         grid.GetXZ(mousePosition, out int x, out int z);
 
         if (placedObjectTypeSO != null) {

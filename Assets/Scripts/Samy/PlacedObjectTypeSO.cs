@@ -5,6 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TowerData", menuName = "ScriptableObjects/TowerData")]
 public class PlacedObjectTypeSO : ScriptableObject {
 
+
+
+    public string nameString;
+    public Transform prefab;
+    public Transform visual;
+    public int width;
+    public int height;
+    public float range;
+    
     public static Dir GetNextDir(Dir dir) {
         switch (dir) {
             default:
@@ -21,14 +30,6 @@ public class PlacedObjectTypeSO : ScriptableObject {
         Up,
         Right,
     }
-
-    public string nameString;
-    public Transform prefab;
-    public Transform visual;
-    public int width;
-    public int height;
-
-
     public int GetRotationAngle(Dir dir) {
         switch (dir) {
             default:

@@ -26,7 +26,7 @@ public class Mouse3D : MonoBehaviour {
 
         bool found = false;
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, 999f, mouseColliderLayerMask))
         {
             print(hit.collider.tag + " v "+hit.collider.name);
             return hit.point;
@@ -45,14 +45,14 @@ public class Mouse3D : MonoBehaviour {
         //}
     }
 
-    public static bool CANBUILD()
+    public  bool CANBUILD()
     {
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         bool found = false;
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit,999f, mouseColliderLayerMask))
         {
             print(hit.collider.tag);
 
