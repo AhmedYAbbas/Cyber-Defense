@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 680d877661376e74bb63648a2300020b, type: 3}
-  m_Name: Spyware
+  m_Name: Ransomware
   m_EditorClassIdentifier: 
   CardColor: {r: 0, g: 0.098689005, b: 0.46226418, a: 1}
   CardImage: {fileID: 0}
-  MalwareName: Spyware
-  AttackDamage: 0
-  MovementSpeed: 0
-  AttackSpeed: 0
-  EnergyCost: 4
+  MalwareName: Ransomware
+  AttackDamage: 30
+  MovementSpeed: 40
+  Health: 90
+  Shield: 90
+  EnergyCost: 15
   IsRanged: 0
