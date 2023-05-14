@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +9,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private TMP_InputField if_playerNickName;
     [SerializeField] private Button btn_LetsGo;
     [SerializeField] private GameObject welcomePanel;
+    [SerializeField] private GameObject createOrJoinRandomPanel;
+    [SerializeField] private GameObject waitingForPlayersPanel;
 
     void Start()
     {
@@ -40,9 +39,25 @@ public class MainMenuManager : MonoBehaviour
         PlayerPrefs.SetString("NickName", if_playerNickName.text);
     }
 
-    public void StartGame()
+    public void CreateOrJoinRoom(TMP_Text RoomName)
     {
-        NetworkingManager.Instance.JoinOrCreateRoom();
+        if (string.IsNullOrEmpty(RoomName.text))
+        {
+            return;
+        }
+        else
+        {
+            NetworkingManager.Instance.CreateOrJoinRoom(RoomName.text);
+            createOrJoinRandomPanel.SetActive(false);
+            waitingForPlayersPanel.SetActive(true);
+        }
+    }
+
+    public void JoinRandomRoom()
+    {
+        NetworkingManager.Instance.QuickMatch();
+        createOrJoinRandomPanel.SetActive(false);
+        waitingForPlayersPanel.SetActive(true);
     }
 
     public void Options()
