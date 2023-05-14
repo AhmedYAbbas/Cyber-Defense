@@ -3,13 +3,13 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using System.Collections.Generic;
 
 public class NetworkingManager : MonoBehaviourPunCallbacks
 {
     // private variables
     private static NetworkingManager _instance;
     [SerializeField] private TMP_InputField if_playerNickname;
-    [SerializeField] private GameObject waitingForPlayersPanel;
 
     // public variables
     public static NetworkingManager Instance { get => _instance; }
@@ -32,9 +32,14 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void JoinOrCreateRoom()
+    public void QuickMatch()
     {
         PhotonNetwork.JoinRandomRoom();
+    }
+
+    public void CreateOrJoinRoom(string RoomName)
+    {
+        PhotonNetwork.JoinOrCreateRoom(RoomName,null,null,null);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
@@ -44,7 +49,7 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        waitingForPlayersPanel.SetActive(true);
+        //waitingForPlayersPanel.SetActive(true);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -61,5 +66,4 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.NickName = if_playerNickname.text;
     }
-
 }
