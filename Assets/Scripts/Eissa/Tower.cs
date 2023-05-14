@@ -125,7 +125,7 @@ public class Tower : MonoBehaviour
             }
             //float enemyDistanceFromTower = Vector3.Distance(transform.position, _enemies[i].transform.position);
             var test = _enemies[i].GetComponent<Malware>();
-            float currentDangerousLevel = (-i+1) * 0.6f + (0.2f * test.speed) ;
+            float currentDangerousLevel = (-i+1) * 0.6f + (0.2f * test.MovementSpeed) ;
             if (dangerousLevel < currentDangerousLevel)
             {
                 dangerousLevel = currentDangerousLevel;
