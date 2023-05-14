@@ -6,8 +6,8 @@ using Photon.Pun;
 public class PlacedObject_Done : MonoBehaviour {
 
     public static PlacedObject_Done Create(Vector3 worldPosition, Vector2Int origin, PlacedObjectTypeSO.Dir dir, PlacedObjectTypeSO placedObjectTypeSO) {
-        GameObject placedObjectTransform = PhotonNetwork.Instantiate(placedObjectTypeSO.prefab.name, worldPosition, Quaternion.Euler(0, placedObjectTypeSO.GetRotationAngle(dir), 0));
-        placedObjectTransform.AddComponent<BoxCollider>();
+        GameObject placedObjectTransform = PhotonNetwork.Instantiate(placedObjectTypeSO.prefab.name, worldPosition, Quaternion.Euler(0, 0, 0));
+        //placedObjectTransform.AddComponent<BoxCollider>();
         PlacedObject_Done placedObject = placedObjectTransform.GetComponent<PlacedObject_Done>();
         placedObject.Setup(placedObjectTypeSO, origin, dir);
 
