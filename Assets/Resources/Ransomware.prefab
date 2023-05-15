@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6918490013398386595}
   - component: {fileID: 8108599338248846216}
   - component: {fileID: 8458344185917165033}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: 'HP '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 8883592161238789253}
   - component: {fileID: 7306146695746861342}
   - component: {fileID: 8176237150928617457}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 780867827882215770}
   - component: {fileID: 573845563254169637}
   - component: {fileID: 7081548906661419965}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 3356219998735575392}
   m_Layer: 2
   m_Name: Ransomware
-  m_TagString: Untagged
+  m_TagString: Malwares
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -499,10 +499,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
-  m_UseLocal: 1
+  m_SynchronizePosition: 0
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 0
 --- !u!65 &3356219998735575392
 BoxCollider:
   m_ObjectHideFlags: 0
