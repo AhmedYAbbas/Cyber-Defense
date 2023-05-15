@@ -1,0 +1,123 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TowerShootingSystem : MonoBehaviour
+{
+    [SerializeField] private Tower _towerScript;
+    private TowerModifications _towerModifications;
+    
+    private float _range;
+    private int _damage;
+    private float _attackSpeed;
+    private float _attackCountdown;
+    private SphereCollider _targetingCollider;
+    private PoolableObject _towerProjectilePrefab;
+    private ObjectPool _projectilePool;
+    private GameObject _currentTarget;
+    private List<GameObject> _enemies = new List<GameObject>();
+    
+    [SerializeField] private Transform shootingPoint;
+    [SerializeField] private Transform towerHead;
+    [SerializeField] private float towerHeadRotationSpeed;
+    private void Awake()
+    {
+        _towerScript.TowerGotModified += GetTowerModification;
+        _targetingCollider = GetComponent<SphereCollider>();
+    }
+
+    private void Update()
+    {
+        GettingTheMostDangerousEnemy();
+        RotateTheTowerHead();
+        CalculateShootingRate();
+    }
+
+    void GetTowerModification(object sender , EventArgs e)
+    {
+       _towerModifications = _towerScript.currentModifications;
+       UpdateTowerStats();
+    }
+
+    private void UpdateTowerStats()
+    {
+        _range = _towerModifications.range;
+        _damage = _towerModifications.damage;
+        _attackSpeed = _towerModifications.attackSpeed;
+        _towerProjectilePrefab = _towerModifications.bulletPrefab;
+        _targetingCollider.radius = _range;
+        _projectilePool = ObjectPool.CreatInstance(_towerProjectilePrefab, 25);
+    }
+    private void GettingTheMostDangerousEnemy()
+    {
+        float dangerousLevel = float.MinValue;
+        GameObject tempEnemy = null;
+        for (int i = 0 ; i < _enemies.Count ;i++)
+        {
+            print("loop in "+ i );
+            if (_enemies[i] == null)
+            {
+                _enemies.RemoveAt(i);
+                continue;
+            }
+            //float enemyDistanceFromTower = Vector3.Distance(transform.position, _enemies[i].transform.position);
+            var test = _enemies[i].GetComponent<Malware>();
+            float currentDangerousLevel = (-i+1) * 0.6f + (0.2f * test.MovementSpeed) ;
+            if (dangerousLevel < currentDangerousLevel)
+            {
+                dangerousLevel = currentDangerousLevel;
+                tempEnemy = _enemies[i];
+            }
+            
+        }
+        _currentTarget = tempEnemy;
+    }
+    private void RotateTheTowerHead()
+    {
+        if (_currentTarget != null)
+        {
+            Vector3 dir = _currentTarget.transform.position - transform.position;
+            Quaternion lookRotation = Quaternion.LookRotation(dir);
+            Vector3 rotation = Quaternion.Lerp(towerHead.rotation,lookRotation,Time.deltaTime * towerHeadRotationSpeed).eulerAngles;
+            towerHead.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+        }
+    }
+    private void CalculateShootingRate()
+    {
+        if (_attackCountdown <= 0)
+        {
+            Shoot();
+            _attackCountdown = 1f / _attackSpeed;
+        }
+
+        _attackCountdown -= Time.deltaTime;
+    }
+
+    private void Shoot()
+    {
+        if (_enemies.Count > 0)
+        {
+            var projectile = _projectilePool.GetObject();
+            projectile.transform.position = shootingPoint.position;
+            projectile.GetComponent<TowerHomingProjectile>().GetTarget(_currentTarget.transform,_damage);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.CompareTag("Enemy"))
+        {
+            _enemies.Add(other.gameObject);
+            print("enemy entered the range");
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            _enemies.Remove(other.gameObject);
+            print("enemy exited the range");
+        }
+    }
+}

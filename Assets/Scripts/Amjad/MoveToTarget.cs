@@ -24,18 +24,18 @@ public class MoveToTarget : MonoBehaviour
 
     void Awake()
     {
-        _towers = new List<GameObject>();
+        //_towers = new List<GameObject>();
         _agent = GetComponent<NavMeshAgent>();
         _target = GameObject.FindGameObjectWithTag("Base");
-        _projectilePool = ObjectPool.CreatInstance(_malwareProjectilePrefab, 20);
+        //_projectilePool = ObjectPool.CreatInstance(_malwareProjectilePrefab, 20);
     }
 
     private void Update()
     {
         //GettingTheMostDangerousTower();
-        GettingTheClosestTower();
-        CalculateShootingRate();
-        print(_towers.Count);
+        //GettingTheClosestTower();
+        //CalculateShootingRate();
+        //print(_towers.Count);
     }
     private void CalculateShootingRate()
     {

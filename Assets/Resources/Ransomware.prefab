@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 5421224613686148110}
   - component: {fileID: 6488093301412063535}
   - component: {fileID: 3356219998735575392}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Ransomware
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -444,8 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb13c4084eb09f4ebe8c6cda5e6d3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 5414232775970044951, guid: b6da2a1513c68114080773751565c591,
-    type: 3}
+  _malwareProjectilePrefab: {fileID: 0}
 --- !u!114 &4921497258081004219
 MonoBehaviour:
   m_ObjectHideFlags: 0
