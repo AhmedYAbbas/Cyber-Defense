@@ -14,7 +14,7 @@ public class Timer : MonoBehaviour
             MatchManager.Instance.roundTime -= Time.deltaTime;
             _canRaiseEvent = true;
 
-            //Debug.Log(MatchManager.Instance.roundTime);
+            Debug.Log(MatchManager.Instance.roundTime);
         }
         else
         {

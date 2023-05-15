@@ -23,7 +23,6 @@ public class MatchManager : MonoBehaviourPunCallbacks
         Attacker,
         Defender
     }
-
     public float roundTime;
     public int currentRound = 1;
 
@@ -41,9 +40,10 @@ public class MatchManager : MonoBehaviourPunCallbacks
     private Side _pSide = Side.Defender;
 
     private const int WINS_REQUIRED = 2;
-    public static float ROUND_START_TIME = 500.0f;
+    public static float ROUND_START_TIME = 13f;
     private int _p1Wins;
     private int _p2Wins;
+
 
     #endregion
 
@@ -78,7 +78,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
         }
     }
 
-    #endregion
+    #endregion  
 
     #region Photon Callbacks
 
@@ -111,8 +111,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
 
         newPlayer.SetCustomProperties(newPlayerProps);
 
-        newPlayer.CustomProperties[CustomKeys.P_SIDE] =
-            1 - (Side)PhotonNetwork.MasterClient.CustomProperties[CustomKeys.P_SIDE];
+        newPlayer.CustomProperties[CustomKeys.P_SIDE] = 1 - (Side)PhotonNetwork.MasterClient.CustomProperties[CustomKeys.P_SIDE];
         newPlayer.CustomProperties[CustomKeys.WINS] = _p2Wins;
 
         MatchStartedRaiseEvent();
@@ -215,6 +214,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
             if ((Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == Side.Attacker)
                 _destroyedDefenderBase = false;
         }
+
     }
 
     private void RecordRoundWinner(Player winner)

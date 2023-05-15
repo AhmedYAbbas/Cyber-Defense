@@ -15,9 +15,8 @@ MonoBehaviour:
   CardColor: {r: 0.49056602, g: 0, b: 0, a: 1}
   CardImage: {fileID: 0}
   MalwareName: Adware
-  AttackDamage: 20
-  MovementSpeed: 60
-  Health: 80
-  Shield: 110
-  EnergyCost: 12
+  AttackDamage: 0
+  MovementSpeed: 0
+  AttackSpeed: 0
+  EnergyCost: 2
   IsRanged: 0
