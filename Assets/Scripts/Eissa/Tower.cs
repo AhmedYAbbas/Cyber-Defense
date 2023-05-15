@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 public class Tower : MonoBehaviour
 {
-    
+
     private List<GameObject> _enemies = new List<GameObject>();
     private float _attackCountdown;
     [SerializeField] private float _currentHealth;
@@ -24,13 +24,13 @@ public class Tower : MonoBehaviour
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private PoolableObject _TowerProjectilePrefab;
     private SphereCollider _targetingCollider;
-    
+
 
     private ObjectPool _projectilePool;
     private GameObject _currentTarget;
     [SerializeField] private TowerModifications baseTowerSO;
     [SerializeField] private TowerModifications ScriptableObjectTest;
-    
+
     void Awake()
     {
         _targetingCollider = GetComponent<SphereCollider>();
@@ -39,16 +39,17 @@ public class Tower : MonoBehaviour
         _projectilePool = ObjectPool.CreatInstance(_TowerProjectilePrefab, 100);
         //InvokeRepeating("GettingTheMostDangerousEnemy", 0, 0.2f);
     }
-    
+
     void Update()
     {
         GettingTheMostDangerousEnemy();
         RotateTheTowerHead();
         CalculateShootingRate();
     }
-    
+
     public void ModifyTower(TowerModifications towerModifications)
     {
+        this.gameObject.name = towerModifications.ModificationName;
         _maxHealth = towerModifications.maxHealth;
         _range = towerModifications.range;
         _damage = towerModifications.damage;
@@ -85,7 +86,7 @@ public class Tower : MonoBehaviour
         {
             DestroyImmediate(_currentTowerIcon);
         }
-        _currentTowerIcon = Instantiate(_towerIcon, _towerIconPostion.transform.position, quaternion.identity,towerHead);
+        _currentTowerIcon = Instantiate(_towerIcon, _towerIconPostion.transform.position, quaternion.identity, towerHead);
     }
 
 
@@ -107,7 +108,7 @@ public class Tower : MonoBehaviour
             //var projectile = Instantiate(projectilePrefab, shootingPoint.position , Quaternion.identity);
             var projectile = _projectilePool.GetObject();
             projectile.transform.position = shootingPoint.position;
-            projectile.GetComponent<TowerHomingProjectile>().GetTarget(_currentTarget.transform,_damage);
+            projectile.GetComponent<TowerHomingProjectile>().GetTarget(_currentTarget.transform, _damage);
         }
     }
 
@@ -115,9 +116,9 @@ public class Tower : MonoBehaviour
     {
         float dangerousLevel = float.MinValue;
         GameObject tempEnemy = null;
-        for (int i = 0 ; i < _enemies.Count;i++)
+        for (int i = 0; i < _enemies.Count; i++)
         {
-            print("loop in "+ i );
+            print("loop in " + i);
             if (_enemies[i] == null)
             {
                 _enemies.RemoveAt(i);
@@ -125,16 +126,16 @@ public class Tower : MonoBehaviour
             }
             //float enemyDistanceFromTower = Vector3.Distance(transform.position, _enemies[i].transform.position);
             var test = _enemies[i].GetComponent<Malware>();
-            float currentDangerousLevel = (-i+1) * 0.6f + (0.2f * test.MovementSpeed) ;
+            float currentDangerousLevel = (-i + 1) * 0.6f + (0.2f * test.MovementSpeed);
             if (dangerousLevel < currentDangerousLevel)
             {
                 dangerousLevel = currentDangerousLevel;
                 tempEnemy = _enemies[i];
             }
-            
+
         }
         _currentTarget = tempEnemy;
-        
+
     }
 
     private void RotateTheTowerHead()
@@ -143,14 +144,14 @@ public class Tower : MonoBehaviour
         {
             Vector3 dir = _currentTarget.transform.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(dir);
-            Vector3 rotation = Quaternion.Lerp(towerHead.rotation,lookRotation,Time.deltaTime * _rotationSpeed).eulerAngles;
+            Vector3 rotation = Quaternion.Lerp(towerHead.rotation, lookRotation, Time.deltaTime * _rotationSpeed).eulerAngles;
             towerHead.rotation = Quaternion.Euler(0f, rotation.y, 0f);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
+
         if (other.CompareTag("Enemy"))
         {
             _enemies.Add(other.gameObject);
@@ -164,15 +165,15 @@ public class Tower : MonoBehaviour
             _enemies.Remove(other.gameObject);
         }
     }
-    
+
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position,_range);
+        Gizmos.DrawWireSphere(transform.position, _range);
         if (_currentTarget != null)
         {
-            Gizmos.DrawLine(transform.position,_currentTarget.transform.position);
+            Gizmos.DrawLine(transform.position, _currentTarget.transform.position);
         }
     }
 }
