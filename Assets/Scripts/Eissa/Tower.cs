@@ -30,6 +30,8 @@ public class Tower : MonoBehaviour
     private GameObject _currentTarget;
     [SerializeField] private TowerModifications baseTowerSO;
     [SerializeField] private TowerModifications ScriptableObjectTest;
+
+    //public Vector3 towerPostion;
     
     void Awake()
     {
@@ -38,6 +40,7 @@ public class Tower : MonoBehaviour
         _currentHealth = _maxHealth;
         _projectilePool = ObjectPool.CreatInstance(_TowerProjectilePrefab, 100);
         //InvokeRepeating("GettingTheMostDangerousEnemy", 0, 0.2f);
+       // towerPostion = transform.position;
     }
     
     void Update()
@@ -115,7 +118,7 @@ public class Tower : MonoBehaviour
     {
         float dangerousLevel = float.MinValue;
         GameObject tempEnemy = null;
-        for (int i = 0 ; i < _enemies.Count;i++)
+        for (int i = 0 ; i < _enemies.Count ;i++)
         {
             print("loop in "+ i );
             if (_enemies[i] == null)

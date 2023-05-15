@@ -4,18 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Road
-  - Tower
-<<<<<<< Updated upstream
   - Buildable
-  - GHOSTSHIT
+  - Road
   - Base
-=======
-  - Bullet
+  - Tower
   - Enemy
-  - TowerBody
-  - EnemyBullet
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
@@ -47,7 +40,7 @@ TagManager:
   - 
   - 
   - 
-  - Enemies
+  - 
   - 
   m_SortingLayers:
   - name: Default
