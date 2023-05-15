@@ -10,7 +10,7 @@ public class MoveToTarget : MonoBehaviour
     // Private
     private NavMeshAgent _agent;
     private GameObject _target;
-    //private Vector3 _closestTower;
+    private Vector3 _closestTower;
     private List<GameObject> _towers;
     private GameObject _currentTarget;
     private float _attackCountdown;
@@ -95,14 +95,14 @@ public class MoveToTarget : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider collision)
+    /*void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Tower"))
         {
             _towers.Add(collision.gameObject);
             print("Tower foundddddddddddddddddd");
         }
-    }
+    }*/
 
     /*void OnTriggerStay(Collider collision)
     {

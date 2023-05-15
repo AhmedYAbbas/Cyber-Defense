@@ -2424,7 +2424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &1126375275
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3928,7 +3928,7 @@ PrefabInstance:
     - target: {fileID: 1142447499720439785, guid: d41cf73e665c97247b76606e1b3298da,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: 2.02
       objectReference: {fileID: 0}
     - target: {fileID: 1142447499720439785, guid: d41cf73e665c97247b76606e1b3298da,
         type: 3}
@@ -3938,7 +3938,7 @@ PrefabInstance:
     - target: {fileID: 1142447499720439785, guid: d41cf73e665c97247b76606e1b3298da,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.45
+      value: -5.89
       objectReference: {fileID: 0}
     - target: {fileID: 1142447499720439785, guid: d41cf73e665c97247b76606e1b3298da,
         type: 3}
@@ -4057,7 +4057,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705732548}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.3265636, y: 1.679481, z: 1.2641492}
@@ -4113,7 +4113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &1776837442
 Rigidbody:
   m_ObjectHideFlags: 0

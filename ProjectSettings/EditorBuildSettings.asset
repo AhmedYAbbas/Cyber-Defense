@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Amjad/Gameplay Scene1.unity
     guid: 9a2ae0a87e7868b4886ed87ab397867c
-  - enabled: 1
-    path: Assets/Scenes/Eissa/Gameplay Scene1Eissa Tests.unity
-    guid: 7cf6b0e4e967a254b81279067b4247fd
   m_configObjects: {}
