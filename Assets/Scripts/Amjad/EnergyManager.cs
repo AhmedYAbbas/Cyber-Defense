@@ -101,12 +101,8 @@ public class EnergyManager : MonoBehaviourPunCallbacks
         _energySlider.value = _energy;
         PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] = _energy;
 
-        if ((int)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] < 100)
-        {
-            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
-            PhotonNetwork.RaiseEvent(MatchManager.MiningUsedEventCode, null, raiseEventOptions, SendOptions.SendReliable);
-        }
-
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
+        PhotonNetwork.RaiseEvent(MatchManager.MiningUsedEventCode, null, raiseEventOptions, SendOptions.SendReliable);
     }
 
     void IncreaseEnergyPerTime()
