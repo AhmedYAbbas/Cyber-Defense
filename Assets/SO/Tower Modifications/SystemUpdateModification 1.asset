@@ -13,11 +13,9 @@ MonoBehaviour:
   m_Name: SystemUpdateModification 1
   m_EditorClassIdentifier: 
   description: 
-  ModificationName: SystemUpdateModification 1
   maxHealth: 100
   damage: 20
   range: 4
-  EnergyCost: 20
   attackSpeed: 2
   bulletPrefab: {fileID: 1997412740616632572, guid: 51ad354cf1e3bab4d9e051becdab8d13,
     type: 3}

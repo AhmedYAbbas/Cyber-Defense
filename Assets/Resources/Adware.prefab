@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1170192659312836042}
   - component: {fileID: 5188622645484956055}
   - component: {fileID: 449636378400430167}
-  m_Layer: 2
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 9016142579184685977}
   - component: {fileID: 5458514278044651168}
   - component: {fileID: 449068665599248199}
-  m_Layer: 2
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 6811010836238888874}
   m_Layer: 2
   m_Name: Adware
-  m_TagString: Malwares
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -370,10 +370,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 0
-  m_SynchronizeRotation: 0
-  m_SynchronizeScale: 0
-  m_UseLocal: 0
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1
+  m_UseLocal: 1
 --- !u!65 &6811010836238888874
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 8379087166409443842}
   - component: {fileID: 5371608312072218953}
   - component: {fileID: 403033561313965432}
-  m_Layer: 2
+  m_Layer: 5
   m_Name: 'HP '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
