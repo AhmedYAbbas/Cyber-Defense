@@ -49,6 +49,7 @@ public class Tower : MonoBehaviour
     
     public void ModifyTower(TowerModifications towerModifications)
     {
+        this.gameObject.name = towerModifications.ModificationName;
         _maxHealth = towerModifications.maxHealth;
         _range = towerModifications.range;
         _damage = towerModifications.damage;

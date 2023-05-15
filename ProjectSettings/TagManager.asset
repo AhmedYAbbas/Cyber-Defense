@@ -4,18 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Road
-  - Tower
-<<<<<<< Updated upstream
-  - Buildable
-  - GHOSTSHIT
-  - Base
-=======
-  - Bullet
   - Enemy
-  - TowerBody
-  - EnemyBullet
->>>>>>> Stashed changes
+  - Tower
+  - Malwares
   layers:
   - Default
   - TransparentFX
@@ -23,6 +14,7 @@ TagManager:
   - 
   - Water
   - UI
+  - Malwares
   - 
   - 
   - 
@@ -47,7 +39,6 @@ TagManager:
   - 
   - 
   - 
-  - Enemies
   - 
   m_SortingLayers:
   - name: Default
