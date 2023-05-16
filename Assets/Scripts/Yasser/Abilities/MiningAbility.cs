@@ -52,6 +52,7 @@ public class MiningAbility : MonoBehaviour, IAbility
 
     public void Use()
     {
+        // TODO: Make the ability usable after a time period (30 secs) and also make it usable only one time per (Game/Round)?!
         if (Time.time > _nextUseTime)
         {
             EnergyManager.Instance.DecreaseEnergyEvent(COST);
