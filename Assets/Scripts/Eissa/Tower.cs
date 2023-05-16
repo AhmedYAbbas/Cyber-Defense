@@ -45,7 +45,7 @@ public class Tower : MonoBehaviour
         _currentHealth -= dmg;
         if (_currentHealth <= 0)
         {
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
         }
     }
 }
