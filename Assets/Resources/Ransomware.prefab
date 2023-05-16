@@ -543,6 +543,7 @@ MonoBehaviour:
   Shield: 0
   EnergyCost: 0
   IsRanged: 0
+  targetingSystem: {fileID: 2883475600529333896}
 --- !u!114 &5421224613686148110
 MonoBehaviour:
   m_ObjectHideFlags: 0
