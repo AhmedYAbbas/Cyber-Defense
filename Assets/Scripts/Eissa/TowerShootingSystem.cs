@@ -57,7 +57,7 @@ public class TowerShootingSystem : MonoBehaviour
         for (int i = 0 ; i < _enemies.Count ;i++)
         {
             print("loop in "+ i );
-            if (_enemies[i] == null)
+            if (!_enemies[i].gameObject.activeInHierarchy)
             {
                 _enemies.RemoveAt(i);
                 continue;
@@ -114,7 +114,7 @@ public class TowerShootingSystem : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy")&& _enemies.Contains(other.gameObject))
+        if (other.CompareTag("Enemy") && _enemies.Contains(other.gameObject))
         {
             _enemies.Remove(other.gameObject);
             print("enemy exited the range");
