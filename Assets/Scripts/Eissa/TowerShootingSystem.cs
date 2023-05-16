@@ -32,6 +32,7 @@ public class TowerShootingSystem : MonoBehaviour
         GettingTheMostDangerousEnemy();
         RotateTheTowerHead();
         CalculateShootingRate();
+        print(_enemies.Count);
     }
 
     void GetTowerModification(object sender , EventArgs e)
@@ -47,7 +48,7 @@ public class TowerShootingSystem : MonoBehaviour
         _attackSpeed = _towerModifications.attackSpeed;
         _towerProjectilePrefab = _towerModifications.bulletPrefab;
         _targetingCollider.radius = _range;
-        _projectilePool = ObjectPool.CreatInstance(_towerProjectilePrefab, 25);
+        _projectilePool = ObjectPool.CreatInstance(_towerProjectilePrefab, 50);
     }
     private void GettingTheMostDangerousEnemy()
     {
@@ -62,8 +63,8 @@ public class TowerShootingSystem : MonoBehaviour
                 continue;
             }
             //float enemyDistanceFromTower = Vector3.Distance(transform.position, _enemies[i].transform.position);
-            var test = _enemies[i].GetComponent<Malware>();
-            float currentDangerousLevel = (-i+1) * 0.6f + (0.2f * test.MovementSpeed) ;
+            //var test = _enemies[i].GetComponent<Malware>();
+            float currentDangerousLevel = (-i + 1) * 0.6f + (0.2f);// * test.MovementSpeed) ;
             if (dangerousLevel < currentDangerousLevel)
             {
                 dangerousLevel = currentDangerousLevel;
@@ -96,7 +97,7 @@ public class TowerShootingSystem : MonoBehaviour
 
     private void Shoot()
     {
-        if (_enemies.Count > 0)
+        if (_enemies.Count > 0 && _currentTarget != null)
         {
             var projectile = _projectilePool.GetObject();
             projectile.transform.position = shootingPoint.position;
@@ -105,8 +106,7 @@ public class TowerShootingSystem : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy")&& !_enemies.Contains(other.gameObject))
         {
             _enemies.Add(other.gameObject);
             print("enemy entered the range");
@@ -114,7 +114,7 @@ public class TowerShootingSystem : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy")&& _enemies.Contains(other.gameObject))
         {
             _enemies.Remove(other.gameObject);
             print("enemy exited the range");
