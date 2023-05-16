@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 3356219998735575392}
   m_Layer: 2
   m_Name: Ransomware
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

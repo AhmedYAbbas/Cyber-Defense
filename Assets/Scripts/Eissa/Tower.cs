@@ -23,7 +23,7 @@ public class Tower : MonoBehaviour
     private GameObject _towerIcon;
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private PoolableObject _TowerProjectilePrefab;
-    private SphereCollider _targetingCollider;
+    private BoxCollider _targetingCollider;
     
 
     private ObjectPool _projectilePool;
@@ -33,7 +33,7 @@ public class Tower : MonoBehaviour
     
     void Awake()
     {
-        _targetingCollider = GetComponent<SphereCollider>();
+        _targetingCollider = GetComponent<BoxCollider>();
         ModifyTower(baseTowerSO);
         _currentHealth = _maxHealth;
         _projectilePool = ObjectPool.CreatInstance(_TowerProjectilePrefab, 100);
@@ -55,7 +55,7 @@ public class Tower : MonoBehaviour
         _attackSpeed = towerModifications.attackSpeed;
         _TowerProjectilePrefab = towerModifications.bulletPrefab;
         _towerIcon = towerModifications.towerIcon;
-        _targetingCollider.radius = _range;
+        //_targetingCollider.radius = _range;
         SwitchTowerIcon();
     }
     [ContextMenu("ScriptableObjectTest")]
@@ -67,7 +67,7 @@ public class Tower : MonoBehaviour
         _attackSpeed = ScriptableObjectTest.attackSpeed;
         _TowerProjectilePrefab = ScriptableObjectTest.bulletPrefab;
         _towerIcon = ScriptableObjectTest.towerIcon;
-        _targetingCollider.radius = _range;
+        //_targetingCollider.radius = _range;
         SwitchTowerIcon();
     }
 
@@ -115,24 +115,28 @@ public class Tower : MonoBehaviour
     {
         float dangerousLevel = float.MinValue;
         GameObject tempEnemy = null;
-        for (int i = 0 ; i < _enemies.Count;i++)
+        int enemyCount = _enemies.Count;
+        for (int i = 0; i < enemyCount; i++)
         {
-            print("loop in "+ i );
-            if (_enemies[i] == null)
+            print("loop in " + i);
+            if (_enemies[i] == null || Vector3.Distance(transform.position, _enemies[i].transform.position) > 500)
             {
+                //print("inside shitty shit");////yes meee samyyyy
                 _enemies.RemoveAt(i);
+                enemyCount--;
                 continue;
             }
             //float enemyDistanceFromTower = Vector3.Distance(transform.position, _enemies[i].transform.position);
             var test = _enemies[i].GetComponent<Malware>();
-            float currentDangerousLevel = (-i+1) * 0.6f + (0.2f * test.MovementSpeed) ;
+            float currentDangerousLevel = (-i + 1) * 0.6f + (0.2f * test.MovementSpeed);
             if (dangerousLevel < currentDangerousLevel)
             {
                 dangerousLevel = currentDangerousLevel;
                 tempEnemy = _enemies[i];
             }
-            
+
         }
+
         _currentTarget = tempEnemy;
         
     }
@@ -150,7 +154,7 @@ public class Tower : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        print("found enemy");
         if (other.CompareTag("Enemy"))
         {
             _enemies.Add(other.gameObject);
@@ -159,6 +163,7 @@ public class Tower : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        print("enemy Scaped or died idk");
         if (other.CompareTag("Enemy"))
         {
             _enemies.Remove(other.gameObject);

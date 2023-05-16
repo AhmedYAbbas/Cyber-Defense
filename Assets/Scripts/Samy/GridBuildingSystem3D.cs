@@ -114,9 +114,9 @@ public class GridBuildingSystem3D : MonoBehaviour
                     }
 
                     OnObjectPlaced?.Invoke(this, EventArgs.Empty);
+                    EnergyManager.Instance.DecreaseEnergy(placedObjectTypeSO.energyReq);
 
                     DeselectObjectType();
-                    EnergyManager.Instance.DecreaseEnergy(placedObjectTypeSO.energyReq);
                 }
                 else
                 {
