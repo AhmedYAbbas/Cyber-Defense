@@ -115,7 +115,7 @@ public class MoveToTarget : MonoBehaviour
         }
     }*/
 
-    void OnTriggerExit(Collider collision)
+    /*void OnTriggerExit(Collider collision)
     {
         if (collision.CompareTag("Tower"))
         {
@@ -123,5 +123,5 @@ public class MoveToTarget : MonoBehaviour
             print("Tower Gryyyyyyyyyyyy");
 
         }
-    }
+    }*/
 }

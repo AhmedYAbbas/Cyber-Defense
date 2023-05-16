@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _towerScript: {fileID: 1142447499720439798}
   shootingPoint: {fileID: 1348042542}
-  towerHead: {fileID: 1697319307}
+  towerHead: {fileID: 5859953710869374100}
   towerHeadRotationSpeed: 2
 --- !u!135 &3324574175415053750
 SphereCollider:
@@ -138,7 +138,8 @@ GameObject:
   - component: {fileID: 1705732549}
   - component: {fileID: -8038338198638515885}
   - component: {fileID: 8798511044593112560}
-  m_Layer: 2
+  - component: {fileID: 8782150720093862037}
+  m_Layer: 0
   m_Name: Tower
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -242,10 +243,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 0
+  m_SynchronizePosition: 1
   m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
   m_UseLocal: 0
+--- !u!65 &8782150720093862037
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142447499720439799}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5548183, z: 1.3660468}
+  m_Center: {x: 0, y: 0.78025323, z: 0.03642422}
 --- !u!1001 &6257757897957344127
 PrefabInstance:
   m_ObjectHideFlags: 0
