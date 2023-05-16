@@ -26,7 +26,7 @@ public class TowerHomingProjectile : PoolableObject
     private void Update()
     {
        
-        if (_target.gameObject.activeInHierarchy)
+        if (_target != null)
         {
             _targetDir = (_target.position - transform.position).normalized;
             transform.position += _targetDir * (projectileSpeed * Time.deltaTime);
@@ -41,8 +41,8 @@ public class TowerHomingProjectile : PoolableObject
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Malware>().DamageMalware(_damage);
-            this.gameObject.SetActive(false);
+            Destroy(other.gameObject);
+            gameObject.SetActive(false);
         }
         else
         {
