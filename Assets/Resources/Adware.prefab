@@ -188,14 +188,14 @@ GameObject:
   - component: {fileID: 4549937016649204497}
   - component: {fileID: 751736967923707349}
   - component: {fileID: 5182511955280354333}
-  - component: {fileID: 1590526379246693196}
+  - component: {fileID: 8084818168527805324}
   - component: {fileID: 2379960807325654817}
   - component: {fileID: 8098241699521256547}
   - component: {fileID: 5218479669629859282}
   - component: {fileID: 7806913584925481616}
   - component: {fileID: 13270378276889636}
   - component: {fileID: 6811010836238888874}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Adware
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1590526379246693196
+--- !u!135 &8084818168527805324
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,7 +315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb13c4084eb09f4ebe8c6cda5e6d3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _malwareProjectilePrefab: {fileID: 0}
 --- !u!114 &5218479669629859282
 MonoBehaviour:
   m_ObjectHideFlags: 0

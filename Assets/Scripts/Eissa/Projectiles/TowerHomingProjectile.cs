@@ -41,8 +41,9 @@ public class TowerHomingProjectile : PoolableObject
     {
         if (other.CompareTag("Enemy"))
         {
-
-            other.GetComponent<Malware>().DamageMalware(_damage);
+            //Destroy(other.gameObject);
+            other.gameObject.transform.position = new Vector3(-1000,-1000,-1000);
+            other.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
         else
