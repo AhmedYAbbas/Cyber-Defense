@@ -55,7 +55,7 @@ public class TouchInputManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(touch.position);
 
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit,999f, mouseColliderLayerMask))
+            if (Physics.Raycast(ray, out hit, 999f, mouseColliderLayerMask))
             {
                 touchWorldPosition = hit.point;
             }

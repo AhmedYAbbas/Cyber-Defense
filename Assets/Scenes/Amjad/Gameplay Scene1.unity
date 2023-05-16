@@ -2387,7 +2387,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 915449101}
-  - component: {fileID: 915449102}
   - component: {fileID: 915449103}
   m_Layer: 0
   m_Name: InputHandler
@@ -2411,21 +2410,6 @@ Transform:
   m_Father: {fileID: 1886449959}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &915449102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 915449100}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed88221bc54a6bc4284a1b3036d92f29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseColliderLayerMask:
-    serializedVersion: 2
-    m_Bits: 23
 --- !u!114 &915449103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2440,7 +2424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseColliderLayerMask:
     serializedVersion: 2
-    m_Bits: 19
+    m_Bits: 51
 --- !u!65 &921448250
 BoxCollider:
   m_ObjectHideFlags: 0

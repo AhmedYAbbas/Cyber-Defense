@@ -13,12 +13,11 @@ public class Tower : MonoBehaviour
     [SerializeField] private Transform towerIconPosition;
     private GameObject _currentTowerIcon;
     private GameObject _towerIcon;
-
     [SerializeField] private Transform towerHead;
     [SerializeField] private TowerModifications baseTowerSo;
     [HideInInspector] public TowerModifications currentModifications;
     public event EventHandler TowerGotModified;
-    
+
 
     private void Start()
     {
@@ -29,19 +28,17 @@ public class Tower : MonoBehaviour
     {
         _maxHealth = towerModifications.maxHealth;
         _towerIcon = towerModifications.towerIcon;
-
         currentModifications = towerModifications;
-        TowerGotModified?.Invoke(this,EventArgs.Empty);
+        TowerGotModified?.Invoke(this, EventArgs.Empty);
         SwitchTowerIcon();
     }
     private void SwitchTowerIcon()
     {
-
         if (_currentTowerIcon != null)
         {
             DestroyImmediate(_currentTowerIcon);
         }
-        _currentTowerIcon = Instantiate(_towerIcon,towerIconPosition.transform.position, quaternion.identity,towerHead);
+        _currentTowerIcon = Instantiate(_towerIcon, towerIconPosition.transform.position, quaternion.identity, towerHead);
     }
     public void DamageTower(int dmg)
     {

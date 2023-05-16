@@ -82,7 +82,7 @@ public class GridBuildingSystem3D : MonoBehaviour
         {
             if (/*Input.GetMouseButtonDown(0)*/TouchInputManager.Instance.GetTouchPhase() == TouchPhase.Ended )
             {
-                Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
+                Vector3 mousePosition = TouchInputManager.Instance.GetTouchWorldPosition();
                 grid.GetXZ(mousePosition, out int x, out int z);
 
                 Vector2Int placedObjectOrigin = new Vector2Int(x, z);
