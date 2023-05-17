@@ -34,7 +34,7 @@ public class Range : MonoBehaviour
             y = Mathf.Cos(Mathf.Deg2Rad * angle) * Radius;
            
 
-            line.SetPosition(i, new Vector3(x, 0, y));
+            line.SetPosition(i, new Vector3(x, 1, y));
 
             angle += (360f / segments);
         }
