@@ -41,7 +41,7 @@ public class TowerHomingProjectile : PoolableObject
     {
         if (other.CompareTag("Enemy") && _target.gameObject.activeInHierarchy)
         {
-            if (other != null && other.gameObject.activeInHierarchy)
+            if (other != null && other.gameObject.activeInHierarchy )
             {
                 other.GetComponent<Malware>().DamageMalware(_damage);
                 this.gameObject.SetActive(false);
