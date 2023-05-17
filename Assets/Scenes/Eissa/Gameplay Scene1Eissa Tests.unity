@@ -1168,7 +1168,6 @@ MonoBehaviour:
   gridWidth: 12
   gridHeight: 12
   cellSize: 2
-  isDefender: 1
 --- !u!65 &487403291
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3914,6 +3913,16 @@ PrefabInstance:
     - target: {fileID: 679756143, guid: d41cf73e665c97247b76606e1b3298da, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142050460532976259, guid: d41cf73e665c97247b76606e1b3298da,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142050460532976259, guid: d41cf73e665c97247b76606e1b3298da,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1142447499377666047, guid: d41cf73e665c97247b76606e1b3298da,
         type: 3}
