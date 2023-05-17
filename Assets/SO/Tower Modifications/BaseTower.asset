@@ -16,11 +16,13 @@ MonoBehaviour:
     one of the cores of every defense strategy against any hacker. the antivirus
     tower attacks any enemy in his range prioritizing the Closest enemy to the Defender\u2019s
     Base Or the first enemy entering his range."
+  ModificationName: BaseTower
   maxHealth: 100
+  EnergyCost: 0
   damage: 10
-  range: 4
+  range: 5
   attackSpeed: 2
-  bulletPrefab: {fileID: 1997412740616632572, guid: 51ad354cf1e3bab4d9e051becdab8d13,
+  bulletPrefab: {fileID: 1997412740616632572, guid: e3721398ade1cc5459c4b8a2c7c682b5,
     type: 3}
   towerIcon: {fileID: 5841758414732240809, guid: bfbf863c365f04c4d8877e85c91782b6,
     type: 3}
