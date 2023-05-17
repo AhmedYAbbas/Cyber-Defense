@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa4eb824681a45fbac5d8006d83a12cb, type: 3}
-  m_Name: SystemUpdateModification 1
+  m_Name: SystemUpdateModification
   m_EditorClassIdentifier: 
   description: 
+  ModificationName: SystemUpdateModification
   maxHealth: 100
+  EnergyCost: 20
   damage: 20
   range: 4
   attackSpeed: 2
-  bulletPrefab: {fileID: 1997412740616632572, guid: 51ad354cf1e3bab4d9e051becdab8d13,
+  bulletPrefab: {fileID: 1997412740616632572, guid: e3721398ade1cc5459c4b8a2c7c682b5,
     type: 3}
   towerIcon: {fileID: 9105737481831305608, guid: 9e290f1be7a33f54ea4ccac77644457f,
     type: 3}

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/GhostView.prefab.meta
+guid: e3721398ade1cc5459c4b8a2c7c682b5
+========
 guid: 51ad354cf1e3bab4d9e051becdab8d13
+>>>>>>>> Development:Assets/Resources/HomingProjectial.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
