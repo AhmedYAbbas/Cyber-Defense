@@ -12,6 +12,7 @@ public class TowerShootingSystem : MonoBehaviour
     private int _damage;
     private float _attackSpeed;
     private float _attackCountdown;
+    private bool _canFunction;
     private SphereCollider _targetingCollider;
     private PoolableObject _towerProjectilePrefab;
     private ObjectPool _projectilePool;
@@ -30,8 +31,11 @@ public class TowerShootingSystem : MonoBehaviour
     private void Update()
     {
         GettingTheMostDangerousEnemy();
-        RotateTheTowerHead();
-        CalculateShootingRate();
+        if (_canFunction)
+        {
+            RotateTheTowerHead();
+            CalculateShootingRate();
+        }
         print(_enemies.Count);
     }
 
