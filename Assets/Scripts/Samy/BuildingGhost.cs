@@ -23,14 +23,13 @@ public class BuildingGhost : MonoBehaviour
     private void LateUpdate()
     {
         Vector3 targetPosition = GridBuildingSystem3D.Instance.GetMouseWorldSnappedPosition();
-        if (TouchInputManager.Instance.HasTouchInput())
+        if (TouchInputManager.Instance.HasTouchInput() || Input.GetMouseButtonDown(0))
         {
-            targetPosition.y = 2f;
-
+            targetPosition.y = 3f;
         }
         else
         {
-            targetPosition.y = -2f;
+            targetPosition.y = -3f;
         }
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 15f);
 

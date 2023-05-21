@@ -80,11 +80,19 @@ public class GridBuildingSystem3D : MonoBehaviour
     {
         if (placedObjectTypeSO != null && EnergyManager.Instance._energy >= placedObjectTypeSO.energyReq)
         {
-            if (/*Input.GetMouseButtonDown(0)*/TouchInputManager.Instance.GetTouchPhase() == TouchPhase.Ended )
+            Vector3 mousePosition;
+            if (Input.GetMouseButtonUp(0)||TouchInputManager.Instance.GetTouchPhase() == TouchPhase.Ended )
             {
-                Vector3 mousePosition = TouchInputManager.Instance.GetTouchWorldPosition();
-                grid.GetXZ(mousePosition, out int x, out int z);
+                if (TouchInputManager.Instance.HasTouchInput())
+                {
+                    mousePosition = TouchInputManager.Instance.GetTouchWorldPosition();
+                }
+                else
+                {
+                    mousePosition = Mouse3D.Instance.GetMouseWorldPosition();
+                }
 
+                grid.GetXZ(mousePosition, out int x, out int z);
                 Vector2Int placedObjectOrigin = new Vector2Int(x, z);
                 placedObjectOrigin = grid.ValidateGridPosition(placedObjectOrigin);
 
@@ -99,7 +107,17 @@ public class GridBuildingSystem3D : MonoBehaviour
                         break;
                     }
                 }
-                bool shit = TouchInputManager.Instance.CANBUILD();
+                bool shit ;
+
+                if (TouchInputManager.Instance.HasTouchInput())
+                {
+                    shit = TouchInputManager.Instance.CANBUILD();
+                }
+                else
+                {
+                    shit = Mouse3D.Instance.CANBUILD();
+                }
+                //bool combinedshit = TouchInputManager.Instance.CANBUILD() && Mouse3D.Instance.CANBUILD();
                 print("Can build ===============================" + shit);
                 if (canBuild && shit)
                 {
@@ -188,7 +206,15 @@ public class GridBuildingSystem3D : MonoBehaviour
     }
 
     public Vector3 GetMouseWorldSnappedPosition() {
-        Vector3 mousePosition = TouchInputManager.Instance.GetTouchWorldPosition();
+        Vector3 mousePosition;
+        if (TouchInputManager.Instance.HasTouchInput())
+        {
+          mousePosition = TouchInputManager.Instance.GetTouchWorldPosition();
+        }
+        else
+        {
+            mousePosition =  Mouse3D.Instance.GetMouseWorldPosition();
+        }
         grid.GetXZ(mousePosition, out int x, out int z);
         //print("Grid position" + x + z);
         if (placedObjectTypeSO != null) {
