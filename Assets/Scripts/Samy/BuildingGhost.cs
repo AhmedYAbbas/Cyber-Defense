@@ -31,7 +31,7 @@ public class BuildingGhost : MonoBehaviour
         }
         else
         {
-            targetPosition.y = -3f;
+            targetPosition.y = -13f;
         }
 
         //transform.rotation = Quaternion.Lerp(transform.rotation, GridBuildingSystem3D.Instance.GetPlacedObjectRotation(), Time.deltaTime * 15f);

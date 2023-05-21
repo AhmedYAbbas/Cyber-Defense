@@ -108,19 +108,18 @@ public class GridBuildingSystem3D : MonoBehaviour
                         break;
                     }
                 }
-                bool shit ;
+                bool RayCastCheck ;
 
                 if (TouchInputManager.Instance.HasTouchInput())
                 {
-                    shit = TouchInputManager.Instance.CANBUILD();
+                    RayCastCheck = TouchInputManager.Instance.CANBUILD();
                 }
                 else
                 {
-                    shit = Mouse3D.Instance.CANBUILD();
+                    RayCastCheck = Mouse3D.Instance.CANBUILD();
                 }
-                //bool combinedshit = TouchInputManager.Instance.CANBUILD() && Mouse3D.Instance.CANBUILD();
-                print("Can build ===============================" + shit);
-                if (canBuild && shit)
+                print("Can build ===============================" + RayCastCheck);
+                if (canBuild && RayCastCheck)
                 {
                     Vector2Int rotationOffset = Vector2Int.zero;
                     Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) +new Vector3(rotationOffset.x, 0, rotationOffset.y)  * grid.GetCellSize();
