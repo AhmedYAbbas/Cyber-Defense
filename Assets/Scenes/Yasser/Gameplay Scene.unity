@@ -28996,7 +28996,7 @@ GameObject:
   - component: {fileID: 1937252235}
   - component: {fileID: 1937252234}
   - component: {fileID: 1937252233}
-  - component: {fileID: 1937252232}
+  - component: {fileID: 1937252236}
   m_Layer: 5
   m_Name: Ransomware Ability
   m_TagString: Untagged
@@ -29026,19 +29026,6 @@ RectTransform:
   m_AnchoredPosition: {x: 596, y: -13.637909}
   m_SizeDelta: {x: 150, y: 172.7242}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &1937252232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1937252230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 395c358df49fdd444b4efe4b0fd4ffd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _malwareData: {fileID: 11400000, guid: 643a19e3cc8c6e84b90e6cfbc01d51a7, type: 2}
 --- !u!114 &1937252233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29083,9 +29070,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1937252232}
-        m_TargetAssemblyTypeName: SpawnCard, Assembly-CSharp
-        m_MethodName: ChooseObjectToSpawn
+      - m_Target: {fileID: 1937252236}
+        m_TargetAssemblyTypeName: RansomwareAbilities, Assembly-CSharp
+        m_MethodName: Use
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29133,6 +29120,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937252230}
   m_CullTransparentMesh: 1
+--- !u!114 &1937252236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937252230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe34f73871774e4596773f40f081ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _card: {fileID: 1937252233}
+  cost: 5
+  _nextUseTime: 0
+  cooldownText: {fileID: 40952538}
+  _timer: 10
+  _isOnCooldown: 0
 --- !u!65 &1939497894
 BoxCollider:
   m_ObjectHideFlags: 0
