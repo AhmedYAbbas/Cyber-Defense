@@ -223,6 +223,12 @@ public class MatchManager : MonoBehaviourPunCallbacks
 
             StartCoroutine(UILayer.Instance.EnableSwitchingSidesPanel());
 
+            // TODO: Introduce a function that takes care for resetting the values that needs to be reset before the start of the match
+            foreach (Player player in PhotonNetwork.PlayerList)
+            {
+                player.CustomProperties[CustomKeys.Base_HEALTH] = 100;
+            }
+
             ResetTime();
             StartMatch();
             currentRound++;
@@ -270,6 +276,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
         if (obj.Code == MatchEndedEventCode)
         {
             PhotonNetwork.Disconnect();
+            // TODO: Make the player switch to the match ended panel
         }
     }
 

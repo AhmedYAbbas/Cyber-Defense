@@ -19,9 +19,9 @@ public class Base : MonoBehaviour
     {
         if (Slider.value <= 0 && (MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker)
         {
+            Slider.value = 100;
             MatchManager.Instance._destroyedDefenderBase = true;
             MatchManager.Instance.BaseDestroyedRaiseEvent();
-            Slider.value = 100;
         }
         else
         {
