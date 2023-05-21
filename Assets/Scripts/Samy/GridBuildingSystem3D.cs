@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using CodeMonkey.Utils;
 using Photon.Pun;
+using UnityEngine.EventSystems;
 
 public class GridBuildingSystem3D : MonoBehaviour
 {
@@ -78,10 +79,10 @@ public class GridBuildingSystem3D : MonoBehaviour
     }
     private void InputHandler()
     {
-        if (placedObjectTypeSO != null && EnergyManager.Instance._energy >= placedObjectTypeSO.energyReq)
+        if (placedObjectTypeSO != null && EnergyManager.Instance._energy >= placedObjectTypeSO.energyReq && !EventSystem.current.IsPointerOverGameObject())
         {
             Vector3 mousePosition;
-            if (Input.GetMouseButtonUp(0)||TouchInputManager.Instance.GetTouchPhase() == TouchPhase.Ended )
+            if (Input.GetMouseButtonUp(0)||TouchInputManager.Instance.GetTouchPhase() == TouchPhase.Ended)
             {
                 if (TouchInputManager.Instance.HasTouchInput())
                 {
@@ -133,7 +134,6 @@ public class GridBuildingSystem3D : MonoBehaviour
 
                     OnObjectPlaced?.Invoke(this, EventArgs.Empty);
                     EnergyManager.Instance.DecreaseEnergy(placedObjectTypeSO.energyReq);
-
                     DeselectObjectType();
                 }
                 else

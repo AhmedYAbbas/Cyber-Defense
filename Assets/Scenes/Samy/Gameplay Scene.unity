@@ -6154,7 +6154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 457122439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.97, y: 2.45, z: -10.78}
+  m_LocalPosition: {x: -28, y: 2.45, z: -10.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6175,8 +6175,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placedObjectTypeSOList:
   - {fileID: 11400000, guid: 1d345b8e6d106074a86603de340875c7, type: 2}
-  gridWidth: 12
-  gridHeight: 12
+  gridWidth: 15
+  gridHeight: 15
   cellSize: 3
 --- !u!1 &466045462
 GameObject:
@@ -12503,7 +12503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseColliderLayerMask:
     serializedVersion: 2
-    m_Bits: 19
+    m_Bits: 51
 --- !u!114 &915449104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12518,7 +12518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseColliderLayerMask:
     serializedVersion: 2
-    m_Bits: 19
+    m_Bits: 51
 --- !u!65 &918506958
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23867,7 +23867,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.3018868, g: 0.16917051, b: 0.16917051, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
