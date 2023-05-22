@@ -19,7 +19,7 @@ public class Mouse3D : MonoBehaviour {
         }
     }
 
-    public static Vector3 GetMouseWorldPosition() => Instance.GetMouseWorldPosition_Instance();
+    public  Vector3 GetMouseWorldPosition() => Instance.GetMouseWorldPosition_Instance();
 
     private Vector3 GetMouseWorldPosition_Instance() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -28,13 +28,14 @@ public class Mouse3D : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 999f, mouseColliderLayerMask))
         {
-            print(hit.collider.tag + " v "+hit.collider.name);
+            print(hit.collider.tag + " v " + hit.collider.name);
             return hit.point;
             //if (hit.transform.CompareTag("Buildable"))
             //{
             //    found = true;
             //}
-        }return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //if (found)
         //{
         //    return hit.point;

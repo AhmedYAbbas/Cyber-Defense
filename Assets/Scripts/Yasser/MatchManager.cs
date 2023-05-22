@@ -14,8 +14,6 @@ public class MatchManager : MonoBehaviourPunCallbacks
     private const byte MatchEndedEventCode = 3;
     private const byte MatchStartedEventCode = 4;
 
-    public const byte MiningUsedEventCode = 5;
-
     #endregion
 
     #region Public Variables
@@ -46,8 +44,6 @@ public class MatchManager : MonoBehaviourPunCallbacks
     public static float ROUND_START_TIME = 500.0f;
     private int _p1Wins;
     private int _p2Wins;
-    private int _p1Energy;
-    private int _p2Energy;
 
     #endregion
 
@@ -95,15 +91,13 @@ public class MatchManager : MonoBehaviourPunCallbacks
             Hashtable masterClientProps = new Hashtable()
             {
                 [CustomKeys.P_SIDE] = _pSide,
-                [CustomKeys.WINS] = _p1Wins,
-                [CustomKeys.ENERGY] = _p1Energy
+                [CustomKeys.WINS] = _p1Wins
             };
 
             PhotonNetwork.LocalPlayer.SetCustomProperties(masterClientProps);
 
             PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] = _pSide;
             PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.WINS] = _p1Wins;
-            PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] = _p1Energy;
         }
     }
 
@@ -112,15 +106,14 @@ public class MatchManager : MonoBehaviourPunCallbacks
         Hashtable newPlayerProps = new Hashtable()
         {
             [CustomKeys.P_SIDE] = 1 - _pSide,
-            [CustomKeys.WINS] = _p2Wins,
-            [CustomKeys.ENERGY] = _p2Energy
+            [CustomKeys.WINS] = _p2Wins
         };
 
         newPlayer.SetCustomProperties(newPlayerProps);
 
-        newPlayer.CustomProperties[CustomKeys.P_SIDE] = 1 - (Side)PhotonNetwork.MasterClient.CustomProperties[CustomKeys.P_SIDE];
+        newPlayer.CustomProperties[CustomKeys.P_SIDE] =
+            1 - (Side)PhotonNetwork.MasterClient.CustomProperties[CustomKeys.P_SIDE];
         newPlayer.CustomProperties[CustomKeys.WINS] = _p2Wins;
-        PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] = _p2Energy;
 
         MatchStartedRaiseEvent();
 
