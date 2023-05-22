@@ -7,7 +7,7 @@ public class AdwareAbility : GenericAbility, IAbility
     {
         if (Time.time > _nextUseTime)
         {
-            EnergyManager.Instance.DecreaseEnergyEvent(cost);
+            EnergyManager.Instance.DecreaseEnergy(cost);
             MatchManager.Instance.AdwareAbilityRaiseEvent();
             _nextUseTime = Time.time + COOLDOWN_TIME;
         }
