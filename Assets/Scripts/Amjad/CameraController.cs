@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     public float zoomSpeed = 1f;
     public float minZoomFOV = 20f;
     public float maxZoomFOV = 60f;
+    public Camera camera;
 
     private Vector3 previousMousePosition;
     private bool isDragging;
@@ -102,9 +103,9 @@ public class CameraController : MonoBehaviour
     private void ZoomCamera(float zoomInput)
     {
         // Adjust the camera's field of view for zooming
-        float newFOV = Camera.main.fieldOfView + zoomInput * zoomSpeed;
+        float newFOV = camera.fieldOfView + zoomInput * zoomSpeed;
         newFOV = Mathf.Clamp(newFOV, minZoomFOV, maxZoomFOV);
-        Camera.main.fieldOfView = newFOV;
+        camera.fieldOfView = newFOV;
 
         // Calculate the distance between the camera and the target
         Vector3 cameraToTarget = target.position - transform.position;
@@ -112,7 +113,7 @@ public class CameraController : MonoBehaviour
 
         // Calculate the new distance based on the field of view change
         float zoomRatio = currentDistance / cameraToTarget.magnitude;
-        float newDistance = currentDistance * (newFOV / Camera.main.fieldOfView);
+        float newDistance = currentDistance * (newFOV / camera.fieldOfView);
 
         // Move the camera towards or away from the target based on the zoom input
         Vector3 newCameraPosition = target.position - transform.forward * newDistance * zoomRatio;

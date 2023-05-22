@@ -5,6 +5,8 @@ public class TouchInputManager : MonoBehaviour
     private static TouchInputManager instance;
     [SerializeField] private LayerMask mouseColliderLayerMask = new LayerMask();
 
+    public Camera camera;
+
     public static TouchInputManager Instance
     {
         get
@@ -52,7 +54,7 @@ public class TouchInputManager : MonoBehaviour
         {
             Touch touch = Input.GetTouch(touchIndex);
 
-            Ray ray = Camera.main.ScreenPointToRay(touch.position);
+            Ray ray = camera.ScreenPointToRay(touch.position);
 
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 999f, mouseColliderLayerMask))
@@ -61,7 +63,7 @@ public class TouchInputManager : MonoBehaviour
             }
             else
             {
-                touchWorldPosition = Camera.main.ScreenToWorldPoint(touch.position);
+                touchWorldPosition = camera.ScreenToWorldPoint(touch.position);
             }
         }
 
@@ -83,7 +85,7 @@ public class TouchInputManager : MonoBehaviour
         {
             Touch touch = Input.GetTouch(touchIndex);
 
-            Ray ray = Camera.main.ScreenPointToRay(touch.position);
+            Ray ray = camera.ScreenPointToRay(touch.position);
             bool found = false;
             RaycastHit hit;
 

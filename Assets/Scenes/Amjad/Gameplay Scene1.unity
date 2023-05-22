@@ -761,6 +761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectName: 
   ObjectEnergyCost: 0
+  camera: {fileID: 2136967981}
 --- !u!4 &44556083
 Transform:
   m_ObjectHideFlags: 0
@@ -13149,6 +13150,7 @@ MonoBehaviour:
   mouseColliderLayerMask:
     serializedVersion: 2
     m_Bits: 51
+  camera: {fileID: 2136967981}
 --- !u!114 &915449104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18666,6 +18668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerModifications: {fileID: 0}
   ObjectEnergyCost: 0
+  camera: {fileID: 2136967981}
 --- !u!65 &1235694700
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32555,6 +32558,7 @@ MonoBehaviour:
   zoomSpeed: 0.03
   minZoomFOV: 10
   maxZoomFOV: 40
+  camera: {fileID: 2136967981}
 --- !u!65 &2140597805
 BoxCollider:
   m_ObjectHideFlags: 0

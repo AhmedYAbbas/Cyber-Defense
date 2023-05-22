@@ -13,6 +13,7 @@ public class SpawnManager : MonoBehaviour
     public static SpawnManager Instance => _instance;
     [HideInInspector] public string ObjectName;
     [HideInInspector] public int ObjectEnergyCost;
+    public Camera camera;
 
     void Start()
     {
@@ -36,7 +37,7 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnObject(Vector3 position)
     {
-        Ray ray = Camera.main.ScreenPointToRay(position);
+        Ray ray = camera.ScreenPointToRay(position);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
