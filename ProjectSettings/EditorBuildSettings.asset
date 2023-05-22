@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Yasser/Main Menu.unity
-    guid: 14cc99dbb2c4aa84a858109911cf5224
+    path: Assets/Scenes/Amjad/Main Menu1.unity
+    guid: 977f65b365f4abd42b3461e97022585f
   - enabled: 1
-    path: Assets/Scenes/Yasser/Gameplay Scene.unity
-    guid: 7ff1dfdef2d976a4ca574a8b5cbdf5bc
+    path: Assets/Scenes/Amjad/Gameplay Scene1.unity
+    guid: 9a2ae0a87e7868b4886ed87ab397867c
   m_configObjects: {}
