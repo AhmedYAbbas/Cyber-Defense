@@ -14,8 +14,6 @@ public class MatchManager : MonoBehaviourPunCallbacks
     private const byte MatchEndedEventCode = 3;
     private const byte MatchStartedEventCode = 4;
 
-    public const byte MiningUsedEventCode = 5;
-
     #endregion
 
     #region Public Variables
@@ -123,7 +121,8 @@ public class MatchManager : MonoBehaviourPunCallbacks
 
         newPlayer.SetCustomProperties(newPlayerProps);
 
-        newPlayer.CustomProperties[CustomKeys.P_SIDE] = 1 - (Side)PhotonNetwork.MasterClient.CustomProperties[CustomKeys.P_SIDE];
+        newPlayer.CustomProperties[CustomKeys.P_SIDE] =
+            1 - (Side)PhotonNetwork.MasterClient.CustomProperties[CustomKeys.P_SIDE];
         newPlayer.CustomProperties[CustomKeys.WINS] = _p2Wins;
         newPlayer.CustomProperties[CustomKeys.ENERGY] = _p2Energy;
         newPlayer.CustomProperties[CustomKeys.Base_HEALTH] = _p2BaseHealth;
