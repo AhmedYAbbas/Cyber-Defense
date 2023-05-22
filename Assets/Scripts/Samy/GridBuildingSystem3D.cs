@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using CodeMonkey.Utils;
 using Photon.Pun;
+using UnityEngine.EventSystems;
 
 public class GridBuildingSystem3D : MonoBehaviour
 {
@@ -78,13 +79,21 @@ public class GridBuildingSystem3D : MonoBehaviour
     }
     private void InputHandler()
     {
-        if (placedObjectTypeSO != null && EnergyManager.Instance._energy >= placedObjectTypeSO.energyReq)
+        if (placedObjectTypeSO != null && EnergyManager.Instance._energy >= placedObjectTypeSO.energyReq && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (/*Input.GetMouseButtonDown(0)*/TouchInputManager.Instance.GetTouchPhase() == TouchPhase.Ended )
+            Vector3 mousePosition;
+            if (Input.GetMouseButtonUp(0)||TouchInputManager.Instance.GetTouchPhase() == TouchPhase.Ended)
             {
-                Vector3 mousePosition = TouchInputManager.Instance.GetTouchWorldPosition();
-                grid.GetXZ(mousePosition, out int x, out int z);
+                if (TouchInputManager.Instance.HasTouchInput())
+                {
+                    mousePosition = TouchInputManager.Instance.GetTouchWorldPosition();
+                }
+                else
+                {
+                    mousePosition = Mouse3D.Instance.GetMouseWorldPosition();
+                }
 
+                grid.GetXZ(mousePosition, out int x, out int z);
                 Vector2Int placedObjectOrigin = new Vector2Int(x, z);
                 placedObjectOrigin = grid.ValidateGridPosition(placedObjectOrigin);
 
@@ -99,9 +108,18 @@ public class GridBuildingSystem3D : MonoBehaviour
                         break;
                     }
                 }
-                bool shit = TouchInputManager.Instance.CANBUILD();
-                print("Can build ===============================" + shit);
-                if (canBuild && shit)
+                bool RayCastCheck ;
+
+                if (TouchInputManager.Instance.HasTouchInput())
+                {
+                    RayCastCheck = TouchInputManager.Instance.CANBUILD();
+                }
+                else
+                {
+                    RayCastCheck = Mouse3D.Instance.CANBUILD();
+                }
+                print("Can build ===============================" + RayCastCheck);
+                if (canBuild && RayCastCheck)
                 {
                     Vector2Int rotationOffset = Vector2Int.zero;
                     Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) +new Vector3(rotationOffset.x, 0, rotationOffset.y)  * grid.GetCellSize();
@@ -115,7 +133,6 @@ public class GridBuildingSystem3D : MonoBehaviour
 
                     OnObjectPlaced?.Invoke(this, EventArgs.Empty);
                     EnergyManager.Instance.DecreaseEnergy(placedObjectTypeSO.energyReq);
-
                     DeselectObjectType();
                 }
                 else
@@ -188,7 +205,15 @@ public class GridBuildingSystem3D : MonoBehaviour
     }
 
     public Vector3 GetMouseWorldSnappedPosition() {
-        Vector3 mousePosition = TouchInputManager.Instance.GetTouchWorldPosition();
+        Vector3 mousePosition;
+        if (TouchInputManager.Instance.HasTouchInput())
+        {
+          mousePosition = TouchInputManager.Instance.GetTouchWorldPosition();
+        }
+        else
+        {
+            mousePosition =  Mouse3D.Instance.GetMouseWorldPosition();
+        }
         grid.GetXZ(mousePosition, out int x, out int z);
         //print("Grid position" + x + z);
         if (placedObjectTypeSO != null) {

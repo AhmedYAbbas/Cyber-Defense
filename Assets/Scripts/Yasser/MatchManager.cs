@@ -14,8 +14,6 @@ public class MatchManager : MonoBehaviourPunCallbacks
     private const byte MatchEndedEventCode = 3;
     private const byte MatchStartedEventCode = 4;
 
-    public const byte MiningUsedEventCode = 5;
-
     #endregion
 
     #region Public Variables
@@ -48,6 +46,8 @@ public class MatchManager : MonoBehaviourPunCallbacks
     private int _p2Wins;
     private int _p1Energy;
     private int _p2Energy;
+    private int _p1BaseHealth;
+    private int _p2BaseHealth;
 
     #endregion
 
@@ -96,7 +96,8 @@ public class MatchManager : MonoBehaviourPunCallbacks
             {
                 [CustomKeys.P_SIDE] = _pSide,
                 [CustomKeys.WINS] = _p1Wins,
-                [CustomKeys.ENERGY] = _p1Energy
+                [CustomKeys.ENERGY] = _p1Energy,
+                [CustomKeys.Base_HEALTH] = _p1BaseHealth
             };
 
             PhotonNetwork.LocalPlayer.SetCustomProperties(masterClientProps);
@@ -104,6 +105,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
             PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] = _pSide;
             PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.WINS] = _p1Wins;
             PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] = _p1Energy;
+            PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.Base_HEALTH] = _p1BaseHealth;
         }
     }
 
@@ -113,14 +115,17 @@ public class MatchManager : MonoBehaviourPunCallbacks
         {
             [CustomKeys.P_SIDE] = 1 - _pSide,
             [CustomKeys.WINS] = _p2Wins,
-            [CustomKeys.ENERGY] = _p2Energy
+            [CustomKeys.ENERGY] = _p2Energy,
+            [CustomKeys.Base_HEALTH] = _p2BaseHealth
         };
 
         newPlayer.SetCustomProperties(newPlayerProps);
 
-        newPlayer.CustomProperties[CustomKeys.P_SIDE] = 1 - (Side)PhotonNetwork.MasterClient.CustomProperties[CustomKeys.P_SIDE];
+        newPlayer.CustomProperties[CustomKeys.P_SIDE] =
+            1 - (Side)PhotonNetwork.MasterClient.CustomProperties[CustomKeys.P_SIDE];
         newPlayer.CustomProperties[CustomKeys.WINS] = _p2Wins;
-        PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] = _p2Energy;
+        newPlayer.CustomProperties[CustomKeys.ENERGY] = _p2Energy;
+        newPlayer.CustomProperties[CustomKeys.Base_HEALTH] = _p2BaseHealth;
 
         MatchStartedRaiseEvent();
 
@@ -142,6 +147,8 @@ public class MatchManager : MonoBehaviourPunCallbacks
         _p1Wins = 0;
         _p2Wins = 0;
         currentRound = 1;
+        _p1BaseHealth = 100;
+        _p2BaseHealth = 100;
         _destroyedDefenderBase = false;
         ResetTime();
     }
@@ -215,6 +222,12 @@ public class MatchManager : MonoBehaviourPunCallbacks
 
             StartCoroutine(UILayer.Instance.EnableSwitchingSidesPanel());
 
+            // TODO: Introduce a function that takes care for resetting the values that needs to be reset before the start of the match
+            foreach (Player player in PhotonNetwork.PlayerList)
+            {
+                player.CustomProperties[CustomKeys.Base_HEALTH] = 100;
+            }
+
             ResetTime();
             StartMatch();
             currentRound++;
@@ -262,6 +275,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
         if (obj.Code == MatchEndedEventCode)
         {
             PhotonNetwork.Disconnect();
+            // TODO: Make the player switch to the match ended panel
         }
     }
 
