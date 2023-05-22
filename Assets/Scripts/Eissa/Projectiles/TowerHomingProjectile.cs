@@ -40,11 +40,17 @@ public class TowerHomingProjectile : PoolableObject
     private void OnTriggerEnter(Collider other)
     {
         
-          if (other.CompareTag("Enemy") && _target.gameObject.activeInHierarchy )
+          if (other.CompareTag("Enemy") && _target.gameObject.activeInHierarchy)
           {
-              if (other != null && other.gameObject.activeInHierarchy )
+              
+              if (other != null && other.gameObject.activeInHierarchy)
               {
-                  other.GetComponent<Malware>().DamageMalware(_damage);
+                  var malwareScript = other.GetComponent<Malware>();
+                  if (malwareScript.photonView.IsMine)
+                  {
+                      malwareScript.DamageMalware(_damage);
+                  }
+                  
                   this.gameObject.SetActive(false);
               }
               else

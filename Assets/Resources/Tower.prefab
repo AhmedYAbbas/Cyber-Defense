@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70922f99426fbc94eaec3a01f69d5c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentHealth: 0
   towerIconPosition: {fileID: 1697319307}
   towerHead: {fileID: 5859953710869374100}
   baseTowerSo: {fileID: 11400000, guid: 4b3b2b8bbe071e54ba89bb93a525b12d, type: 2}
@@ -220,12 +221,13 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 2
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 1142447499720439798}
   - {fileID: 8798511044593112560}
+  - {fileID: 4028080954702382854}
+  - {fileID: 1824520835858597520}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -270,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 0
+  m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
 --- !u!65 &8782150720093862037

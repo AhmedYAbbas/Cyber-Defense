@@ -30,13 +30,12 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (photonView.IsMine)
-        {
+        
             GettingTheMostDangerousEnemy();
             RotateTheTowerHead();
             CalculateShootingRate();
             print(_enemies.Count);
-        }
+        
     }
 
     void GetTowerModification(object sender , EventArgs e)

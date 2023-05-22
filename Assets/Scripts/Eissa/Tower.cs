@@ -7,10 +7,10 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class Tower : MonoBehaviourPun ,IPunObservable
+public class Tower : MonoBehaviourPun 
 {
     private float _maxHealth;
-    private float _currentHealth;
+    [SerializeField] private float _currentHealth;
     [SerializeField] private Transform towerIconPosition;
     private GameObject _currentTowerIcon;
     private GameObject _towerIcon;
@@ -26,6 +26,7 @@ public class Tower : MonoBehaviourPun ,IPunObservable
             ModifyTower(baseTowerSo);
             _currentHealth = _maxHealth;
             healthBarSlider.value = 1;
+            print("Is Mine");
         
     }
     public void ModifyTower(TowerModifications towerModifications)
@@ -48,13 +49,27 @@ public class Tower : MonoBehaviourPun ,IPunObservable
     }
     public void DamageTower(int dmg)
     {
-        _currentHealth -= dmg;
-        UpdateHealthBar();
+            _currentHealth -= dmg;
+            UpdateHealthBar();
+            CheckTowerHealth();
+            photonView.RPC("SyncTowerHealth", RpcTarget.Others, _currentHealth);
+    }
+
+    void CheckTowerHealth()
+    {
         if (_currentHealth <= 0)
         {
             gameObject.SetActive(false);
             //Destroy(gameObject);
         }
+    }
+
+    [PunRPC]
+    private void SyncTowerHealth(float health)
+    {
+        _currentHealth = health;
+        UpdateHealthBar();
+        CheckTowerHealth();
     }
 
     private void OnDisable()
@@ -68,7 +83,7 @@ public class Tower : MonoBehaviourPun ,IPunObservable
         healthBarSlider.value = healthPercentage / 100;
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    /*public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         stream.Serialize(ref _currentHealth);
         if (stream.IsWriting)
@@ -80,5 +95,5 @@ public class Tower : MonoBehaviourPun ,IPunObservable
             _currentHealth = (float)stream.ReceiveNext();
         }
         UpdateHealthBar();
-    }
+    }*/
 }
