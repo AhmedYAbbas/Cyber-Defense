@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class TowerShootingSystem : MonoBehaviour
+public class TowerShootingSystem : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Tower _towerScript;
     private TowerModifications _towerModifications;
@@ -29,10 +30,13 @@ public class TowerShootingSystem : MonoBehaviour
 
     private void Update()
     {
-        GettingTheMostDangerousEnemy();
-        RotateTheTowerHead();
-        CalculateShootingRate();
-        print(_enemies.Count);
+        if (photonView.IsMine)
+        {
+            GettingTheMostDangerousEnemy();
+            RotateTheTowerHead();
+            CalculateShootingRate();
+            print(_enemies.Count);
+        }
     }
 
     void GetTowerModification(object sender , EventArgs e)
@@ -86,23 +90,25 @@ public class TowerShootingSystem : MonoBehaviour
     }
     private void CalculateShootingRate()
     {
-        if (_attackCountdown <= 0)
-        {
-            Shoot();
-            _attackCountdown = 1f / _attackSpeed;
-        }
-
-        _attackCountdown -= Time.deltaTime;
-    }
-
-    private void Shoot()
-    {
         if (_enemies.Count > 0 && _currentTarget != null)
         {
-            var projectile = _projectilePool.GetObject();
-            projectile.transform.position = shootingPoint.position;
-            projectile.GetComponent<TowerHomingProjectile>().GetTarget(_currentTarget.transform,_damage);
+            if (_attackCountdown <= 0)
+            {
+                Shoot();
+                //photonView.RPC(nameof(Shoot), RpcTarget.All);
+                _attackCountdown = 1f / _attackSpeed;
+            }
+
+            _attackCountdown -= Time.deltaTime;
         }
+    }
+    
+    //[PunRPC]
+    private void Shoot()
+    {
+          var projectile = _projectilePool.GetObject();
+          projectile.transform.position = shootingPoint.position;
+          projectile.GetComponent<TowerHomingProjectile>().GetTarget(_currentTarget.transform,_damage);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -120,4 +126,6 @@ public class TowerShootingSystem : MonoBehaviour
             print("enemy exited the range");
         }
     }
+
+    
 }

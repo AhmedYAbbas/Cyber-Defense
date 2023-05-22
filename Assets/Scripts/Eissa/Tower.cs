@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class Tower : MonoBehaviour
+public class Tower : MonoBehaviourPun ,IPunObservable
 {
     private float _maxHealth;
     private float _currentHealth;
@@ -20,12 +20,13 @@ public class Tower : MonoBehaviour
     public event EventHandler TowerGotModified;
     [SerializeField] private Slider healthBarSlider;
 
-
     private void Start()
     {
-        ModifyTower(baseTowerSo);
-        _currentHealth = _maxHealth;
-        healthBarSlider.value = 1;
+        
+            ModifyTower(baseTowerSo);
+            _currentHealth = _maxHealth;
+            healthBarSlider.value = 1;
+        
     }
     public void ModifyTower(TowerModifications towerModifications)
     {
@@ -65,5 +66,19 @@ public class Tower : MonoBehaviour
     {
         float healthPercentage  = (_currentHealth / _maxHealth) * 100;
         healthBarSlider.value = healthPercentage / 100;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        stream.Serialize(ref _currentHealth);
+        if (stream.IsWriting)
+        {
+            stream.SendNext(_currentHealth);
+        }
+        else
+        {
+            _currentHealth = (float)stream.ReceiveNext();
+        }
+        UpdateHealthBar();
     }
 }
