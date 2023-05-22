@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Samy/Main Menu1.unity
-    guid: 52779dab882731f4bb14f7be597dea47
+    path: Assets/Scenes/Yasser/Main Menu.unity
+    guid: 14cc99dbb2c4aa84a858109911cf5224
   - enabled: 1
-    path: Assets/Scenes/Samy/Gameplay Scene.unity
-    guid: b362e12f54deb314ab31f993ff42004a
+    path: Assets/Scenes/Yasser/Gameplay Scene.unity
+    guid: 7ff1dfdef2d976a4ca574a8b5cbdf5bc
   m_configObjects: {}

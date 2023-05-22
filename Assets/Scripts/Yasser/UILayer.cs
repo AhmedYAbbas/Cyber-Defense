@@ -10,6 +10,7 @@ public class UILayer : MonoBehaviour
     [SerializeField] private GameObject attackerUI;
     [SerializeField] private GameObject defenderUI;
     [SerializeField] private GameObject switchingSidesPanel;
+    [SerializeField] private GameObject ads;
 
     #endregion
 
@@ -36,7 +37,7 @@ public class UILayer : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -70,11 +71,16 @@ public class UILayer : MonoBehaviour
         switchingSidesPanel.gameObject.SetActive(false);
     }
 
-    #endregion
-
     public void ReturnToMainMenu()
     {
         PhotonNetwork.LoadLevel(0);
         Destroy(gameObject, 2.0f);
     }
+
+    public void ShowAds()
+    {
+        ads.SetActive(true);
+    }
+
+    #endregion
 }
