@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 
 public class PlacedObject_Done : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class PlacedObject_Done : MonoBehaviour
         //placedObjectTransform.AddComponent<BoxCollider>();
         PlacedObject_Done placedObject = placedObjectTransform.GetComponent<PlacedObject_Done>();
         placedObject.Setup(placedObjectTypeSO, origin, dir);
-
         return placedObject;
     }
 

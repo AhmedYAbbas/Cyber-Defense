@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Photon.Pun;
+using System;
 using UnityEngine;
 
 
-public class PoolableObject : MonoBehaviour
+public class PoolableObject : MonoBehaviourPunCallbacks
 {
     public ObjectPool Parent;
 
