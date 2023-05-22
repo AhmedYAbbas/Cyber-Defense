@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (!EventSystem.current.IsPointerOverGameObject() && GridBuildingSystem3D.Instance.GetPlacedObjectTypeSO() == null)
         {
             // Handle camera rotation
             if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
@@ -44,7 +44,6 @@ public class CameraController : MonoBehaviour
             float zoomInput = GetZoomInput();
             ZoomCamera(zoomInput);
         }
-
     }
 
     private bool HasZoomInput()

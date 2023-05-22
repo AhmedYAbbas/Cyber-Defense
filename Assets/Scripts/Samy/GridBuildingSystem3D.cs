@@ -21,6 +21,7 @@ public class GridBuildingSystem3D : MonoBehaviour
     [SerializeField] private int gridWidth;
     [SerializeField] private int gridHeight;
     [SerializeField] private float cellSize;
+    
     private void Awake() {
         Instance = this;
 
@@ -238,8 +239,8 @@ public class GridBuildingSystem3D : MonoBehaviour
     }
     public void SetPlacedObjectTypeSO(int TypeNum)
     {
+        print("selected type " + TypeNum);
         placedObjectTypeSO = placedObjectTypeSOList[TypeNum];
         RefreshSelectedObjectType();
-        print("selected type " + TypeNum);
     }
 }
