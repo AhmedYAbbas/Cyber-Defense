@@ -87,7 +87,7 @@ public class EnergyManager : MonoBehaviourPunCallbacks
             _energy = _maxEnergy;
 
         _roundTime = 0;
-        _energy = _maxEnergy;
+        //_energy = _maxEnergy;
         _energySlider.value = _energy;
 
         Hashtable energyProp = new Hashtable { [CustomKeys.ENERGY] = _energy };
@@ -104,7 +104,7 @@ public class EnergyManager : MonoBehaviourPunCallbacks
         else if (_energy > _maxEnergy)
             _energy = _maxEnergy;
 
-        _energy -= amount;
+        //_energy -= amount;
         _energySlider.value = _energy;
         PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] = _energy;
 
@@ -119,7 +119,7 @@ public class EnergyManager : MonoBehaviourPunCallbacks
             int defenderEnergy = (int)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY];
             int energyToDecrease = (int)(defenderEnergy * 0.2);
             DecreaseDefenderEnergy(energyToDecrease);
-            Debug.Log("Removed from defender");
+            //Debug.Log("Removed from defender");
         }
     }
 

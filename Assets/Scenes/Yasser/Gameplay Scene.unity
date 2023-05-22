@@ -14568,10 +14568,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613fd4350e188c6488927d084e406f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _card: {fileID: 0}
+  _card: {fileID: 966286028}
   cost: 5
   _nextUseTime: 0
-  cooldownText: {fileID: 0}
+  cooldownText: {fileID: 1728203281}
   _timer: 10
   _isOnCooldown: 0
 --- !u!1001 &974318701
