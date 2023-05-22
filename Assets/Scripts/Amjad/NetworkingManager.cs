@@ -49,6 +49,7 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        print(PhotonNetwork.CurrentRoom.Name);
         //waitingForPlayersPanel.SetActive(true);
     }
 

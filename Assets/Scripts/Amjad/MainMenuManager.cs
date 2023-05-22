@@ -39,7 +39,7 @@ public class MainMenuManager : MonoBehaviour
         PlayerPrefs.SetString("NickName", if_playerNickName.text);
     }
 
-    public void CreateOrJoinRoom(TMP_Text RoomName)
+    public void CreateOrJoinRoom(TMP_InputField RoomName)
     {
         if (string.IsNullOrEmpty(RoomName.text))
         {
