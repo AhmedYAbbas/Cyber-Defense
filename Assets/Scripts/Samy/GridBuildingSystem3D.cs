@@ -13,7 +13,7 @@ public class GridBuildingSystem3D : MonoBehaviour
     public event EventHandler OnSelectedChanged;
     public event EventHandler OnObjectPlaced;
 
-
+    public static Camera MyCamera;
     private GridXZ<GridObject> grid;
     [SerializeField] private List<PlacedObjectTypeSO> placedObjectTypeSOList = null;
     private PlacedObjectTypeSO placedObjectTypeSO;
@@ -24,7 +24,7 @@ public class GridBuildingSystem3D : MonoBehaviour
     
     private void Awake() {
         Instance = this;
-
+        MyCamera = Camera.main;
         //gridWidth = 10;
         //gridHeight = 10;
         //cellSize = 5f;
@@ -35,7 +35,7 @@ public class GridBuildingSystem3D : MonoBehaviour
     }
 
     public class GridObject {
-
+        
         private GridXZ<GridObject> grid;
         private int x;
         private int y;
@@ -123,7 +123,7 @@ public class GridBuildingSystem3D : MonoBehaviour
                 if (canBuild && RayCastCheck)
                 {
                     Vector2Int rotationOffset = Vector2Int.zero;
-                    Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) +new Vector3(rotationOffset.x, 0, rotationOffset.y)  * grid.GetCellSize();
+                    Vector3 placedObjectWorldPosition = grid.GetWorldPosition(placedObjectOrigin.x, placedObjectOrigin.y) +new Vector3(rotationOffset.x, 0, rotationOffset.y)  * grid.GetCellSize()/2;
 
                     PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, dir, placedObjectTypeSO);
 
@@ -139,7 +139,7 @@ public class GridBuildingSystem3D : MonoBehaviour
                 else
                 {
                     // Cannot build here
-                    UtilsClass.CreateWorldTextPopup("Cannot Build Here!", mousePosition);
+                    UtilsClass.CreateWorldTextPopup("Cannot Build Here!", new Vector3(mousePosition.x-12, mousePosition.y, mousePosition.z));
                     //DeselectObjectType();
                 }
             }
@@ -218,8 +218,8 @@ public class GridBuildingSystem3D : MonoBehaviour
         grid.GetXZ(mousePosition, out int x, out int z);
         //print("Grid position" + x + z);
         if (placedObjectTypeSO != null) {
-            Vector2Int rotationOffset = Vector2Int.zero;
-            Vector3 placedObjectWorldPosition = grid.GetWorldPosition(x, z) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize()/2;
+            //Vector2Int rotationOffset = Vector2Int.zero;
+            Vector3 placedObjectWorldPosition = grid.GetWorldPosition(x, z)  + Vector3.one * grid.GetCellSize()/4;
             return placedObjectWorldPosition;
         } else {
             return mousePosition;
