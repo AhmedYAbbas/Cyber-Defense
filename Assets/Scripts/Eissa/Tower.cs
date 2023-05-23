@@ -7,10 +7,10 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class Tower : MonoBehaviour
+public class Tower : MonoBehaviourPun 
 {
     private float _maxHealth;
-    private float _currentHealth;
+    [SerializeField] private float _currentHealth;
     [SerializeField] private Transform towerIconPosition;
     private GameObject _currentTowerIcon;
     private GameObject _towerIcon;
@@ -20,12 +20,14 @@ public class Tower : MonoBehaviour
     public event EventHandler TowerGotModified;
     [SerializeField] private Slider healthBarSlider;
 
-
     private void Start()
     {
-        ModifyTower(baseTowerSo);
-        _currentHealth = _maxHealth;
-        healthBarSlider.value = 1;
+        
+            ModifyTower(baseTowerSo);
+            _currentHealth = _maxHealth;
+            healthBarSlider.value = 1;
+            print("Is Mine");
+        
     }
     public void ModifyTower(TowerModifications towerModifications)
     {
@@ -47,13 +49,27 @@ public class Tower : MonoBehaviour
     }
     public void DamageTower(int dmg)
     {
-        _currentHealth -= dmg;
-        UpdateHealthBar();
+            _currentHealth -= dmg;
+            UpdateHealthBar();
+            CheckTowerHealth();
+            photonView.RPC("SyncTowerHealth", RpcTarget.Others, _currentHealth);
+    }
+
+    void CheckTowerHealth()
+    {
         if (_currentHealth <= 0)
         {
             gameObject.SetActive(false);
             //Destroy(gameObject);
         }
+    }
+
+    [PunRPC]
+    private void SyncTowerHealth(float health)
+    {
+        _currentHealth = health;
+        UpdateHealthBar();
+        CheckTowerHealth();
     }
 
     private void OnDisable()
@@ -66,4 +82,18 @@ public class Tower : MonoBehaviour
         float healthPercentage  = (_currentHealth / _maxHealth) * 100;
         healthBarSlider.value = healthPercentage / 100;
     }
+
+    /*public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        stream.Serialize(ref _currentHealth);
+        if (stream.IsWriting)
+        {
+            stream.SendNext(_currentHealth);
+        }
+        else
+        {
+            _currentHealth = (float)stream.ReceiveNext();
+        }
+        UpdateHealthBar();
+    }*/
 }
