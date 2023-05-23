@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TowerData
   m_EditorClassIdentifier: 
   nameString: Tower
-  prefab: {fileID: 1142447499720439785, guid: d41cf73e665c97247b76606e1b3298da, type: 3}
+  prefab: {fileID: 4547989627355245919, guid: 486cc259b550b924f8d0c01d2080d7a3, type: 3}
   visual: {fileID: 163852957138936261, guid: 79ed07c946a6d08469c68cf57c72f413, type: 3}
   width: 1
   height: 1
