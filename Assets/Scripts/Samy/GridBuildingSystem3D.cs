@@ -219,7 +219,7 @@ public class GridBuildingSystem3D : MonoBehaviour
         //print("Grid position" + x + z);
         if (placedObjectTypeSO != null) {
             //Vector2Int rotationOffset = Vector2Int.zero;
-            Vector3 placedObjectWorldPosition = grid.GetWorldPosition(x, z)  + Vector3.one * grid.GetCellSize()/4;
+            Vector3 placedObjectWorldPosition = grid.GetWorldPosition(x, z)  + Vector3.zero * grid.GetCellSize()/2;
             return placedObjectWorldPosition;
         } else {
             return mousePosition;

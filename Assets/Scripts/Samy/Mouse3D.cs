@@ -29,7 +29,7 @@ public class Mouse3D : MonoBehaviour {
 
         bool found = false;
         RaycastHit hit;
-        if (Physics.Raycast(RaycastStart.position,Vector3.down,out hit, 999f, mouseColliderLayerMask))
+        if (Physics.Raycast(ray,out hit, 999f, mouseColliderLayerMask))
         {
 
             print(hit.collider.tag + " v " + hit.collider.name);
