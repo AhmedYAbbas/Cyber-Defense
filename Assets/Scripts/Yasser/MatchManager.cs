@@ -49,6 +49,8 @@ public class MatchManager : MonoBehaviourPunCallbacks
     private int _p2Wins;
     private int _p1Energy;
     private int _p2Energy;
+    private bool _isWinner;
+    private string WinnerUserName;
 
     #endregion
 
@@ -97,7 +99,9 @@ public class MatchManager : MonoBehaviourPunCallbacks
             {
                 [CustomKeys.P_SIDE] = _pSide,
                 [CustomKeys.WINS] = _p1Wins,
-                [CustomKeys.ENERGY] = _p1Energy
+                [CustomKeys.ENERGY] = _p1Energy,
+                [CustomKeys.User_Name] = PlayerPrefs.GetString("NickName"),
+                [CustomKeys.Winner] = _isWinner
             };
 
             PhotonNetwork.LocalPlayer.SetCustomProperties(masterClientProps);
@@ -105,6 +109,8 @@ public class MatchManager : MonoBehaviourPunCallbacks
             PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] = _pSide;
             PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.WINS] = _p1Wins;
             PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] = _p1Energy;
+            PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.User_Name] = PlayerPrefs.GetString("NickName");
+            PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.Winner] = _isWinner;
         }
     }
 
@@ -114,7 +120,9 @@ public class MatchManager : MonoBehaviourPunCallbacks
         {
             [CustomKeys.P_SIDE] = 1 - _pSide,
             [CustomKeys.WINS] = _p2Wins,
-            [CustomKeys.ENERGY] = _p2Energy
+            [CustomKeys.ENERGY] = _p2Energy,
+            [CustomKeys.User_Name] = PlayerPrefs.GetString("NickName"),
+            [CustomKeys.Winner] = _isWinner
         };
 
         newPlayer.SetCustomProperties(newPlayerProps);
@@ -208,6 +216,11 @@ public class MatchManager : MonoBehaviourPunCallbacks
             foreach (Player player in PhotonNetwork.PlayerList)
             {
                 player.CustomProperties[CustomKeys.P_SIDE] = 1 - (Side)player.CustomProperties[CustomKeys.P_SIDE];
+                if ((bool)player.CustomProperties[CustomKeys.Winner])
+                {
+                    print((string)player.CustomProperties[CustomKeys.User_Name]);
+                    WinnerUserName = (string)player.CustomProperties[CustomKeys.User_Name];
+                }
             }
 
             if (currentRound >= WINS_REQUIRED)
@@ -215,12 +228,12 @@ public class MatchManager : MonoBehaviourPunCallbacks
                 if (_p1Wins > _p2Wins || _p2Wins > _p1Wins)
                 {
                     UILayer.Instance.GameEndedPanel.SetActive(true);
-
+                    UILayer.Instance.winnerText.text = $"<color=yellow>{WinnerUserName}</color> Won The Game";
                     // Disconnects the player
                     MatchEndedRaiseEvent();
                 }
             }
-            
+
             StartCoroutine(UILayer.Instance.EnableSwitchingSidesPanel());
 
             ResetTime();
@@ -249,13 +262,16 @@ public class MatchManager : MonoBehaviourPunCallbacks
         if ((Side)player.CustomProperties[CustomKeys.P_SIDE] == Side.Attacker && _destroyedDefenderBase)
         {
             RecordRoundWinner(player);
+            player.CustomProperties[CustomKeys.Winner] = true;
         }
         else if ((Side)player.CustomProperties[CustomKeys.P_SIDE] == Side.Defender && roundTime <= 0)
         {
             RecordRoundWinner(player);
+            player.CustomProperties[CustomKeys.Winner] = true;
         }
         else
         {
+            player.CustomProperties[CustomKeys.Winner] = false;
             RecordRoundWinner(PhotonNetwork.PlayerListOthers[0]);
         }
     }

@@ -10,6 +10,8 @@ public class UILayer : MonoBehaviour
     [SerializeField] private GameObject attackerUI;
     [SerializeField] private GameObject defenderUI;
     [SerializeField] private GameObject switchingSidesPanel;
+    [SerializeField] private TMP_Text roundNumText;
+    [SerializeField] private TMP_Text attackerDefenderTurnText;
     [SerializeField] private GameObject ads;
 
     #endregion
@@ -20,6 +22,7 @@ public class UILayer : MonoBehaviour
     public TextMeshProUGUI roundText;
     public TextMeshProUGUI p1WinsText;
     public TextMeshProUGUI p2WinsText;
+    public TMP_Text winnerText;
     public GameObject GameEndedPanel;
 
     public static UILayer Instance { get; private set; }
@@ -66,6 +69,16 @@ public class UILayer : MonoBehaviour
 
     public IEnumerator EnableSwitchingSidesPanel()
     {
+        roundNumText.text = $"Round: {MatchManager.Instance.currentRound+1}";
+        if (defenderUI.activeInHierarchy)
+        {
+            attackerDefenderTurnText.text = "Now You Are An <color=red>Attacker</color>";
+        }
+        else
+        {
+            attackerDefenderTurnText.text = "Now You Are A <color=blue>Defender</color>";
+        }
+
         switchingSidesPanel.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
         switchingSidesPanel.gameObject.SetActive(false);

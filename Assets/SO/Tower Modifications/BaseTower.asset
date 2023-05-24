@@ -19,8 +19,8 @@ MonoBehaviour:
   ModificationName: BaseTower
   maxHealth: 100
   EnergyCost: 0
-  damage: 10
-  range: 5
+  damage: 20
+  range: 10
   attackSpeed: 2
   bulletPrefab: {fileID: 1997412740616632572, guid: e3721398ade1cc5459c4b8a2c7c682b5,
     type: 3}

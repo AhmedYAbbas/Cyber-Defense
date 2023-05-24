@@ -125,6 +125,7 @@ public class EnergyManager : MonoBehaviourPunCallbacks
 
     void IncreaseEnergyPerTime()
     {
+        _energy += _energyIncreaseValue;
         _energySlider.value = _energy;
     }
 }

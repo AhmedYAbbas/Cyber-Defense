@@ -4,4 +4,6 @@ public static class CustomKeys
     public const string WINS = "wins";
     public const string ENERGY = "Energy";
     public const string Base_HEALTH = "BaseHealth";
+    public const string User_Name = "UserName";
+    public const string Winner = "IsWinner";
 }
