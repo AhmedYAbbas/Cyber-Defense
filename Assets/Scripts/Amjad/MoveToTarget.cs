@@ -27,6 +27,7 @@ public class MoveToTarget : MonoBehaviour
         //_towers = new List<GameObject>();
         _agent = GetComponent<NavMeshAgent>();
         _target = GameObject.FindGameObjectWithTag("Base");
+        print(_target.name + " found");
         //_projectilePool = ObjectPool.CreatInstance(_malwareProjectilePrefab, 20);
     }
 
@@ -92,7 +93,6 @@ public class MoveToTarget : MonoBehaviour
             print("Target Found");
             _agent.SetDestination(_target.transform.position);
         }
-
     }
 
     /*void OnTriggerEnter(Collider collision)

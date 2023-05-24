@@ -32,7 +32,7 @@ public class Mouse3D : MonoBehaviour {
         if (Physics.Raycast(ray,out hit, 999f, mouseColliderLayerMask))
         {
 
-            print(hit.collider.tag + " v " + hit.collider.name);
+            //print(hit.collider.tag + " v " + hit.collider.name);
             return hit.point;
 
         }
