@@ -202,6 +202,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
     {
         if (obj.Code == TimeEndedEventCode || obj.Code == BaseDestroyedEventCode)
         {
+            _destroyedDefenderBase = true;
             CheckWinner(PhotonNetwork.LocalPlayer);
 
             foreach (Player player in PhotonNetwork.PlayerList)
@@ -219,15 +220,13 @@ public class MatchManager : MonoBehaviourPunCallbacks
                     MatchEndedRaiseEvent();
                 }
             }
-
+            
             StartCoroutine(UILayer.Instance.EnableSwitchingSidesPanel());
 
             ResetTime();
             StartMatch();
             currentRound++;
-
-            if ((Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == Side.Attacker)
-                _destroyedDefenderBase = false;
+            _destroyedDefenderBase = false;
         }
     }
 

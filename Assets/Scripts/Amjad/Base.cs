@@ -3,24 +3,67 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Base : MonoBehaviour
+public class Base : MonoBehaviourPunCallbacks
 {
-    public Slider Slider;
+    public Slider healthBarSlider;
+    [SerializeField] private float _maxHealth = 100;
+    [SerializeField] private float _currentHealth;
 
     private void Start()
     {
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            player.CustomProperties[CustomKeys.Base_HEALTH] = 100;
-        }
+        _currentHealth = _maxHealth;
+        photonView.RPC("SyncBaseHealth", RpcTarget.All, _currentHealth);
+
+        // foreach (Player player in PhotonNetwork.PlayerList)
+        // {
+        //     if ((MatchManager.Side)player.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Defender)
+        //     {
+        //         photonView.TransferOwnership(player);
+        //     }
+        // }
+
+        // if (PhotonNetwork.IsMasterClient)
+        // {
+        //     photonView.TransferOwnership(PhotonNetwork.MasterClient);
+        //    
+        // }
     }
 
     public void TakeDamage(int dmg)
     {
-        if (Slider.value <= 0 && (MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker)
+        _currentHealth -= dmg;
+        UpdateHealthBar();
+        CheckBaseHealth();
+        photonView.RPC("SyncBaseHealth", RpcTarget.All, _currentHealth);
+    }
+    private void UpdateHealthBar()
+    {
+        float healthPercentage  = (_currentHealth / _maxHealth) * 100;
+        healthBarSlider.value = healthPercentage / 100;
+    }
+    void CheckBaseHealth()
+    {
+        if (_currentHealth <= 0 && (MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Defender)    
         {
-            Slider.value = 100;
-            MatchManager.Instance._destroyedDefenderBase = true;
+            MatchManager.Instance.BaseDestroyedRaiseEvent();
+            _currentHealth = _maxHealth;
+            //gameObject.SetActive(false);
+            //Destroy(gameObject);
+        }
+    }
+    [PunRPC]
+    private void SyncBaseHealth(float health)
+    {
+        _currentHealth = health;
+        UpdateHealthBar();
+        // CheckBaseHealth();
+    }
+
+    public void TakeDamagea(int dmg)
+    {
+        if (healthBarSlider.value <= 0 && (MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker)
+        {
+            healthBarSlider.value = 100;
             MatchManager.Instance.BaseDestroyedRaiseEvent();
         }
         else
@@ -28,7 +71,7 @@ public class Base : MonoBehaviour
             int health = (int)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.Base_HEALTH];
             health -= dmg;
             PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.Base_HEALTH] = health;
-            Slider.value = health;
+            healthBarSlider.value = health;
         }
     }
 }
