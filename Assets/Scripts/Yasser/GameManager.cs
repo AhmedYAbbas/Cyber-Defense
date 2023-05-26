@@ -42,8 +42,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if (Input.GetKeyDown(KeyCode.Space) && (MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker)
         {
-            MatchManager.Instance._destroyedDefenderBase = true;
             MatchManager.Instance.BaseDestroyedRaiseEvent();
+            foreach (Player player in PhotonNetwork.PlayerList)
+            {
+                Debug.Log(player.NickName);
+            }
         }
     }
 

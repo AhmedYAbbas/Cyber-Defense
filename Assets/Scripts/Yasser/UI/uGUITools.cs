@@ -1,6 +1,8 @@
 ﻿/// Credit Senshi  
 /// Sourced from - http://forum.unity3d.com/threads/scripts-useful-4-6-scripts-collection.264161/ (uGUITools link)
 
+#if UNITY_EDITOR
+
 using UnityEditor;
 namespace UnityEngine.UI.Extensions
 {
@@ -113,3 +115,5 @@ namespace UnityEngine.UI.Extensions
         }
     }
 }
+
+#endif
