@@ -15,6 +15,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
     private const byte MatchStartedEventCode = 4;
 
     public const byte MiningUsedEventCode = 5;
+    public const byte AdwareAbilityEventCode = 6;
 
     #endregion
 
@@ -173,6 +174,12 @@ public class MatchManager : MonoBehaviourPunCallbacks
         PhotonNetwork.RaiseEvent(MatchStartedEventCode, null, raiseEventOptions, SendOptions.SendReliable);
     }
 
+    public void AdwareAbilityRaiseEvent()
+    {
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
+        PhotonNetwork.RaiseEvent(AdwareAbilityEventCode, null, raiseEventOptions, SendOptions.SendReliable);
+    }
+
     #endregion
 
     #region Private Methods
@@ -254,9 +261,6 @@ public class MatchManager : MonoBehaviourPunCallbacks
         }
     }
 
-    #endregion
-
-
     private void DisconnectPlayers(EventData obj)
     {
         if (obj.Code == MatchEndedEventCode)
@@ -273,4 +277,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
             ResetMatch();
         }
     }
+
+    #endregion
+
 }

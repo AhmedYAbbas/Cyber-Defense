@@ -28,7 +28,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnEnable()
     {
         base.OnEnable();
+        PhotonNetwork.NetworkingClient.EventReceived += ShowAds;
         UpdateUI();
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        PhotonNetwork.NetworkingClient.EventReceived -= ShowAds;
     }
 
     private void Update()
@@ -65,6 +72,14 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         // Load players UI
         UILayer.Instance.LoadPlayerUI((MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE]);
+    }
+
+    private void ShowAds(EventData obj)
+    {
+        if (obj.Code == MatchManager.AdwareAbilityEventCode)
+        {
+            UILayer.Instance.ShowAds();
+        }
     }
 
 }
