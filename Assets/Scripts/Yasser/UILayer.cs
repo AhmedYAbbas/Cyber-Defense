@@ -42,6 +42,7 @@ public class UILayer : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        StartCoroutine(EnableSwitchingSidesPanel(0));
     }
 
     #endregion
@@ -67,10 +68,10 @@ public class UILayer : MonoBehaviour
         }
     }
 
-    public IEnumerator EnableSwitchingSidesPanel()
+    public IEnumerator EnableSwitchingSidesPanel(int increment)
     {
-        roundNumText.text = $"Round: {MatchManager.Instance.currentRound+1}";
-        if (defenderUI.activeInHierarchy)
+        roundNumText.text = $"Round: {MatchManager.Instance.currentRound+increment}";
+        if ((MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker)
         {
             attackerDefenderTurnText.text = "Now You Are An <color=red>Attacker</color>";
         }
@@ -78,6 +79,7 @@ public class UILayer : MonoBehaviour
         {
             attackerDefenderTurnText.text = "Now You Are A <color=blue>Defender</color>";
         }
+
 
         switchingSidesPanel.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);

@@ -6,50 +6,80 @@ public class CameraController : MonoBehaviour
     public Transform target;
     public float rotationSpeed = 1f;
     public float zoomSpeed = 1f;
-    public float minZoomFOV = 20f;
-    public float maxZoomFOV = 60f;
+    public float minZoomDistance = 5f;
+    public float maxZoomDistance = 20f;
+    public float rotateDelay = 1f; // Delay in seconds before allowing rotation after zooming
+    public float minSwipeDistance = 1; // Minimum swipe distance required for rotation
     public Camera camera;
 
     private Vector3 previousMousePosition;
     private bool isDragging;
+    private float rotateTimer;
+    private bool shouldRotate;
 
     private void Update()
     {
         if (!EventSystem.current.IsPointerOverGameObject() && GridBuildingSystem3D.Instance.GetPlacedObjectTypeSO() == null)
         {
-            // Handle camera rotation
-            if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
-            {
-                isDragging = true;
-                previousMousePosition = Input.mousePosition;
-            }
-            else if ((Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1)))
-            {
-                isDragging = false;
-            }
+            HandleCameraRotation();
 
-            if (isDragging && !HasZoomInput())
-            {
-                Vector3 currentMousePosition = Input.mousePosition;
-                Vector3 deltaMousePosition = currentMousePosition - previousMousePosition;
+            HandleCameraZoom();
+        }
+    }
 
+    private void HandleCameraRotation()
+    {
+        if (rotateTimer > 0f)
+        {
+            rotateTimer -= Time.deltaTime;
+            shouldRotate = false; // Disable rotation during the delay
+        }
+        else
+        {
+            shouldRotate = true; // Enable rotation after the delay
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            isDragging = true;
+            previousMousePosition = Input.mousePosition;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            isDragging = false;
+        }
+
+        if (isDragging && shouldRotate && !HasZoomInput())
+        {
+            Vector3 currentMousePosition = Input.mousePosition;
+            Vector3 deltaMousePosition = currentMousePosition - previousMousePosition;
+
+            // Check if the delta position exceeds the minimum swipe distance for rotation
+            if (deltaMousePosition.magnitude > minSwipeDistance)
+            {
                 // Rotate camera around the target
                 transform.RotateAround(target.position, Vector3.up, deltaMousePosition.x * rotationSpeed);
-                //transform.RotateAround(target.position, transform.right, -deltaMousePosition.y * rotationSpeed);
+                transform.RotateAround(target.position, transform.right, -deltaMousePosition.y * rotationSpeed);
             }
+        }
 
-            // Store the current mouse position for the next frame
-            previousMousePosition = Input.mousePosition;
+        previousMousePosition = Input.mousePosition;
+    }
 
-            // Handle camera zoom
-            float zoomInput = GetZoomInput();
-            ZoomCamera(zoomInput);
+    private void HandleCameraZoom()
+    {
+        float zoomInput = GetZoomInput();
+        ZoomCamera(zoomInput);
+
+        // Start the rotate timer when zooming occurs
+        if (Mathf.Abs(zoomInput) > 0.001f)
+        {
+            rotateTimer = rotateDelay;
         }
     }
 
     private bool HasZoomInput()
     {
-        // Check for pinch gesture on mobile devices
         if (Input.touchCount == 2)
         {
             Touch touch0 = Input.GetTouch(0);
@@ -61,13 +91,10 @@ public class CameraController : MonoBehaviour
             float prevTouchDeltaMag = (touch0PrevPos - touch1PrevPos).magnitude;
             float touchDeltaMag = (touch0.position - touch1.position).magnitude;
 
-            // Return true if there is zoom input on mobile devices
             return Mathf.Abs(touchDeltaMag - prevTouchDeltaMag) > 0.001f;
         }
-        // Check for scroll wheel input on other platforms
         else
         {
-            // Return true if there is zoom input from the scroll wheel
             return Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) > 0.001f;
         }
     }
@@ -76,7 +103,6 @@ public class CameraController : MonoBehaviour
     {
         float zoomInput = 0f;
 
-        // Check for pinch gesture on mobile devices
         if (Input.touchCount == 2)
         {
             Touch touch0 = Input.GetTouch(0);
@@ -88,10 +114,8 @@ public class CameraController : MonoBehaviour
             float prevTouchDeltaMag = (touch0PrevPos - touch1PrevPos).magnitude;
             float touchDeltaMag = (touch0.position - touch1.position).magnitude;
 
-            // Reverse the zoom input for mobile devices
             zoomInput = prevTouchDeltaMag - touchDeltaMag;
         }
-        // Check for scroll wheel input on other platforms
         else
         {
             zoomInput = -Input.GetAxis("Mouse ScrollWheel") * 100;
@@ -102,21 +126,13 @@ public class CameraController : MonoBehaviour
 
     private void ZoomCamera(float zoomInput)
     {
-        // Adjust the camera's field of view for zooming
-        float newFOV = camera.fieldOfView + zoomInput * zoomSpeed;
-        newFOV = Mathf.Clamp(newFOV, minZoomFOV, maxZoomFOV);
-        camera.fieldOfView = newFOV;
-
-        // Calculate the distance between the camera and the target
         Vector3 cameraToTarget = target.position - transform.position;
         float currentDistance = cameraToTarget.magnitude;
 
-        // Calculate the new distance based on the field of view change
-        float zoomRatio = currentDistance / cameraToTarget.magnitude;
-        float newDistance = currentDistance * (newFOV / camera.fieldOfView);
+        float newDistance = currentDistance + zoomInput * zoomSpeed;
+        newDistance = Mathf.Clamp(newDistance, minZoomDistance, maxZoomDistance);
 
-        // Move the camera towards or away from the target based on the zoom input
-        Vector3 newCameraPosition = target.position - transform.forward * newDistance * zoomRatio;
+        Vector3 newCameraPosition = target.position - cameraToTarget.normalized * newDistance;
         transform.position = newCameraPosition;
     }
 }

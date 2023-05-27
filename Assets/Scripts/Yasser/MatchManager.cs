@@ -44,7 +44,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
     private Side _pSide = Side.Defender;
 
     private const int WINS_REQUIRED = 2;
-    public static float ROUND_START_TIME = 300.0f;
+    public static float ROUND_START_TIME = 60f;
     private int _p1Wins;
     private int _p2Wins;
     private int _p1Energy;
@@ -318,7 +318,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
             DecideWinner();
         }
 
-        StartCoroutine(UILayer.Instance.EnableSwitchingSidesPanel());
+        StartCoroutine(UILayer.Instance.EnableSwitchingSidesPanel(1));
 
         ResetTime();
         StartMatch();
