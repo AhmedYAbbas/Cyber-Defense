@@ -15,9 +15,11 @@ MonoBehaviour:
   CardColor: {r: 0.03341816, g: 0.5754717, b: 0, a: 1}
   CardImage: {fileID: 0}
   MalwareName: Trojan Horse
-  AttackDamage: 15
+  AttackDamage: 5
   MovementSpeed: 70
-  Health: 65
-  Shield: 100
-  EnergyCost: 17
+  Health: 80
+  Shield: 80
+  EnergyCost: 70
+  Range: 5
   IsRanged: 0
+  FireRate: 1

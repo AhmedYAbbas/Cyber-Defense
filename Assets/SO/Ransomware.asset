@@ -15,9 +15,11 @@ MonoBehaviour:
   CardColor: {r: 0, g: 0.098689005, b: 0.46226418, a: 1}
   CardImage: {fileID: 0}
   MalwareName: Ransomware
-  AttackDamage: 30
-  MovementSpeed: 40
-  Health: 90
-  Shield: 90
-  EnergyCost: 25
+  AttackDamage: 10
+  MovementSpeed: 2.5
+  Health: 140
+  Shield: 140
+  EnergyCost: 100
+  Range: 5
   IsRanged: 0
+  FireRate: 1

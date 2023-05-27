@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5034a5f47f34a13a5231185de54b9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _malwareData: {fileID: 11400000, guid: a40e017ccf1541f49a5b90e9f4317494, type: 2}
   _malwareProjectilePrefab: {fileID: 2018507756116791279, guid: b6da2a1513c68114080773751565c591,
     type: 3}
 --- !u!135 &1901982169227952280

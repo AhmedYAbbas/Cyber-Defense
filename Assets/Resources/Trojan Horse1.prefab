@@ -348,7 +348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7934940988387994949
 Transform:
   m_ObjectHideFlags: 0
@@ -376,6 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5034a5f47f34a13a5231185de54b9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _malwareData: {fileID: 11400000, guid: 643a19e3cc8c6e84b90e6cfbc01d51a7, type: 2}
   _malwareProjectilePrefab: {fileID: 2018507756116791279, guid: b6da2a1513c68114080773751565c591,
     type: 3}
 --- !u!135 &1440303127651799859
