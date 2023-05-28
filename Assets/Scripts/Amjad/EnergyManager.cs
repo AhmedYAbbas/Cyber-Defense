@@ -46,9 +46,8 @@ public class EnergyManager : MonoBehaviourPunCallbacks
         }
 
         _energySlider.maxValue = _maxEnergy;
-        //InitializeRoundVariables();
+        _energySlider.value = _maxEnergy;
         InvokeRepeating("IncreaseEnergyPerTime", 0, _timePeriodToIncreaseEnergy);
-        //_energySlider.value = 0;
     }
 
 
@@ -66,7 +65,9 @@ public class EnergyManager : MonoBehaviourPunCallbacks
 
     public void DecreaseEnergy(int amount)
     {
+        Debug.Log("Energy before decreasing: " + _energy);
         _energy -= amount;
+        Debug.Log("Energy before if: " + _energy);
 
         if (_energy < 0)
             _energy = 0;
@@ -74,7 +75,9 @@ public class EnergyManager : MonoBehaviourPunCallbacks
             _energy = _maxEnergy;
 
         _energySlider.value = _energy;
-
+        Debug.Log("Energy after if: " + _energy);
+        PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] = _energy;
+        Debug.Log("Custom Property Energy: " + (int)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY]);
     }
 
     public void DecreaseDefenderEnergy(int amount)
@@ -87,7 +90,6 @@ public class EnergyManager : MonoBehaviourPunCallbacks
             _energy = _maxEnergy;
 
         _roundTime = 0;
-        //_energy = _maxEnergy;
         _energySlider.value = _energy;
 
         Hashtable energyProp = new Hashtable { [CustomKeys.ENERGY] = _energy };
@@ -104,7 +106,6 @@ public class EnergyManager : MonoBehaviourPunCallbacks
         else if (_energy > _maxEnergy)
             _energy = _maxEnergy;
 
-        //_energy -= amount;
         _energySlider.value = _energy;
         PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] = _energy;
 
@@ -119,13 +120,15 @@ public class EnergyManager : MonoBehaviourPunCallbacks
             int defenderEnergy = (int)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY];
             int energyToDecrease = (int)(defenderEnergy * 0.2);
             DecreaseDefenderEnergy(energyToDecrease);
-            //Debug.Log("Removed from defender");
         }
     }
 
     void IncreaseEnergyPerTime()
     {
-        _energy += _energyIncreaseValue;
-        _energySlider.value = _energy;
+        if (_energy < _maxEnergy)
+        {
+            _energy += _energyIncreaseValue;
+            _energySlider.value = _energy;
+        }
     }
 }
