@@ -51,7 +51,7 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
         _attackSpeed = _towerModifications.attackSpeed;
         _towerProjectilePrefab = _towerModifications.bulletPrefab;
         _targetingCollider.radius = _range;
-        _projectilePool = ObjectPool.CreatInstance(_towerProjectilePrefab, 50);
+        _projectilePool = ObjectPool.CreatInstance(_towerProjectilePrefab, 20);
     }
     private void GettingTheMostDangerousEnemy()
     {
