@@ -43,6 +43,8 @@ MonoBehaviour:
   - SyncTowerHealth
   - SyncMalwareHealth
   - SyncBaseHealth
+  - SwitchModificationsOnBothSide
+  - UpdateStatsAndSwitch
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
