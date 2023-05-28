@@ -81,7 +81,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c3a1a29e593462b49a28b91b5504487c, type: 3}
   - {fileID: 21300000, guid: bdf546ce7ef991743909d9cf33444bff, type: 3}
   - {fileID: 21300000, guid: 943956fe84a85a44dbbc2086c5ff9109, type: 3}
+  - {fileID: 21300000, guid: 7738c30fb3121d34d832d3302aae7362, type: 3}
   - {fileID: 21300000, guid: 248a354f004f4ca4aa27bdfa4f67d540, type: 3}
+  - {fileID: 21300000, guid: 745e17bfe3da292488a5be047541087d, type: 3}
   - {fileID: 21300000, guid: 5991ffbf380166743b512729f3d8c168, type: 3}
   m_PackedSpriteNamesToIndex:
   - Button
@@ -115,7 +117,9 @@ SpriteAtlas:
   - AD4
   - Highlighted_Button
   - Text_Field_Blue
+  - Mining_Ability
   - Main_Menu_Background
+  - Adware_Ability
   - Fill
   m_RenderDataMap: {}
   m_Tag: UI_Sprite_Atlas
