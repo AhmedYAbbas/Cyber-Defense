@@ -1,3 +1,4 @@
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
@@ -18,8 +19,12 @@ public class Timer : MonoBehaviour
         {
             if (_canRaiseEvent)
             {
-                MatchManager.Instance.SwitchSideRaiseEvent();
                 _canRaiseEvent = false;
+
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    MatchManager.Instance.EndRound(false);
+                }
             }
         }
 

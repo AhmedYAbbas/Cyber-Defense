@@ -9,13 +9,12 @@ public class MatchManager : MonoBehaviourPunCallbacks
 {
     #region Photon Event Codes
 
-    private const byte TimeEndedEventCode = 1;
-    private const byte BaseDestroyedEventCode = 2;
-    private const byte MatchEndedEventCode = 3;
-    private const byte MatchStartedEventCode = 4;
+    private const byte RoundEndedEventCode = 1;
+    private const byte MatchStartedEventCode = 2;
 
-    public const byte MiningUsedEventCode = 5;
-    public const byte AdwareAbilityEventCode = 6;
+
+    public const byte MiningUsedEventCode = 3;
+    public const byte AdwareAbilityEventCode = 4;
 
     #endregion
 
@@ -26,14 +25,8 @@ public class MatchManager : MonoBehaviourPunCallbacks
         Attacker,
         Defender
     }
-
     public float roundTime;
     public int currentRound = 1;
-
-    // TODO: Define a setter maybe and change it to be private
-    public bool _destroyedDefenderBase;
-    public bool canRaiseBaseDestroyedEvent = true;
-
     public static MatchManager Instance { get; private set; }
 
     #endregion
@@ -42,17 +35,12 @@ public class MatchManager : MonoBehaviourPunCallbacks
 
     [SerializeField] string GAMEPLAY_SCENE_NAME;
 
-    private Side _pSide = Side.Defender;
+    private Side _pSide;
 
     private const int WINS_REQUIRED = 2;
     public static float ROUND_START_TIME = 150f;
-    private int _p1Wins;
-    private int _p2Wins;
     private int _p1Energy;
     private int _p2Energy;
-    private bool _isP1Winner;
-    private bool _isP2Winner;
-    private string _winnerUserName;
 
     #endregion
 
@@ -61,17 +49,15 @@ public class MatchManager : MonoBehaviourPunCallbacks
     public override void OnEnable()
     {
         base.OnEnable();
-        PhotonNetwork.NetworkingClient.EventReceived += SwitchSide;
-        PhotonNetwork.NetworkingClient.EventReceived += DisconnectPlayers;
         PhotonNetwork.NetworkingClient.EventReceived += StartMatchDataSet;
+        PhotonNetwork.NetworkingClient.EventReceived += SwitchSides;
     }
 
     public override void OnDisable()
     {
         base.OnDisable();
-        PhotonNetwork.NetworkingClient.EventReceived -= SwitchSide;
-        PhotonNetwork.NetworkingClient.EventReceived -= DisconnectPlayers;
         PhotonNetwork.NetworkingClient.EventReceived -= StartMatchDataSet;
+        PhotonNetwork.NetworkingClient.EventReceived -= SwitchSides;
     }
 
     private void Awake()
@@ -100,19 +86,17 @@ public class MatchManager : MonoBehaviourPunCallbacks
             Hashtable masterClientProps = new Hashtable()
             {
                 [CustomKeys.P_SIDE] = _pSide,
-                [CustomKeys.WINS] = _p1Wins,
+                [CustomKeys.WINS] = 0,
                 [CustomKeys.ENERGY] = _p1Energy,
-                [CustomKeys.User_Name] = PhotonNetwork.LocalPlayer.NickName,
-                [CustomKeys.Winner] = _isP1Winner
+                [CustomKeys.User_Name] = PhotonNetwork.LocalPlayer.NickName
             };
 
             PhotonNetwork.LocalPlayer.SetCustomProperties(masterClientProps);
 
             PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] = _pSide;
-            PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.WINS] = _p1Wins;
+            PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.WINS] = 0;
             PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] = _p1Energy;
             PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.User_Name] = PhotonNetwork.LocalPlayer.NickName;
-            PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.Winner] = _isP1Winner;
         }
     }
 
@@ -121,22 +105,19 @@ public class MatchManager : MonoBehaviourPunCallbacks
         Hashtable newPlayerProps = new Hashtable()
         {
             [CustomKeys.P_SIDE] = 1 - _pSide,
-            [CustomKeys.WINS] = _p2Wins,
+            [CustomKeys.WINS] = 0,
             [CustomKeys.ENERGY] = _p2Energy,
-            [CustomKeys.User_Name] = newPlayer.NickName,
-            [CustomKeys.Winner] = _isP2Winner
+            [CustomKeys.User_Name] = newPlayer.NickName
         };
 
         newPlayer.SetCustomProperties(newPlayerProps);
 
         newPlayer.CustomProperties[CustomKeys.P_SIDE] = 1 - (Side)PhotonNetwork.MasterClient.CustomProperties[CustomKeys.P_SIDE];
-        newPlayer.CustomProperties[CustomKeys.WINS] = _p2Wins;
+        newPlayer.CustomProperties[CustomKeys.WINS] = 0;
         newPlayer.CustomProperties[CustomKeys.ENERGY] = _p2Energy;
         newPlayer.CustomProperties[CustomKeys.User_Name] = newPlayer.NickName;
-        newPlayer.CustomProperties[CustomKeys.Winner] = _isP2Winner;
 
         MatchStartedRaiseEvent();
-
         StartMatch();
     }
 
@@ -148,45 +129,6 @@ public class MatchManager : MonoBehaviourPunCallbacks
     #endregion
 
     #region Public Methods
-
-    // TODO: we need an event that is called once the game is ready to start so that it resets the data before entering the gameplay scene.
-    public void ResetMatch()
-    {
-        _p1Wins = 0;
-        _p2Wins = 0;
-        currentRound = 1;
-        _isP1Winner = false;
-        _isP2Winner = false;
-        _destroyedDefenderBase = false;
-        ResetTime();
-    }
-
-    private void ResetRound()
-    {
-        EnergyManager.Instance._energy = EnergyManager.Instance._maxEnergy;
-        EnergyManager.Instance._energySlider.value = EnergyManager.Instance._energy;
-    }
-
-    public void SwitchSideRaiseEvent()
-    {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-            PhotonNetwork.RaiseEvent(TimeEndedEventCode, null, raiseEventOptions, SendOptions.SendReliable);
-        }
-    }
-
-    public void BaseDestroyedRaiseEvent()
-    {
-        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-        PhotonNetwork.RaiseEvent(BaseDestroyedEventCode, null, raiseEventOptions, SendOptions.SendReliable);
-    }
-
-    public void MatchEndedRaiseEvent()
-    {
-        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-        PhotonNetwork.RaiseEvent(MatchEndedEventCode, null, raiseEventOptions, SendOptions.SendReliable);
-    }
 
     public void MatchStartedRaiseEvent()
     {
@@ -200,9 +142,47 @@ public class MatchManager : MonoBehaviourPunCallbacks
         PhotonNetwork.RaiseEvent(AdwareAbilityEventCode, null, raiseEventOptions, SendOptions.SendReliable);
     }
 
+    public void RoundEndedRaiseEvent()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+            PhotonNetwork.RaiseEvent(RoundEndedEventCode, null, raiseEventOptions, SendOptions.SendReliable);
+        }
+    }
+
+    public void EndRound(bool isBaseDestroyed)
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            CheckWinner(isBaseDestroyed);
+            RoundEndedRaiseEvent();
+        }
+    }
+
     #endregion
 
     #region Private Methods
+
+
+    private void ResetMatch()
+    {
+        currentRound = 1;
+        ResetTime();
+    }
+
+    private void ResetRound()
+    {
+        ResetEnergy();
+        ResetTime();
+        IncreaseRound();
+    }
+
+    private void ResetEnergy()
+    {
+        EnergyManager.Instance._energy = EnergyManager.Instance._maxEnergy;
+        EnergyManager.Instance._energySlider.value = EnergyManager.Instance._energy;
+    }
 
     private void StartMatch()
     {
@@ -217,55 +197,33 @@ public class MatchManager : MonoBehaviourPunCallbacks
         roundTime = ROUND_START_TIME;
     }
 
-    // TODO: need to find a way to write this function in a better way
-    private void SwitchSide(EventData obj)
+    private void CheckWinner(bool isBaseDestroyed)
     {
-        if (obj.Code == TimeEndedEventCode)
+        foreach (Player player in PhotonNetwork.PlayerList)
         {
-            HandleEndOfRound();
-        }
-        else if (obj.Code == BaseDestroyedEventCode)
-        {
-            _destroyedDefenderBase = true;
-            HandleEndOfRound();
-        }
-    }
+            if ((Side)player.CustomProperties[CustomKeys.P_SIDE] == Side.Attacker && isBaseDestroyed)
+            {
+                int wins = (int)player.CustomProperties[CustomKeys.WINS];
+                wins++;
 
-    private void RecordRoundWinner(Player winner)
-    {
-        if (winner == PhotonNetwork.MasterClient)
-        {
-            _p1Wins++;
-            winner.CustomProperties[CustomKeys.WINS] = _p1Wins;
-        }
-        else
-        {
-            _p2Wins++;
-            winner.CustomProperties[CustomKeys.WINS] = _p2Wins;
-        }
-    }
+                Hashtable winsProp = new Hashtable { [CustomKeys.WINS] = wins };
+                player.SetCustomProperties(winsProp);
+                player.CustomProperties[CustomKeys.WINS] = wins;
+            }
+            else if ((Side)player.CustomProperties[CustomKeys.P_SIDE] == Side.Defender && roundTime <= 0)
+            {
+                int wins = (int)player.CustomProperties[CustomKeys.WINS];
+                wins++;
 
-    private void CheckWinner(Player player)
-    {
-        if ((Side)player.CustomProperties[CustomKeys.P_SIDE] == Side.Attacker && _destroyedDefenderBase)
-        {
-            RecordRoundWinner(player);
+                Hashtable winsProp = new Hashtable { [CustomKeys.WINS] = wins };
+                player.SetCustomProperties(winsProp);
+                player.CustomProperties[CustomKeys.WINS] = wins;
+            }
         }
-        else if ((Side)player.CustomProperties[CustomKeys.P_SIDE] == Side.Defender && roundTime <= 0)
-        {
-            RecordRoundWinner(player);
-        }
-        else
-        {
-            RecordRoundWinner(PhotonNetwork.PlayerListOthers[0]);
-        }
-    }
 
-    private void DisconnectPlayers(EventData obj)
-    {
-        if (obj.Code == MatchEndedEventCode)
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
-            PhotonNetwork.Disconnect();
+            Debug.Log($"P{i + 1} wins: " + (int)PhotonNetwork.PlayerList[i].CustomProperties[CustomKeys.WINS]);
         }
     }
 
@@ -278,60 +236,59 @@ public class MatchManager : MonoBehaviourPunCallbacks
         }
     }
 
-    private void DecideWinner()
+    private void StateWinner()
     {
-        if (_p1Wins > _p2Wins)
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length;)
         {
-            UILayer.Instance.GameEndedPanel.SetActive(true);
-            UILayer.Instance.winnerText.text = $"<color=yellow>{(string)PhotonNetwork.MasterClient.CustomProperties[CustomKeys.User_Name]}</color> Won The Game";
-
-            // Disconnects the player
-            MatchEndedRaiseEvent();
-        }
-        else if (_p2Wins > _p1Wins)
-        {
-            if (!PhotonNetwork.IsMasterClient)
+            if ((int)PhotonNetwork.PlayerList[0].CustomProperties[CustomKeys.WINS] >
+                (int)PhotonNetwork.PlayerList[1].CustomProperties[CustomKeys.WINS])
             {
                 UILayer.Instance.GameEndedPanel.SetActive(true);
-                UILayer.Instance.winnerText.text = $"<color=yellow>{(string)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.User_Name]}</color> Won The Game";
-
-                // Disconnects the player
-                MatchEndedRaiseEvent();
+                UILayer.Instance.winnerText.text = $"<color=yellow>{(string)PhotonNetwork.PlayerList[0].CustomProperties[CustomKeys.User_Name]}</color> Won The Game";
+                PhotonNetwork.Disconnect();
             }
-            else
+            else if ((int)PhotonNetwork.PlayerList[0].CustomProperties[CustomKeys.WINS] <
+                     (int)PhotonNetwork.PlayerList[1].CustomProperties[CustomKeys.WINS])
             {
                 UILayer.Instance.GameEndedPanel.SetActive(true);
-                UILayer.Instance.winnerText.text = $"<color=yellow>{(string)PhotonNetwork.PlayerListOthers[0].CustomProperties[CustomKeys.User_Name]}</color> Won The Game";
-
-                // Disconnects the player
-                MatchEndedRaiseEvent();
+                UILayer.Instance.winnerText.text = $"<color=yellow>{(string)PhotonNetwork.PlayerList[1].CustomProperties[CustomKeys.User_Name]}</color> Won The Game";
+                PhotonNetwork.Disconnect();
             }
+
+            break;
         }
     }
 
-    private void HandleEndOfRound()
+    // All
+    public void SwitchSides(EventData obj)
     {
-        CheckWinner(PhotonNetwork.LocalPlayer);
+        if (obj.Code == RoundEndedEventCode)
+        {
+            ChangeSides();
 
+            if (currentRound >= WINS_REQUIRED)
+            {
+                StateWinner();
+            }
+
+            StartCoroutine(UILayer.Instance.EnableSwitchingSidesPanel(1));
+
+            ResetRound();
+            StartMatch();
+        }
+    }
+
+    private void IncreaseRound()
+    {
+        currentRound++;
+    }
+
+    private void ChangeSides()
+    {
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             player.CustomProperties[CustomKeys.P_SIDE] = 1 - (Side)player.CustomProperties[CustomKeys.P_SIDE];
         }
-
-        // TODO: this if statement needs some serious refactoring but i'm leaving it like that for now because we don't have time
-        if (currentRound >= WINS_REQUIRED)
-        {
-            DecideWinner();
-        }
-
-        StartCoroutine(UILayer.Instance.EnableSwitchingSidesPanel(1));
-
-        _destroyedDefenderBase = false;
-        ResetRound();
-        ResetTime();
-        StartMatch();
-        currentRound++;
-        canRaiseBaseDestroyedEvent = true;
     }
 
     #endregion

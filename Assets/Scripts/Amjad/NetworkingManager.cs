@@ -46,11 +46,6 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 2 });
     }
 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        Debug.Log(newPlayer.NickName + " has joined the room");
-    }
-
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
@@ -59,6 +54,5 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
     public void SetNickName()
     {
         PhotonNetwork.NickName = if_playerNickname.text;
-        //PhotonNetwork.LocalPlayer.NickName = if_playerNickname.text;
     }
 }

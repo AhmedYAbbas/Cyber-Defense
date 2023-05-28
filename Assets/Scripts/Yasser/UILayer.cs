@@ -42,6 +42,7 @@ public class UILayer : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
         StartCoroutine(EnableSwitchingSidesPanel(0));
     }
 

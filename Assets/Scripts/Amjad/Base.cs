@@ -31,12 +31,10 @@ public class Base : MonoBehaviourPunCallbacks
 
     void CheckBaseHealth()
     {
-        if (_currentHealth <= 0 && (MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Defender
-            && MatchManager.Instance.canRaiseBaseDestroyedEvent)    
+        if (_currentHealth <= 0)    
         {
+            MatchManager.Instance.EndRound(true);
             _currentHealth = _maxHealth;
-            MatchManager.Instance.canRaiseBaseDestroyedEvent = false;
-            MatchManager.Instance.BaseDestroyedRaiseEvent();
         }
     }
 
@@ -46,20 +44,4 @@ public class Base : MonoBehaviourPunCallbacks
         _currentHealth = health;
         UpdateHealthBar();
     }
-
-    //public void TakeDamage(int dmg)
-    //{
-    //    if (healthBarSlider.value <= 0 && (MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker)
-    //    {
-    //        healthBarSlider.value = 100;
-    //        MatchManager.Instance.BaseDestroyedRaiseEvent();
-    //    }
-    //    else
-    //    {
-    //        int health = (int)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.Base_HEALTH];
-    //        health -= dmg;
-    //        PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.Base_HEALTH] = health;
-    //        healthBarSlider.value = health;
-    //    }
-    //}
 }
