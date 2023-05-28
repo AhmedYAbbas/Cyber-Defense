@@ -32,6 +32,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
 
     // TODO: Define a setter maybe and change it to be private
     public bool _destroyedDefenderBase;
+    public bool canRaiseBaseDestroyedEvent = true;
 
     public static MatchManager Instance { get; private set; }
 
@@ -160,6 +161,12 @@ public class MatchManager : MonoBehaviourPunCallbacks
         ResetTime();
     }
 
+    private void ResetRound()
+    {
+        EnergyManager.Instance._energy = EnergyManager.Instance._maxEnergy;
+        EnergyManager.Instance._energySlider.value = EnergyManager.Instance._energy;
+    }
+
     public void SwitchSideRaiseEvent()
     {
         if (PhotonNetwork.IsMasterClient)
@@ -221,7 +228,6 @@ public class MatchManager : MonoBehaviourPunCallbacks
         {
             _destroyedDefenderBase = true;
             HandleEndOfRound();
-            _destroyedDefenderBase = false;
         }
     }
 
@@ -320,9 +326,12 @@ public class MatchManager : MonoBehaviourPunCallbacks
 
         StartCoroutine(UILayer.Instance.EnableSwitchingSidesPanel(1));
 
+        _destroyedDefenderBase = false;
+        ResetRound();
         ResetTime();
         StartMatch();
         currentRound++;
+        canRaiseBaseDestroyedEvent = true;
     }
 
     #endregion

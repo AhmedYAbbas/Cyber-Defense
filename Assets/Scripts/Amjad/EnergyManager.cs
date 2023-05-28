@@ -10,8 +10,8 @@ public class EnergyManager : MonoBehaviourPunCallbacks
 {
     // Private
     private static EnergyManager _instance;
-    [SerializeField] private int _maxEnergy;
-    [SerializeField] private Slider _energySlider;
+    [SerializeField] public int _maxEnergy;
+    [SerializeField] public Slider _energySlider;
     [SerializeField] private int _timePeriodToIncreaseEnergy;
     [SerializeField] private int _energyIncreaseValue;
     private int _roundTime;
