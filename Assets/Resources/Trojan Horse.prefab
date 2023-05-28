@@ -4257,7 +4257,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 8.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -4340,10 +4340,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
-  m_UseLocal: 1
+  m_SynchronizePosition: 0
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 0
 --- !u!1 &7303604770512792170
 GameObject:
   m_ObjectHideFlags: 0
@@ -4371,7 +4371,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7303604770512792170}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.68, z: 0.861}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4390,6 +4390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5034a5f47f34a13a5231185de54b9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _malwareData: {fileID: 11400000, guid: 643a19e3cc8c6e84b90e6cfbc01d51a7, type: 2}
   _malwareProjectilePrefab: {fileID: 2018507756116791279, guid: b6da2a1513c68114080773751565c591,
     type: 3}
 --- !u!135 &7023729432441226533

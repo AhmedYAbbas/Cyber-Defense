@@ -17,10 +17,10 @@ public class MoveToTarget : MonoBehaviour
     private float _attackSpeed = 1;
     private int _damage = 10;
     private ObjectPool _projectilePool;
-    
-    
+
+
     [SerializeField] private PoolableObject _malwareProjectilePrefab;
-    
+
 
     void Awake()
     {
@@ -48,7 +48,7 @@ public class MoveToTarget : MonoBehaviour
 
         _attackCountdown -= Time.deltaTime;
     }
-    
+
     private void Shoot()
     {
         print("trying to shoot");
@@ -57,16 +57,16 @@ public class MoveToTarget : MonoBehaviour
             //GameObject projectile = Instantiate(_projectilePrefab, transform.position , Quaternion.identity);
             var projectile = _projectilePool.GetObject();
             projectile.transform.position = transform.position;
-            projectile.GetComponent<MalwareProjectile>().GetTarget(_currentTarget.transform,_damage);
+            projectile.GetComponent<MalwareProjectile>().GetTarget(_currentTarget.transform, _damage);
         }
     }
     private void GettingTheClosestTower()
     {
         float closestTower = 0;
         GameObject tempEnemy = null;
-        for (int i = 0 ; i < _towers.Count;i++)
+        for (int i = 0; i < _towers.Count; i++)
         {
-            print("loop in "+ i );
+            print("loop in " + i);
             if (_towers[i] == null)
             {
                 _towers.RemoveAt(i);
@@ -81,7 +81,7 @@ public class MoveToTarget : MonoBehaviour
                 closestTower = currentClosestTower;
                 tempEnemy = _towers[i];
             }
-            
+
         }
         _currentTarget = tempEnemy;
     }

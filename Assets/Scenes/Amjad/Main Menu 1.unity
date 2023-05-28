@@ -6069,7 +6069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844955e1e685e4b4ea00fae796e5bd1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundTime: 60
+  roundTime: 120
   currentRound: 1
   _destroyedDefenderBase: 0
   GAMEPLAY_SCENE_NAME: Gameplay Scene1
