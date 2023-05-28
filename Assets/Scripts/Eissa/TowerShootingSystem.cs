@@ -22,19 +22,23 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private Transform towerHead;
     [SerializeField] private float towerHeadRotationSpeed;
+
+    [SerializeField] private GameObject muzzleGameObject;
+    private ParticleSystem _muzzleParticleSystem;
     private void Awake()
     {
         _towerScript.TowerGotModified += GetTowerModification;
         _targetingCollider = GetComponent<SphereCollider>();
+        _muzzleParticleSystem = muzzleGameObject.GetComponent<ParticleSystem>();
+        _muzzleParticleSystem.Stop();
     }
 
     private void Update()
     {
-        
-            GettingTheMostDangerousEnemy();
-            RotateTheTowerHead();
-            CalculateShootingRate();
-            print(_enemies.Count);
+        GettingTheMostDangerousEnemy();
+        RotateTheTowerHead();
+        CalculateShootingRate();
+        print(_enemies.Count);
         
     }
 
@@ -51,7 +55,7 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
         _attackSpeed = _towerModifications.attackSpeed;
         _towerProjectilePrefab = _towerModifications.bulletPrefab;
         _targetingCollider.radius = _range;
-        _projectilePool = ObjectPool.CreatInstance(_towerProjectilePrefab, 50);
+        _projectilePool = ObjectPool.CreatInstance(_towerProjectilePrefab, 20);
     }
     private void GettingTheMostDangerousEnemy()
     {
@@ -106,6 +110,7 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
     private void Shoot()
     {
           var projectile = _projectilePool.GetObject();
+          _muzzleParticleSystem.Play();
           projectile.transform.position = shootingPoint.position;
           projectile.GetComponent<TowerHomingProjectile>().GetTarget(_currentTarget.transform,_damage);
     }

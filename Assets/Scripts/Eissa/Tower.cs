@@ -17,24 +17,36 @@ public class Tower : MonoBehaviourPun
     [SerializeField] private Transform towerHead;
     [SerializeField] private TowerModifications baseTowerSo;
     [HideInInspector] public TowerModifications currentModifications;
+    [SerializeField] List<TowerModifications> _modificationsList;
     public event EventHandler TowerGotModified;
     [SerializeField] private Slider healthBarSlider;
 
     private void Start()
     {
+        ModifyTower(baseTowerSo);
+        _currentHealth = _maxHealth;
+        healthBarSlider.value = 1;
         
-            ModifyTower(baseTowerSo);
-            _currentHealth = _maxHealth;
-            healthBarSlider.value = 1;
-            print("Is Mine");
         
     }
     public void ModifyTower(TowerModifications towerModifications)
     {
-        this.name = towerModifications.ModificationName;
-        _maxHealth = towerModifications.maxHealth;
-        _towerIcon = towerModifications.towerIcon;
-        currentModifications = towerModifications;
+        for (int i = 0; i < _modificationsList.Count; i++)
+        {
+            if (_modificationsList[i] == towerModifications)
+            {
+                photonView.RPC("UpdateStatsAndSwitch", RpcTarget.All, i);
+            }
+        }
+    }
+    
+    [PunRPC]
+    private void UpdateStatsAndSwitch(int i)
+    {
+        this.name = _modificationsList[i].ModificationName;
+        _maxHealth = _modificationsList[i].maxHealth;
+        _towerIcon = _modificationsList[i].towerIcon;
+        currentModifications = _modificationsList[i];
         TowerGotModified?.Invoke(this, EventArgs.Empty);
         print("tower modified");
         SwitchTowerIcon();

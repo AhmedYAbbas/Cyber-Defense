@@ -1603,7 +1603,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.74
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &1153116918396336143
 NavMeshAgent:
@@ -1639,7 +1639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb13c4084eb09f4ebe8c6cda5e6d3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _malwareProjectilePrefab: {fileID: 2018507756116791279, guid: b6da2a1513c68114080773751565c591,
+  _malwareProjectilePrefab: {fileID: 2018507756116791279, guid: cacee74b160a79440b2aa59f13e8b174,
     type: 3}
 --- !u!114 &1153116918396336140
 MonoBehaviour:
