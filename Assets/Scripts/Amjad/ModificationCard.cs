@@ -8,15 +8,21 @@ public class ModificationCard : MonoBehaviour
     [SerializeField] private TowerModifications _modificationCard;
     private Button _card;
 
+    private void Awake()
+    {
+        _card = GetComponent<Button>();
+    }
+
     void Start()
     {
         // this.GetComponent<Image>().color = _malwareData.CardColor;
-        this.GetComponentInChildren<TMP_Text>().text = _modificationCard.EnergyCost.ToString();
-        _card = this.GetComponent<Button>();
+        //this.GetComponentInChildren<TMP_Text>().text = _modificationCard.EnergyCost.ToString();
+        //_card = this.GetComponent<Button>();
     }
 
     void Update()
     {
+        Debug.Log("Energy: " + EnergyManager.Instance._energy);
         if (EnergyManager.Instance._energy < _modificationCard.EnergyCost)
         {
             _card.interactable = false;

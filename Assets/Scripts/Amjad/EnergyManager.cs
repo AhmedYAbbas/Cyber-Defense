@@ -65,9 +65,7 @@ public class EnergyManager : MonoBehaviourPunCallbacks
 
     public void DecreaseEnergy(int amount)
     {
-        Debug.Log("Energy before decreasing: " + _energy);
         _energy -= amount;
-        Debug.Log("Energy before if: " + _energy);
 
         if (_energy < 0)
             _energy = 0;
@@ -75,9 +73,7 @@ public class EnergyManager : MonoBehaviourPunCallbacks
             _energy = _maxEnergy;
 
         _energySlider.value = _energy;
-        Debug.Log("Energy after if: " + _energy);
         PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] = _energy;
-        Debug.Log("Custom Property Energy: " + (int)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY]);
     }
 
     public void DecreaseDefenderEnergy(int amount)
