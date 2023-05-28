@@ -61912,7 +61912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxEnergy: 1000
-  _energySlider: {fileID: 0}
+  _energySlider: {fileID: 1632009758}
   _timePeriodToIncreaseEnergy: 2
   _energyIncreaseValue: 30
   _energy: 0
