@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI_Sprite_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: b6d2170ed13105c48a5d5c252e841298, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 3c005940eed7b33439f3d598b3614e7a, type: 3}
+  - {fileID: 21300000, guid: 8e10f541753478c458401e4ec04beb16, type: 3}
+  - {fileID: 21300000, guid: 82d3ebd1621194248bb4ab521cd35855, type: 3}
+  - {fileID: 21300000, guid: 6e02c9e1388e50f4fbfb602acf96fe04, type: 3}
+  - {fileID: 21300000, guid: 80c3c653322786b4683a0b0dd1791e7e, type: 3}
+  - {fileID: 21300000, guid: f048c354630a57849af4e0a32cea8ebb, type: 3}
+  - {fileID: 21300000, guid: d2d1f3e4ce0b58647a8ff7f3e387fc35, type: 3}
+  - {fileID: 21300000, guid: 2dd817969e7ad2749a249bc8cb0fadb3, type: 3}
+  - {fileID: 21300000, guid: 423809e649ed21c478c56cabef6b0468, type: 3}
+  - {fileID: 21300000, guid: c3122817d503ab94db2354cea854b49b, type: 3}
+  - {fileID: 21300000, guid: c29d436746e6e3149b63cf0d9e78d305, type: 3}
+  - {fileID: 21300000, guid: c64f7b778bc800c49bb78c98c9e028ac, type: 3}
+  - {fileID: 21300000, guid: be0072a7c58993e4d86463d046f55d1d, type: 3}
+  - {fileID: 21300000, guid: 0fa1b5e7f1a4514429dc6b7f412b874e, type: 3}
+  - {fileID: 21300000, guid: fde54039ecdbc8049aa4f0a3f6cc5135, type: 3}
+  - {fileID: 21300000, guid: c7c75b99b10ece64a8e4b691567e5fc4, type: 3}
+  - {fileID: 21300000, guid: 98eb6cb98ea86474794d079c817f7ca0, type: 3}
+  - {fileID: 21300000, guid: 2cbfcfb9fdffce143b65f85e4852b652, type: 3}
+  - {fileID: 21300000, guid: 34f5dd5aee769654f9b96eeae9372356, type: 3}
+  - {fileID: 21300000, guid: 059a9aaad4af4044e9b5d4594a9fb5e2, type: 3}
+  - {fileID: 21300000, guid: 42b00cbae44a879498309afbb7d37536, type: 3}
+  - {fileID: 21300000, guid: 502fa6bb77898c9479f955a1b123a088, type: 3}
+  - {fileID: 21300000, guid: 254398cba0650d9478ee4422606010d5, type: 3}
+  - {fileID: 21300000, guid: 1b3a930c86cb9414f964b28f8481dd77, type: 3}
+  - {fileID: 21300000, guid: 0b0adc6c95186d64dabf07ebb7c3c02f, type: 3}
+  - {fileID: 21300000, guid: 6559b77c247a5074fbee8000b4c1bed2, type: 3}
+  - {fileID: 21300000, guid: f7fd55bc2d9af774280996a0730d864d, type: 3}
+  - {fileID: 21300000, guid: 734f56bcbc0565f4585a64b3222fb661, type: 3}
+  - {fileID: 21300000, guid: 7c8786bc0ef99c548953cb7f82e40d1b, type: 3}
+  - {fileID: 21300000, guid: bd74895d7fcb90140b7ba4e4bb2a06de, type: 3}
+  - {fileID: 21300000, guid: 28a9f8bd9de87ad4e9ae9001f5623437, type: 3}
+  - {fileID: 21300000, guid: 6735070e44dd01b42a8102787a12179c, type: 3}
+  - {fileID: 21300000, guid: ca0a821e06cd00f4aa57ab76e5a00338, type: 3}
+  - {fileID: 21300000, guid: c3a1a29e593462b49a28b91b5504487c, type: 3}
+  - {fileID: 21300000, guid: bdf546ce7ef991743909d9cf33444bff, type: 3}
+  - {fileID: 21300000, guid: 943956fe84a85a44dbbc2086c5ff9109, type: 3}
+  - {fileID: 21300000, guid: 248a354f004f4ca4aa27bdfa4f67d540, type: 3}
+  - {fileID: 21300000, guid: 5991ffbf380166743b512729f3d8c168, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Button
+  - Tower
+  - Find_Match
+  - Exit_Text
+  - Text_Field
+  - AdwareCard
+  - Scanner
+  - Cofirm_Text
+  - Anti Malware
+  - Highlighted_Join_Room
+  - Virus
+  - PV_Main_Menu
+  - Play_Text
+  - PV_Energy_Bar
+  - AD2
+  - Create_Room
+  - Background_Energy_Bar
+  - Highlighted_Find_Match
+  - PV_Welcome
+  - AD1
+  - Options_Text
+  - Welcome_Background
+  - Background_Blue
+  - Highlighted_Create_Room
+  - TrojanHorseCard
+  - Update
+  - FireWall
+  - AD3
+  - Background_White
+  - Background
+  - PV_Choose_Mode
+  - Frame
+  - Join_Room
+  - AD4
+  - Highlighted_Button
+  - Text_Field_Blue
+  - Main_Menu_Background
+  - Fill
+  m_RenderDataMap: {}
+  m_Tag: UI_Sprite_Atlas
+  m_IsVariant: 0
