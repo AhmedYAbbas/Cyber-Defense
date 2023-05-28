@@ -23895,7 +23895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarSlider: {fileID: 2120116770}
-  _maxHealth: 100
+  _maxHealth: 1500
   _currentHealth: 0
 --- !u!114 &864252676
 MonoBehaviour:
@@ -61981,10 +61981,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ef53e329b11fb4a8fba9428c1a8eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxEnergy: 100
+  _maxEnergy: 1000
   _energySlider: {fileID: 546370888}
-  _timePeriodToIncreaseEnergy: 5
-  _energyIncreaseValue: 5
+  _timePeriodToIncreaseEnergy: 2
+  _energyIncreaseValue: 30
   _energy: 0
 --- !u!1001 &2060677828
 PrefabInstance:
