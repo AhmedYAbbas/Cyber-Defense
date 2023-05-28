@@ -6073,7 +6073,7 @@ MonoBehaviour:
   currentRound: 1
   _destroyedDefenderBase: 0
   canRaiseBaseDestroyedEvent: 1
-  GAMEPLAY_SCENE_NAME: Gameplay Scene1
+  GAMEPLAY_SCENE_NAME: Gameplay New Env
 --- !u!4 &2133242351
 Transform:
   m_ObjectHideFlags: 0
