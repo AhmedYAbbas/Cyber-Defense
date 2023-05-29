@@ -19,7 +19,7 @@ MonoBehaviour:
   MovementSpeed: 30
   Health: 80
   Shield: 80
-  EnergyCost: 25
+  EnergyCost: 80
   Range: 5
   IsRanged: 0
   FireRate: 1
