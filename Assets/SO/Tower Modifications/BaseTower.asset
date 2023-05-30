@@ -17,7 +17,7 @@ MonoBehaviour:
     tower attacks any enemy in his range prioritizing the Closest enemy to the Defender\u2019s
     Base Or the first enemy entering his range."
   ModificationName: BaseTower
-  maxHealth: 800
+  maxHealth: 100
   EnergyCost: 200
   damage: 20
   range: 6

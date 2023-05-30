@@ -59,7 +59,7 @@ public class CameraController : MonoBehaviour
             {
                 // Rotate camera around the target
                 transform.RotateAround(target.position, Vector3.up, deltaMousePosition.x * rotationSpeed);
-                transform.RotateAround(target.position, transform.right, -deltaMousePosition.y * rotationSpeed);
+                //transform.RotateAround(target.position, transform.right, -deltaMousePosition.y * rotationSpeed);
             }
         }
 

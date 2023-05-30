@@ -18,4 +18,4 @@ MonoBehaviour:
   width: 1
   height: 1
   range: 2
-  energyReq: 10
+  energyReq: 150
