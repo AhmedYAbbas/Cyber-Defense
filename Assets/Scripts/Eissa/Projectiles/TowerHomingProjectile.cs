@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class TowerHomingProjectile : PoolableObject
 {
+    
     private Transform _target;
     private Vector3 _targetDir;
-    [SerializeField] private AnimationCurve positionCurve;
-    private Coroutine _homingCoroutine;
     private int _damage;
-    [SerializeField] float projectileSpeed = .1f;
+    [SerializeField] private float projectileSpeed;
 
     public override void OnDisable()
     {
@@ -26,7 +25,7 @@ public class TowerHomingProjectile : PoolableObject
 
     private void Update()
     {
-        if (_target != null &&_target.gameObject.activeInHierarchy)
+        if (_target != null && _target.gameObject.activeInHierarchy)
         {
             _targetDir = (_target.position - transform.position).normalized;
             transform.position += _targetDir * (projectileSpeed * Time.deltaTime);
@@ -39,28 +38,14 @@ public class TowerHomingProjectile : PoolableObject
 
     private void OnTriggerEnter(Collider other)
     {
-      
-        if (other.CompareTag("Enemy") && _target.gameObject.activeInHierarchy)
+        if (other.CompareTag("Enemy") && other.gameObject != null && other.gameObject.activeInHierarchy)
         {
-            
-            if (other != null && other.gameObject.activeInHierarchy)
+            var malwareScript = other.GetComponent<Malware>();
+            if (malwareScript.photonView.IsMine)
             {
-                var malwareScript = other.GetComponent<Malware>();
-                if (malwareScript.photonView.IsMine)
-                {
-                    malwareScript.DamageMalware(_damage);
-                }
-                
-                this.gameObject.SetActive(false);
+                malwareScript.DamageMalware(_damage);
             }
-            else
-            {
-                this.gameObject.SetActive(false);
-            }
-        }
-        else
-        {
-            // gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
         }
     }
 }

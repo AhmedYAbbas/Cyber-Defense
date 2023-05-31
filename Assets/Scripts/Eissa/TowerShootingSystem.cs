@@ -17,7 +17,7 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
     private PoolableObject _towerProjectilePrefab;
     private ObjectPool _projectilePool;
     private GameObject _currentTarget;
-    private List<GameObject> _enemies = new List<GameObject>();
+    private List<Malware> _enemies = new List<Malware>();
     
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private Transform towerHead;
@@ -35,11 +35,12 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        GettingTheMostDangerousEnemy();
-        RotateTheTowerHead();
-        CalculateShootingRate();
-        print(_enemies.Count);
-        
+        if (_enemies.Count > 0)
+        {
+            GettingTheMostDangerousEnemy();
+            RotateTheTowerHead();
+            CalculateShootingRate();
+        }
     }
 
     void GetTowerModification(object sender , EventArgs e)
@@ -63,21 +64,17 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
         GameObject tempEnemy = null;
         for (int i = 0 ; i < _enemies.Count ;i++)
         {
-            print("loop in "+ i );
             if (!_enemies[i].gameObject.activeInHierarchy)
             {
                 _enemies.RemoveAt(i);
                 continue;
             }
-            //float enemyDistanceFromTower = Vector3.Distance(transform.position, _enemies[i].transform.position);
-            //var test = _enemies[i].GetComponent<Malware>();
-            float currentDangerousLevel = (-i + 1) * 0.6f + (0.2f);// * test.MovementSpeed) ;
+            float currentDangerousLevel = (-i + 1) * 0.6f + (0.5f * _enemies[i].MovementSpeed);
             if (dangerousLevel < currentDangerousLevel)
             {
                 dangerousLevel = currentDangerousLevel;
-                tempEnemy = _enemies[i];
+                tempEnemy = _enemies[i].gameObject;
             }
-            
         }
         _currentTarget = tempEnemy;
     }
@@ -93,12 +90,11 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
     }
     private void CalculateShootingRate()
     {
-        if (_enemies.Count > 0 && _currentTarget != null)
+        if (_enemies.Count > 0)
         {
             if (_attackCountdown <= 0)
             {
                 Shoot();
-                //photonView.RPC(nameof(Shoot), RpcTarget.All);
                 _attackCountdown = 1f / _attackSpeed;
             }
 
@@ -106,7 +102,6 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
         }
     }
     
-    //[PunRPC]
     private void Shoot()
     {
           var projectile = _projectilePool.GetObject();
@@ -116,18 +111,16 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy")&& !_enemies.Contains(other.gameObject))
+        if (other.CompareTag("Enemy") )
         {
-            _enemies.Add(other.gameObject);
-            print("enemy entered the range");
+            _enemies.Add(other.GetComponent<Malware>());
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy") && _enemies.Contains(other.gameObject))
+        if (other.CompareTag("Enemy") )
         {
-            _enemies.Remove(other.gameObject);
-            print("enemy exited the range");
+            _enemies.Remove(other.GetComponent<Malware>());
         }
     }
 
