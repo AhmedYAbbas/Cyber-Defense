@@ -31,7 +31,7 @@ public class AttackerDefenderPanelTween : MonoBehaviour
             _panelTweener = _panel.transform.DOLocalMove(new Vector3(0, -2000f, 0f), 10f).OnComplete(() =>
             {
                 _panel.SetActive(false);
-            }).SetDelay(5f);
+            }).SetDelay(_delayTime);
         }
     }
 }

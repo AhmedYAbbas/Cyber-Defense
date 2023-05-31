@@ -63,6 +63,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: be0072a7c58993e4d86463d046f55d1d, type: 3}
   - {fileID: 21300000, guid: 7b4827f8efe12a8459e700a171b7fe13, type: 3}
   - {fileID: 21300000, guid: 1d79011937b28654e94e9e8b529adac9, type: 3}
+  - {fileID: 21300000, guid: ff389029dc2a6ee4a81c29a0d020c362, type: 3}
   - {fileID: 21300000, guid: fde54039ecdbc8049aa4f0a3f6cc5135, type: 3}
   - {fileID: 21300000, guid: c7c75b99b10ece64a8e4b691567e5fc4, type: 3}
   - {fileID: 21300000, guid: 67b4eda99814d6c4894af6bfaa2250c3, type: 3}
@@ -99,6 +100,7 @@ SpriteAtlas:
   - Play_Text
   - Background
   - Update
+  - BlankCard
   - AD2
   - Create_Room
   - Anti_Malware
@@ -117,7 +119,7 @@ SpriteAtlas:
   - Highlighted_Button
   - Text_Field_Blue
   - Mining_Ability
-  - Firewall
+  - FireWall
   - Main_Menu_Background
   - Adware_Ability
   - Fill
