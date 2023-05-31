@@ -5,6 +5,7 @@ using System;
 using CodeMonkey.Utils;
 using Photon.Pun;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class GridBuildingSystem3D : MonoBehaviour
 {
@@ -21,7 +22,9 @@ public class GridBuildingSystem3D : MonoBehaviour
     [SerializeField] private int gridWidth;
     [SerializeField] private int gridHeight;
     [SerializeField] private float cellSize;
-    
+    [SerializeField] TowerModifications towerBase;
+
+    int counter =0;
     private void Awake() {
         Instance = this;
         MyCamera = Camera.main;
@@ -80,7 +83,8 @@ public class GridBuildingSystem3D : MonoBehaviour
     }
     private void InputHandler()
     {
-        if (placedObjectTypeSO != null && EnergyManager.Instance._energy >= placedObjectTypeSO.energyReq && !EventSystem.current.IsPointerOverGameObject())
+
+        if (placedObjectTypeSO != null && EnergyManager.Instance._energy >= towerBase.EnergyCost && !EventSystem.current.IsPointerOverGameObject())
         {
             Vector3 mousePosition;
             if (Input.GetMouseButtonUp(0)||TouchInputManager.Instance.GetTouchPhase() == TouchPhase.Ended)
@@ -88,6 +92,11 @@ public class GridBuildingSystem3D : MonoBehaviour
                 if (TouchInputManager.Instance.HasTouchInput())
                 {
                     mousePosition = TouchInputManager.Instance.GetTouchWorldPosition();
+                    if(counter==0)
+                    {
+                        counter++;
+                        return;
+                    }
                 }
                 else
                 {
@@ -110,7 +119,7 @@ public class GridBuildingSystem3D : MonoBehaviour
                     }
                 }
                 bool RayCastCheck ;
-
+                
                 if (TouchInputManager.Instance.HasTouchInput())
                 {
                     RayCastCheck = TouchInputManager.Instance.CANBUILD();
@@ -135,6 +144,7 @@ public class GridBuildingSystem3D : MonoBehaviour
                     OnObjectPlaced?.Invoke(this, EventArgs.Empty);
                     EnergyManager.Instance.DecreaseEnergy(placedObjectTypeSO.energyReq);
                     DeselectObjectType();
+                    counter= 0;
                 }
                 else
                 {
@@ -145,48 +155,7 @@ public class GridBuildingSystem3D : MonoBehaviour
             }
         }
 
-            //if (Input.GetKeyDown(KeyCode.Alpha0)) { DeselectObjectType(); }
-
-            //placedObjectTypeSO = placedObjectTypeSOList[0]; 
-            RefreshSelectedObjectType();
-
-
-
-
-
-            /////////////////////////////////////////////////// TO DELETE THE TOWER ////////////////////////
-            ///
-
-            //if (Input.GetMouseButtonDown(1)) {
-            //    Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
-            //    if (grid.GetGridObject(mousePosition) != null) {
-            //        // Valid Grid Position
-            //        PlacedObject_Done placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
-            //        if (placedObject != null) {
-            //            // Demolish
-            //            placedObject.DestroySelf();
-
-            //            List<Vector2Int> gridPositionList = placedObject.GetGridPositionList();
-            //            foreach (Vector2Int gridPosition in gridPositionList) {
-            //                grid.GetGridObject(gridPosition.x, gridPosition.y).ClearPlacedObject();
-            //            }
-            //        }
-            //    }
-            //}
-
-
-
-
-
-            /////////////////////////////////////// TO ROTATE THE TOWER //////////////////////////////////
-            ///
-
-            //if (Input.GetKeyDown(KeyCode.R)) {
-            //    dir = PlacedObjectTypeSO.GetNextDir(dir);
-            //}
-            //placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType();//added to test on soska's phone to delete later
-
-            
+            RefreshSelectedObjectType();  
 
     }
 

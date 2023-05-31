@@ -8,6 +8,8 @@ TagManager:
   - Tower
   - Base
   - Enemy
+  - Buildable
+  - Button
   layers:
   - Default
   - TransparentFX
