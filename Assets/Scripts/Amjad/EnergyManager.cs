@@ -5,20 +5,25 @@ using UnityEngine.UI;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using static MatchManager;
 
 public class EnergyManager : MonoBehaviourPunCallbacks
 {
     // Private
     private static EnergyManager _instance;
-    [SerializeField] public int _maxEnergy;
+    [SerializeField] public int _AttackerMaxEnergy;
+    [SerializeField] public int _DefenderMaxEnergy;
     [SerializeField] public Slider _energySlider;
     [SerializeField] private int _timePeriodToIncreaseEnergy;
-    [SerializeField] private int _energyIncreaseValue;
+    [SerializeField] private int _AttackerEnergyIncreaseValue;
+    [SerializeField] private int _DefenderEnergyIncreaseValue;
     private int _roundTime;
 
     // Public 
     public static EnergyManager Instance => _instance;
-    public int _energy;
+    [HideInInspector] public int _energy;
+    [HideInInspector] public int _energyIncreaseValue;
+    [HideInInspector] public int _maxEnergy;
 
     public override void OnEnable()
     {
@@ -34,6 +39,16 @@ public class EnergyManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        if ((Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == Side.Defender)
+        {
+            _maxEnergy = _DefenderMaxEnergy;
+            _energyIncreaseValue = _DefenderEnergyIncreaseValue;
+        }
+        else
+        {
+            _maxEnergy = _AttackerMaxEnergy;
+            _energyIncreaseValue = _AttackerEnergyIncreaseValue;
+        }
         InitializeRoundVariables();
     }
 
@@ -47,6 +62,7 @@ public class EnergyManager : MonoBehaviourPunCallbacks
 
         _energySlider.maxValue = _maxEnergy;
         _energySlider.value = _maxEnergy;
+
         InvokeRepeating("IncreaseEnergyPerTime", 0, _timePeriodToIncreaseEnergy);
     }
 
