@@ -38,8 +38,6 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
         GettingTheMostDangerousEnemy();
         RotateTheTowerHead();
         CalculateShootingRate();
-        print(_enemies.Count);
-        
     }
 
     void GetTowerModification(object sender , EventArgs e)

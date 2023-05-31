@@ -14609,8 +14609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5034a5f47f34a13a5231185de54b9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _malwareData: {fileID: 11400000, guid: 88f4637d202b45e409542982a1b5b867, type: 2}
-  _malwareProjectilePrefab: {fileID: 2018507756116791279, guid: b6da2a1513c68114080773751565c591,
+  malwareData: {fileID: 11400000, guid: 88f4637d202b45e409542982a1b5b867, type: 2}
+  malwareProjectilePrefab: {fileID: 2018507756116791279, guid: b6da2a1513c68114080773751565c591,
     type: 3}
 --- !u!135 &2928132647140296223
 SphereCollider:
@@ -16663,7 +16663,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6218528301520505269}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.78
@@ -16702,8 +16702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb13c4084eb09f4ebe8c6cda5e6d3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _malwareProjectilePrefab: {fileID: 2018507756116791279, guid: b6da2a1513c68114080773751565c591,
-    type: 3}
 --- !u!114 &2613915599048686619
 MonoBehaviour:
   m_ObjectHideFlags: 0
