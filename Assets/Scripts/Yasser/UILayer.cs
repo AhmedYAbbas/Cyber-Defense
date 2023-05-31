@@ -61,9 +61,11 @@ public class UILayer : MonoBehaviour
         switch (side)
         {
             case MatchManager.Side.Attacker:
+                defenderUI.SetActive(false);
                 attackerUI.SetActive(true);
                 break;
             case MatchManager.Side.Defender:
+                attackerUI.SetActive(false);
                 defenderUI.SetActive(true);
                 break;
         }
