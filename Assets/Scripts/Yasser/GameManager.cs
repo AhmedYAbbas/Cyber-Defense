@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         base.OnEnable();
         PhotonNetwork.NetworkingClient.EventReceived += ShowAds;
-        UpdateUI();
     }
 
     public override void OnDisable()
@@ -38,12 +37,16 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NetworkingClient.EventReceived -= ShowAds;
     }
 
+    private void Start()
+    {
+        UpdateUI();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && (MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker)
         {
-            MatchManager.Instance._destroyedDefenderBase = true;
-            MatchManager.Instance.BaseDestroyedRaiseEvent();
+            MatchManager.Instance.EndRound(true);
         }
     }
 
@@ -62,12 +65,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         // Just for Debugging purposes and most likely gonna change the workflow entirely
         UILayer.Instance.p1WinsText.gameObject.SetActive(true);
         UILayer.Instance.p2WinsText.gameObject.SetActive(true);
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length;)
         {
-            if (i == 0)
-                UILayer.Instance.p1WinsText.text = $"P{i + 1} Wins: " + (int)PhotonNetwork.PlayerList[i].CustomProperties[CustomKeys.WINS];
-            else
-                UILayer.Instance.p2WinsText.text = $"P{i + 1} Wins: " + (int)PhotonNetwork.PlayerList[i].CustomProperties[CustomKeys.WINS];
+            UILayer.Instance.p1WinsText.text = $"P1 Wins: " + (int)PhotonNetwork.PlayerList[0].CustomProperties[CustomKeys.WINS];
+            UILayer.Instance.p2WinsText.text = $"P2 Wins: " + (int)PhotonNetwork.PlayerList[1].CustomProperties[CustomKeys.WINS];
+            break;
         }
 
         // Load players UI

@@ -9,7 +9,7 @@ public class SpawnCard : MonoBehaviour
     private Button _card;
     void Start()
     {
-        this.GetComponent<Image>().color = _malwareData.CardColor;
+        //this.GetComponent<Image>().color = _malwareData.CardColor;
         this.GetComponentInChildren<TMP_Text>().text = _malwareData.EnergyCost.ToString();
         _card = this.GetComponent<Button>();
     }

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
@@ -13,15 +14,17 @@ public class Timer : MonoBehaviour
         {
             MatchManager.Instance.roundTime -= Time.deltaTime;
             _canRaiseEvent = true;
-
-            //Debug.Log(MatchManager.Instance.roundTime);
         }
         else
         {
             if (_canRaiseEvent)
             {
-                MatchManager.Instance.SwitchSideRaiseEvent();
                 _canRaiseEvent = false;
+
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    MatchManager.Instance.EndRound(false);
+                }
             }
         }
 

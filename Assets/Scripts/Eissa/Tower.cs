@@ -7,19 +7,19 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class Tower : MonoBehaviour
+public class Tower : MonoBehaviourPun 
 {
     private float _maxHealth;
-    private float _currentHealth;
+    [SerializeField] private float _currentHealth;
     [SerializeField] private Transform towerIconPosition;
     private GameObject _currentTowerIcon;
     private GameObject _towerIcon;
     [SerializeField] private Transform towerHead;
     [SerializeField] private TowerModifications baseTowerSo;
     [HideInInspector] public TowerModifications currentModifications;
+    [SerializeField] List<TowerModifications> _modificationsList;
     public event EventHandler TowerGotModified;
     [SerializeField] private Slider healthBarSlider;
-
 
     private void Start()
     {
@@ -29,13 +29,13 @@ public class Tower : MonoBehaviour
     }
     public void ModifyTower(TowerModifications towerModifications)
     {
-        this.name = towerModifications.ModificationName;
-        _maxHealth = towerModifications.maxHealth;
-        _towerIcon = towerModifications.towerIcon;
-        currentModifications = towerModifications;
-        TowerGotModified?.Invoke(this, EventArgs.Empty);
-        print("tower modified");
-        SwitchTowerIcon();
+        for (int i = 0; i < _modificationsList.Count; i++)
+        {
+            if (_modificationsList[i] == towerModifications)
+            {
+                photonView.RPC("UpdateStatsAndSwitch", RpcTarget.All, i);
+            }
+        }
     }
     private void SwitchTowerIcon()
     {
@@ -49,21 +49,46 @@ public class Tower : MonoBehaviour
     {
         _currentHealth -= dmg;
         UpdateHealthBar();
+        CheckTowerHealth();
+        photonView.RPC("SyncTowerHealth", RpcTarget.Others, _currentHealth);
+    }
+
+    void CheckTowerHealth()
+    {
         if (_currentHealth <= 0)
         {
-            gameObject.SetActive(false);
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
-
-    private void OnDisable()
-    {
-        Destroy(gameObject,5);
-    }
-
+    
     private void UpdateHealthBar()
     {
         float healthPercentage  = (_currentHealth / _maxHealth) * 100;
         healthBarSlider.value = healthPercentage / 100;
     }
+
+    #region RPCs
+
+    [PunRPC]
+    private void SyncTowerHealth(float health)
+    {
+        _currentHealth = health;
+        UpdateHealthBar();
+        CheckTowerHealth();
+    }
+    [PunRPC]
+    private void UpdateStatsAndSwitch(int i)
+    {
+        this.name = _modificationsList[i].ModificationName;
+        _maxHealth = _modificationsList[i].maxHealth;
+        _towerIcon = _modificationsList[i].towerIcon;
+        currentModifications = _modificationsList[i];
+        TowerGotModified?.Invoke(this, EventArgs.Empty);
+        print("tower modified");
+        SwitchTowerIcon();
+    }
+
+    #endregion
+    
+    
 }

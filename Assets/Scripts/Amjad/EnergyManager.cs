@@ -1,23 +1,29 @@
 using ExitGames.Client.Photon;
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
+using static MatchManager;
 
-public class EnergyManager : MonoBehaviourPunCallbacks 
+public class EnergyManager : MonoBehaviourPunCallbacks
 {
     // Private
     private static EnergyManager _instance;
-    [SerializeField] private int _maxEnergy;
-    [SerializeField] private Slider _energySlider;
+    [SerializeField] public int _AttackerMaxEnergy;
+    [SerializeField] public int _DefenderMaxEnergy;
+    [SerializeField] public Slider _energySlider;
     [SerializeField] private int _timePeriodToIncreaseEnergy;
-    [SerializeField] private int _energyIncreaseValue;
+    [SerializeField] private int _AttackerEnergyIncreaseValue;
+    [SerializeField] private int _DefenderEnergyIncreaseValue;
     private int _roundTime;
 
     // Public 
     public static EnergyManager Instance => _instance;
-    public int _energy;
-
+    [HideInInspector] public int _energy;
+    [HideInInspector] public int _energyIncreaseValue;
+    [HideInInspector] public int _maxEnergy;
 
     public override void OnEnable()
     {
@@ -33,8 +39,19 @@ public class EnergyManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        if ((Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == Side.Defender)
+        {
+            _maxEnergy = _DefenderMaxEnergy;
+            _energyIncreaseValue = _DefenderEnergyIncreaseValue;
+        }
+        else
+        {
+            _maxEnergy = _AttackerMaxEnergy;
+            _energyIncreaseValue = _AttackerEnergyIncreaseValue;
+        }
         InitializeRoundVariables();
     }
+
 
     void Start()
     {
@@ -44,9 +61,11 @@ public class EnergyManager : MonoBehaviourPunCallbacks
         }
 
         _energySlider.maxValue = _maxEnergy;
+        _energySlider.value = _maxEnergy;
+
         InvokeRepeating("IncreaseEnergyPerTime", 0, _timePeriodToIncreaseEnergy);
-        //_energySlider.value = 0;
     }
+
 
     public void InitializeRoundVariables()
     {
@@ -66,11 +85,11 @@ public class EnergyManager : MonoBehaviourPunCallbacks
 
         if (_energy < 0)
             _energy = 0;
-        else if(_energy > _maxEnergy)
+        else if (_energy > _maxEnergy)
             _energy = _maxEnergy;
 
         _energySlider.value = _energy;
-
+        PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY] = _energy;
     }
 
     public void DecreaseDefenderEnergy(int amount)
@@ -82,6 +101,7 @@ public class EnergyManager : MonoBehaviourPunCallbacks
         else if (_energy > _maxEnergy)
             _energy = _maxEnergy;
 
+        _roundTime = 0;
         _energySlider.value = _energy;
 
         Hashtable energyProp = new Hashtable { [CustomKeys.ENERGY] = _energy };
@@ -105,20 +125,6 @@ public class EnergyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.RaiseEvent(MatchManager.MiningUsedEventCode, null, raiseEventOptions, SendOptions.SendReliable);
     }
 
-    void IncreaseEnergyPerTime()
-    {
-        if (_energy < _maxEnergy)
-        {
-            _energy += _energyIncreaseValue;
-        }
-        else
-        {
-            _energy = _maxEnergy;
-        }
-
-        _energySlider.value = _energy;
-    }
-
     public void ModifyEnergy(EventData obj)
     {
         if (obj.Code == MatchManager.MiningUsedEventCode)
@@ -126,8 +132,15 @@ public class EnergyManager : MonoBehaviourPunCallbacks
             int defenderEnergy = (int)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.ENERGY];
             int energyToDecrease = (int)(defenderEnergy * 0.2);
             DecreaseDefenderEnergy(energyToDecrease);
-            Debug.Log("Removed from defender");
         }
     }
 
+    void IncreaseEnergyPerTime()
+    {
+        if (_energy < _maxEnergy)
+        {
+            _energy += _energyIncreaseValue;
+            _energySlider.value = _energy;
+        }
+    }
 }

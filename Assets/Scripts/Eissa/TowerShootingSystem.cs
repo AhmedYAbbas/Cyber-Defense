@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class TowerShootingSystem : MonoBehaviour
+public class TowerShootingSystem : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Tower _towerScript;
     private TowerModifications _towerModifications;
@@ -16,23 +17,30 @@ public class TowerShootingSystem : MonoBehaviour
     private PoolableObject _towerProjectilePrefab;
     private ObjectPool _projectilePool;
     private GameObject _currentTarget;
-    private List<GameObject> _enemies = new List<GameObject>();
+    private List<Malware> _enemies = new List<Malware>();
     
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private Transform towerHead;
     [SerializeField] private float towerHeadRotationSpeed;
+
+    [SerializeField] private GameObject muzzleGameObject;
+    private ParticleSystem _muzzleParticleSystem;
     private void Awake()
     {
         _towerScript.TowerGotModified += GetTowerModification;
         _targetingCollider = GetComponent<SphereCollider>();
+        _muzzleParticleSystem = muzzleGameObject.GetComponent<ParticleSystem>();
+        _muzzleParticleSystem.Stop();
     }
 
     private void Update()
     {
-        GettingTheMostDangerousEnemy();
-        RotateTheTowerHead();
-        CalculateShootingRate();
-        print(_enemies.Count);
+        if (_enemies.Count > 0)
+        {
+            GettingTheMostDangerousEnemy();
+            RotateTheTowerHead();
+            CalculateShootingRate();
+        }
     }
 
     void GetTowerModification(object sender , EventArgs e)
@@ -48,7 +56,7 @@ public class TowerShootingSystem : MonoBehaviour
         _attackSpeed = _towerModifications.attackSpeed;
         _towerProjectilePrefab = _towerModifications.bulletPrefab;
         _targetingCollider.radius = _range;
-        _projectilePool = ObjectPool.CreatInstance(_towerProjectilePrefab, 50);
+        _projectilePool = ObjectPool.CreatInstance(_towerProjectilePrefab, 20);
     }
     private void GettingTheMostDangerousEnemy()
     {
@@ -56,21 +64,17 @@ public class TowerShootingSystem : MonoBehaviour
         GameObject tempEnemy = null;
         for (int i = 0 ; i < _enemies.Count ;i++)
         {
-            print("loop in "+ i );
             if (!_enemies[i].gameObject.activeInHierarchy)
             {
                 _enemies.RemoveAt(i);
                 continue;
             }
-            //float enemyDistanceFromTower = Vector3.Distance(transform.position, _enemies[i].transform.position);
-            //var test = _enemies[i].GetComponent<Malware>();
-            float currentDangerousLevel = (-i + 1) * 0.6f + (0.2f);// * test.MovementSpeed) ;
+            float currentDangerousLevel = (-i + 1) * 0.6f + (0.5f * _enemies[i].MovementSpeed);
             if (dangerousLevel < currentDangerousLevel)
             {
                 dangerousLevel = currentDangerousLevel;
-                tempEnemy = _enemies[i];
+                tempEnemy = _enemies[i].gameObject;
             }
-            
         }
         _currentTarget = tempEnemy;
     }
@@ -86,38 +90,39 @@ public class TowerShootingSystem : MonoBehaviour
     }
     private void CalculateShootingRate()
     {
-        if (_attackCountdown <= 0)
+        if (_enemies.Count > 0)
         {
-            Shoot();
-            _attackCountdown = 1f / _attackSpeed;
+            if (_attackCountdown <= 0)
+            {
+                Shoot();
+                _attackCountdown = 1f / _attackSpeed;
+            }
+
+            _attackCountdown -= Time.deltaTime;
         }
-
-        _attackCountdown -= Time.deltaTime;
     }
-
+    
     private void Shoot()
     {
-        if (_enemies.Count > 0 && _currentTarget != null)
-        {
-            var projectile = _projectilePool.GetObject();
-            projectile.transform.position = shootingPoint.position;
-            projectile.GetComponent<TowerHomingProjectile>().GetTarget(_currentTarget.transform,_damage);
-        }
+          var projectile = _projectilePool.GetObject();
+          _muzzleParticleSystem.Play();
+          projectile.transform.position = shootingPoint.position;
+          projectile.GetComponent<TowerHomingProjectile>().GetTarget(_currentTarget.transform,_damage);
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy")&& !_enemies.Contains(other.gameObject))
+        if (other.CompareTag("Enemy") )
         {
-            _enemies.Add(other.gameObject);
-            print("enemy entered the range");
+            _enemies.Add(other.GetComponent<Malware>());
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy") && _enemies.Contains(other.gameObject))
+        if (other.CompareTag("Enemy") )
         {
-            _enemies.Remove(other.gameObject);
-            print("enemy exited the range");
+            _enemies.Remove(other.GetComponent<Malware>());
         }
     }
+
+    
 }

@@ -5,50 +5,44 @@ using UnityEngine;
 public class Mouse3D : MonoBehaviour {
 
     public static Mouse3D Instance { get; private set; }
-
+    public Camera MyCamera;
     [SerializeField] private LayerMask mouseColliderLayerMask = new LayerMask();
-
+    [SerializeField] private Transform RaycastStart;
     private void Awake() {
         Instance = this;
+        MyCamera = Camera.main;
     }
 
     private void Update() {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, mouseColliderLayerMask)) {
             transform.position = raycastHit.point;
         }
     }
 
-    public static Vector3 GetMouseWorldPosition() => Instance.GetMouseWorldPosition_Instance();
+    public  Vector3 GetMouseWorldPosition() => Instance.GetMouseWorldPosition_Instance();
 
     private Vector3 GetMouseWorldPosition_Instance() {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition - new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
+
 
         bool found = false;
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 999f, mouseColliderLayerMask))
+        if (Physics.Raycast(ray,out hit, 999f, mouseColliderLayerMask))
         {
-            print(hit.collider.tag + " v "+hit.collider.name);
+
+            //print(hit.collider.tag + " v " + hit.collider.name);
             return hit.point;
-            //if (hit.transform.CompareTag("Buildable"))
-            //{
-            //    found = true;
-            //}
-        }return Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //if (found)
-        //{
-        //    return hit.point;
-        //}
-        //else
-        //{
-        //    return Vector3.zero;
-        //}
+
+        }
+        return hit.point;
     }
 
     public  bool CANBUILD()
     {
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
         bool found = false;
         RaycastHit hit;
 

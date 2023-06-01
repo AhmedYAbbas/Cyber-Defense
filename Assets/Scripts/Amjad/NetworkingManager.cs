@@ -3,7 +3,6 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
-using System.Collections.Generic;
 
 public class NetworkingManager : MonoBehaviourPunCallbacks
 {
@@ -39,22 +38,12 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
 
     public void CreateOrJoinRoom(string RoomName)
     {
-        PhotonNetwork.JoinOrCreateRoom(RoomName,null,null,null);
+        PhotonNetwork.JoinOrCreateRoom(RoomName, new RoomOptions { MaxPlayers = 2 }, null, null);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 2 });
-    }
-
-    public override void OnJoinedRoom()
-    {
-        //waitingForPlayersPanel.SetActive(true);
-    }
-
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        Debug.Log(newPlayer.NickName + " has joined the room");
     }
 
     public void LeaveRoom()

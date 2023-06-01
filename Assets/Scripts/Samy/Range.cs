@@ -4,14 +4,16 @@ using System.Collections;
 [RequireComponent(typeof(LineRenderer))]
 public class Range : MonoBehaviour
 {
+    [SerializeField] private TowerModifications baseTowerSo;
     [Range(0, 50)]
     public int segments = 50;
-    [Range(0, 5)]
-    public float Radius = 1;
+    public float Radius ;
     LineRenderer line;
     private void Awake()
     {
-        Radius = GridBuildingSystem3D.Instance.GetPlacedObjectTypeSO().range;
+        //Radius = GridBuildingSystem3D.Instance.GetPlacedObjectTypeSO().range;
+        Radius = baseTowerSo.range;
+
     }
     void Start()
     {

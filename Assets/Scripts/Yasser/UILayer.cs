@@ -10,6 +10,8 @@ public class UILayer : MonoBehaviour
     [SerializeField] private GameObject attackerUI;
     [SerializeField] private GameObject defenderUI;
     [SerializeField] private GameObject switchingSidesPanel;
+    [SerializeField] private TMP_Text roundNumText;
+    [SerializeField] private TMP_Text attackerDefenderTurnText;
     [SerializeField] private GameObject ads;
 
     #endregion
@@ -20,6 +22,7 @@ public class UILayer : MonoBehaviour
     public TextMeshProUGUI roundText;
     public TextMeshProUGUI p1WinsText;
     public TextMeshProUGUI p2WinsText;
+    public TMP_Text winnerText;
     public GameObject GameEndedPanel;
 
     public static UILayer Instance { get; private set; }
@@ -37,8 +40,10 @@ public class UILayer : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(gameObject);
         }
+
+        StartCoroutine(EnableSwitchingSidesPanel(0));
     }
 
     #endregion
@@ -56,16 +61,29 @@ public class UILayer : MonoBehaviour
         switch (side)
         {
             case MatchManager.Side.Attacker:
+                defenderUI.SetActive(false);
                 attackerUI.SetActive(true);
                 break;
             case MatchManager.Side.Defender:
+                attackerUI.SetActive(false);
                 defenderUI.SetActive(true);
                 break;
         }
     }
 
-    public IEnumerator EnableSwitchingSidesPanel()
+    public IEnumerator EnableSwitchingSidesPanel(int increment)
     {
+        roundNumText.text = $"Round: {MatchManager.Instance.currentRound+increment}";
+        if ((MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker)
+        {
+            attackerDefenderTurnText.text = "Now You Are An <color=red>Attacker</color>";
+        }
+        else
+        {
+            attackerDefenderTurnText.text = "Now You Are A <color=blue>Defender</color>";
+        }
+
+
         switchingSidesPanel.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
         switchingSidesPanel.gameObject.SetActive(false);

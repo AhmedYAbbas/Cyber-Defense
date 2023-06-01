@@ -9,14 +9,17 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private TMP_InputField if_playerNickName;
     [SerializeField] private Button btn_LetsGo;
     [SerializeField] private GameObject welcomePanel;
-    [SerializeField] private GameObject createOrJoinRandomPanel;
-    [SerializeField] private GameObject waitingForPlayersPanel;
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject chooseModePanel;
+    [SerializeField] private GameObject waitingForPlayerPanel;
+    [SerializeField] private GameObject searchingForMatchPanel;
 
     void Start()
     {
         if (PlayerPrefs.GetString("NickName") != String.Empty)
         {
             welcomePanel.SetActive(false);
+            mainMenuPanel.SetActive(true);
             print(PlayerPrefs.GetString("NickName"));
         }
     }
@@ -39,7 +42,7 @@ public class MainMenuManager : MonoBehaviour
         PlayerPrefs.SetString("NickName", if_playerNickName.text);
     }
 
-    public void CreateOrJoinRoom(TMP_Text RoomName)
+    public void CreateOrJoinRoom(TMP_InputField RoomName)
     {
         if (string.IsNullOrEmpty(RoomName.text))
         {
@@ -48,16 +51,17 @@ public class MainMenuManager : MonoBehaviour
         else
         {
             NetworkingManager.Instance.CreateOrJoinRoom(RoomName.text);
-            createOrJoinRandomPanel.SetActive(false);
-            waitingForPlayersPanel.SetActive(true);
+            waitingForPlayerPanel.SetActive(true);
+            chooseModePanel.GetComponent<Canvas>().enabled = false;
         }
     }
 
     public void JoinRandomRoom()
     {
         NetworkingManager.Instance.QuickMatch();
-        createOrJoinRandomPanel.SetActive(false);
-        waitingForPlayersPanel.SetActive(true);
+        waitingForPlayerPanel.SetActive(true);
+        chooseModePanel.GetComponent<Canvas>().enabled = false;
+
     }
 
     public void Options()

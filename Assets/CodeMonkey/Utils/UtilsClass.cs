@@ -21,14 +21,15 @@ namespace CodeMonkey.Utils {
     /*
      * Various assorted utilities functions
      * */
+
     public static class UtilsClass {
         
         private static readonly Vector3 Vector3zero = Vector3.zero;
         private static readonly Vector3 Vector3one = Vector3.one;
         private static readonly Vector3 Vector3yDown = new Vector3(0,-1);
-
         public const int sortingOrderDefault = 5000;
-        
+
+
         // Get Sorting order to set SpriteRenderer sortingOrder, higher position = lower sortingOrder
         public static int GetSortingOrder(Vector3 position, int offset, int baseSortingOrder = sortingOrderDefault) {
             return (int)(baseSortingOrder - position.y) + offset;
@@ -119,19 +120,24 @@ namespace CodeMonkey.Utils {
 
         // Create a Text Popup in the World, no parent
         public static void CreateWorldTextPopup(string text, Vector3 localPosition, float popupTime = 1f) {
-            CreateWorldTextPopup(null, text, localPosition, 40, Color.white, localPosition + new Vector3(0, 20), popupTime);
+            CreateWorldTextPopup(null, text, localPosition, 25, Color.white, localPosition + new Vector3(0, 20), popupTime);
         }
         
         // Create a Text Popup in the World
         public static void CreateWorldTextPopup(Transform parent, string text, Vector3 localPosition, int fontSize, Color color, Vector3 finalPopupPosition, float popupTime) {
             TextMesh textMesh = CreateWorldText(parent, text, localPosition, fontSize, color, TextAnchor.LowerLeft, TextAlignment.Left, sortingOrderDefault);
             Transform transform = textMesh.transform;
+            textMesh.transform.LookAt(Camera.main.transform.position);
+            textMesh.transform.Rotate(0f, 180f, 0f);
+
+            //textMesh.transform.rotation = Quaternion.Inverse(textMesh.transform.rotation);
+
             Vector3 moveAmount = (finalPopupPosition - localPosition) / popupTime;
             FunctionUpdater.Create(delegate () {
                 transform.position += moveAmount * Time.unscaledDeltaTime;
                 popupTime -= Time.unscaledDeltaTime;
                 if (popupTime <= 0f) {
-                    UnityEngine.Object.Destroy(transform.gameObject);
+                    UnityEngine.Object.Destroy(transform.gameObject);   
                     return true;
                 } else {
                     return false;
