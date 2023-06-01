@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Amjad/Main Menu 1.unity
     guid: 2d2874fc8b9d10340b40817623f2e5af
   - enabled: 1
-    path: Assets/Scenes/Amjad/Gameplay New Env.unity
-    guid: 957ebcc9ae81d8a4d91a02c4bf7d4a8c
+    path: Assets/Scenes/Amjad/Gameplay Scene1.unity
+    guid: 9a2ae0a87e7868b4886ed87ab397867c
   m_configObjects: {}

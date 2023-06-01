@@ -38,7 +38,7 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
 
     public void CreateOrJoinRoom(string RoomName)
     {
-        PhotonNetwork.JoinOrCreateRoom(RoomName, null, null, null);
+        PhotonNetwork.JoinOrCreateRoom(RoomName, new RoomOptions { MaxPlayers = 2 }, null, null);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
