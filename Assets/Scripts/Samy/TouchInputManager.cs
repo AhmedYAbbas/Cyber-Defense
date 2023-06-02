@@ -79,30 +79,30 @@ public class TouchInputManager : MonoBehaviour
 
         return TouchPhase.Canceled;
     }
-    public bool CANBUILD(int touchIndex=0)
+    public bool CANBUILD(int touchIndex = 0)
     {
         if (HasTouchInput())
         {
             Touch touch = Input.GetTouch(touchIndex);
 
             Ray ray = camera.ScreenPointToRay(touch.position);
-            bool found = false;
-            RaycastHit hit;
+            bool found = true;
 
-            if (Physics.Raycast(ray, out hit,999f, mouseColliderLayerMask))
+            RaycastHit[] hits = Physics.SphereCastAll(ray, 0.5f, 999f, mouseColliderLayerMask);
+
+            foreach (RaycastHit hit in hits)
             {
                 print(hit.collider.tag);
 
-                if (hit.transform.CompareTag("Buildable"))
+                if (hit.transform.CompareTag("notBuildable") || hit.transform.CompareTag("Road"))
                 {
-                    found = true;
+                    return false;
                 }
             }
-            return found;
+
+            return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
+
 }

@@ -14610,8 +14610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malwareData: {fileID: 11400000, guid: 88f4637d202b45e409542982a1b5b867, type: 2}
-  malwareProjectilePrefab: {fileID: 2018507756116791279, guid: b6da2a1513c68114080773751565c591,
-    type: 3}
+  _malwareProjectilePrefab: {fileID: 0}
 --- !u!135 &2928132647140296223
 SphereCollider:
   m_ObjectHideFlags: 0

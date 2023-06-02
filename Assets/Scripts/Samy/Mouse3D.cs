@@ -43,16 +43,16 @@ public class Mouse3D : MonoBehaviour {
     {
 
         Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
-        bool found = false;
-        RaycastHit hit;
+        bool found = true;
+        RaycastHit[] hits = Physics.SphereCastAll(ray, 0.5f, 999f, mouseColliderLayerMask);
 
-        if (Physics.Raycast(ray, out hit,999f, mouseColliderLayerMask))
+        foreach (RaycastHit hit in hits)
         {
             print(hit.collider.tag);
 
-            if (hit.transform.CompareTag("Buildable"))
+            if (hit.transform.CompareTag("notBuildable")|| hit.transform.CompareTag("Road"))
             {
-                found = true;
+                return false;
             }
         }
         return found;
