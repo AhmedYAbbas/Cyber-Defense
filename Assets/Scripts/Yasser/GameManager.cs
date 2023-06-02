@@ -1,14 +1,16 @@
 using ExitGames.Client.Photon;
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    [SerializeField] private GameObject timerGameObject;
+
     #region Public Variables
 
     public static GameManager Instance { get; private set; }
     public GameObject TowerManager;
+
     #endregion
 
     #region Unity Callbacks
@@ -42,23 +44,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         UpdateUI();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && (MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker)
-        {
-            MatchManager.Instance.EndRound(true);
-        }
-    }
-
     #endregion
 
-    public void UpdateUI()
+    private void UpdateUI()
     {
-        // Start timer
-        // TODO: Consider syncing the timer instead of just enabling it
-        UILayer.Instance.timerGameObject.SetActive(true);
+        timerGameObject.SetActive(true);
 
-        // Set rounds text
         UILayer.Instance.roundText.gameObject.SetActive(true);
         UILayer.Instance.roundText.text = "Round: " + MatchManager.Instance.currentRound;
 
@@ -73,7 +64,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             break;
         }
 
-        // Load players UI
         UILayer.Instance.LoadPlayerUI((MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE]);
     }
 
@@ -84,5 +74,4 @@ public class GameManager : MonoBehaviourPunCallbacks
             UILayer.Instance.ShowAds();
         }
     }
-
 }

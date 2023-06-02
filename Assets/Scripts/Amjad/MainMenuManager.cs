@@ -20,7 +20,6 @@ public class MainMenuManager : MonoBehaviour
         {
             welcomePanel.SetActive(false);
             mainMenuPanel.SetActive(true);
-            print(PlayerPrefs.GetString("NickName"));
         }
     }
 

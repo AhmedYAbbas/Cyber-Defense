@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class MatchManager : MonoBehaviourPunCallbacks
 {
@@ -139,7 +140,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        if (_disconnected)
+        if (_disconnected && SceneManager.GetActiveScene().name == GAMEPLAY_SCENE_NAME)
         {
             DisconnectPlayersRaiseEvent();
             UILayer.Instance.EnableDisconnectionPanel();

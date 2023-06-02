@@ -20,7 +20,6 @@ public class UILayer : MonoBehaviour
 
     #region Public Variables
 
-    public GameObject timerGameObject;
     public TextMeshProUGUI roundText;
     public TextMeshProUGUI p1WinsText;
     public TextMeshProUGUI p2WinsText;
