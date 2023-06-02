@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (/*!EventSystem.current.IsPointerOverGameObject() &&*/ GridBuildingSystem3D.Instance.GetPlacedObjectTypeSO() == null)
+        if (!EventSystem.current.IsPointerOverGameObject() && GridBuildingSystem3D.Instance.GetPlacedObjectTypeSO() == null)
         {
             HandleCameraRotation();
 

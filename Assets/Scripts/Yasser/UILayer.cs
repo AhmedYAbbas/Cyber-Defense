@@ -74,7 +74,7 @@ public class UILayer : MonoBehaviour
 
     public IEnumerator EnableSwitchingSidesPanel(int increment)
     {
-        roundNumText.text = $"Round: {MatchManager.Instance.currentRound+increment}";
+        roundNumText.text = $"Round: {MatchManager.Instance.currentRound + increment}";
         if ((MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker)
         {
             attackerDefenderTurnText.text = "Now You Are An <color=red>Attacker</color>";
@@ -98,6 +98,10 @@ public class UILayer : MonoBehaviour
 
     public void ShowAds()
     {
+        foreach (Transform AD in ads.transform)
+        {
+            AD.gameObject.SetActive(true);
+        }
         ads.SetActive(true);
     }
 
