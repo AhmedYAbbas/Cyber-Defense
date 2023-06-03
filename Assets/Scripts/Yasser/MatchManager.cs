@@ -83,6 +83,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
     {
         if (SceneManager.GetActiveScene().name == MatchManager.Instance.GAMEPLAY_SCENE_NAME)
         {
+            // TODO: Profiler: cache this list
             if (PhotonNetwork.PlayerList.Length < 2)
             {
                 DisconnectPlayersRaiseEvent();
