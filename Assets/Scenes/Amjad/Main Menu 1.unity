@@ -636,7 +636,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2305,8 +2305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a9bb1bab8ed86e478df760676dd73f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundMusic: {fileID: 0}
-  soundEffects: []
+  MainMenuMusic: {fileID: 0}
+  GameplayMusic: {fileID: 0}
 --- !u!4 &762839598
 Transform:
   m_ObjectHideFlags: 0
