@@ -16,10 +16,10 @@ MonoBehaviour:
   CardImage: {fileID: 0}
   MalwareName: Trojan Horse
   AttackDamage: 5
-  MovementSpeed: 30
+  MovementSpeed: 10
   Health: 80
   Shield: 80
-  EnergyCost: 80
+  EnergyCost: 70
   Range: 5
   IsRanged: 0
   FireRate: 1
