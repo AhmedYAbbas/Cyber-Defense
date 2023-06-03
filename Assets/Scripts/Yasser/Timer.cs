@@ -1,3 +1,4 @@
+using System.Collections;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
@@ -6,6 +7,14 @@ public class Timer : MonoBehaviourPunCallbacks
 {
     [SerializeField] private TextMeshProUGUI timerText;
     private bool _canRaiseEvent;
+
+    private void Start()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            StartCoroutine(SyncTimerCoroutine());
+        }
+    }
 
     private void Update()
     {
@@ -29,7 +38,6 @@ public class Timer : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             DisplayTime(MatchManager.Instance.roundTime);
-            photonView.RPC("SyncTimer", RpcTarget.Others, MatchManager.Instance.roundTime);
         }
     }
 
@@ -49,5 +57,14 @@ public class Timer : MonoBehaviourPunCallbacks
     private void SyncTimer(float time)
     {
         DisplayTime(time);
+    }
+
+    private IEnumerator SyncTimerCoroutine()
+    {
+        while (true)
+        {
+            photonView.RPC("SyncTimer", RpcTarget.Others, MatchManager.Instance.roundTime);
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 }
