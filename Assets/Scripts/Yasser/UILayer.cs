@@ -22,7 +22,9 @@ public class UILayer : MonoBehaviour
 
     public TextMeshProUGUI roundText;
     public TextMeshProUGUI p1WinsText;
+    public TextMeshProUGUI p1NameText;
     public TextMeshProUGUI p2WinsText;
+    public TextMeshProUGUI p2NameText;
     public TMP_Text winnerText;
     public GameObject GameEndedPanel;
 

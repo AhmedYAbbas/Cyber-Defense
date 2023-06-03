@@ -57,10 +57,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         UILayer.Instance.p1WinsText.gameObject.SetActive(true);
         UILayer.Instance.p2WinsText.gameObject.SetActive(true);
 
+        UILayer.Instance.p1NameText.text = (string)PhotonNetwork.PlayerList[0].CustomProperties[CustomKeys.User_Name];
+        UILayer.Instance.p2NameText.text = (string)PhotonNetwork.PlayerList[1].CustomProperties[CustomKeys.User_Name];
+
         for (int i = 0; i < PhotonNetwork.PlayerList.Length;)
         {
-            UILayer.Instance.p1WinsText.text = $"P1 Wins: " + (int)PhotonNetwork.PlayerList[0].CustomProperties[CustomKeys.WINS];
-            UILayer.Instance.p2WinsText.text = $"P2 Wins: " + (int)PhotonNetwork.PlayerList[1].CustomProperties[CustomKeys.WINS];
+            UILayer.Instance.p1WinsText.text = ((int)PhotonNetwork.PlayerList[0].CustomProperties[CustomKeys.WINS]).ToString();
+            UILayer.Instance.p2WinsText.text = ((int)PhotonNetwork.PlayerList[1].CustomProperties[CustomKeys.WINS]).ToString();
             break;
         }
 

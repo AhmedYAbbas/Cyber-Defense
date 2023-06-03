@@ -1202,7 +1202,7 @@ MonoBehaviour:
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 3c005940eed7b33439f3d598b3614e7a, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: f3534028e4337954098e42cf5d90c907, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -2305,8 +2305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a9bb1bab8ed86e478df760676dd73f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundMusic: {fileID: 0}
-  soundEffects: []
+  MainMenuMusic: {fileID: 0}
+  GameplayMusic: {fileID: 0}
 --- !u!4 &762839598
 Transform:
   m_ObjectHideFlags: 0
