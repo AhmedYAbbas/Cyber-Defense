@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -26,7 +27,7 @@ public class Base : MonoBehaviourPunCallbacks
     private void UpdateHealthBar()
     {
         float healthPercentage  = (_currentHealth / _maxHealth) * 100;
-        healthBarSlider.value = healthPercentage / 100;
+        DOTween.To(() => healthBarSlider.value, x => healthBarSlider.value = x, healthPercentage / 100f, 1f);
     }
 
     void CheckBaseHealth()
