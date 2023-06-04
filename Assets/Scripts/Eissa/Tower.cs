@@ -84,7 +84,6 @@ public class Tower : MonoBehaviourPun
         _towerIcon = _modificationsList[i].towerIcon;
         currentModifications = _modificationsList[i];
         TowerGotModified?.Invoke(this, EventArgs.Empty);
-        print("tower modified");
         SwitchTowerIcon();
     }
 
