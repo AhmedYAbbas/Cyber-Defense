@@ -52,13 +52,18 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 3c005940eed7b33439f3d598b3614e7a, type: 3}
   - {fileID: 21300000, guid: 46fe54801f3546e409f866c2c84e5ba1, type: 3}
+  - {fileID: 21300000, guid: 64d097f0ffa4aaf4d9ece042bd82961f, type: 3}
+  - {fileID: 21300000, guid: 3e662e21dfe6e7e46aa5eefdb41e0e80, type: 3}
   - {fileID: 21300000, guid: 8e10f541753478c458401e4ec04beb16, type: 3}
   - {fileID: 21300000, guid: 82d3ebd1621194248bb4ab521cd35855, type: 3}
   - {fileID: 21300000, guid: 6e02c9e1388e50f4fbfb602acf96fe04, type: 3}
   - {fileID: 21300000, guid: 2c25656313dfb2942a783a0aaa6fab59, type: 3}
   - {fileID: 21300000, guid: e5671cd36346a9048b42dd8ac46f766f, type: 3}
   - {fileID: 21300000, guid: f048c354630a57849af4e0a32cea8ebb, type: 3}
+  - {fileID: 21300000, guid: 4a00a1358c2b4144686588beb33d2c77, type: 3}
+  - {fileID: 21300000, guid: 8a1e5c55290277b4ab5f134f63d06ce6, type: 3}
   - {fileID: 21300000, guid: 83096665ea2544249bed6320b56ec805, type: 3}
+  - {fileID: 21300000, guid: a96cb4852cd730f42955b94e7c319042, type: 3}
   - {fileID: 21300000, guid: 323736063cec1e2419511381f2853377, type: 3}
   - {fileID: 21300000, guid: 2dd817969e7ad2749a249bc8cb0fadb3, type: 3}
   - {fileID: 21300000, guid: c3122817d503ab94db2354cea854b49b, type: 3}
@@ -66,6 +71,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c29d436746e6e3149b63cf0d9e78d305, type: 3}
   - {fileID: 21300000, guid: c64f7b778bc800c49bb78c98c9e028ac, type: 3}
   - {fileID: 21300000, guid: be0072a7c58993e4d86463d046f55d1d, type: 3}
+  - {fileID: 21300000, guid: a7f21e18b14d86645970d0de8961c732, type: 3}
   - {fileID: 21300000, guid: f3534028e4337954098e42cf5d90c907, type: 3}
   - {fileID: 21300000, guid: 7b4827f8efe12a8459e700a171b7fe13, type: 3}
   - {fileID: 21300000, guid: 1d79011937b28654e94e9e8b529adac9, type: 3}
@@ -99,13 +105,18 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - Button
   - DeepScanner
+  - New_Virus
+  - NewBlankCard
   - Tower
   - Find_Match
   - Exit_Text
   - Hard Edge Lobby UI
   - IMG_4127
   - AdwareCard
+  - NewEnergy_BG
+  - New_Adware
   - IMG_4126
+  - New_Trojan Horse
   - Lobby UI
   - Cofirm_Text
   - Highlighted_Join_Room
@@ -113,6 +124,7 @@ SpriteAtlas:
   - Virus
   - PV_Main_Menu
   - Play_Text
+  - NewEnergy_Fill
   - DisabledButton
   - Background
   - Update
