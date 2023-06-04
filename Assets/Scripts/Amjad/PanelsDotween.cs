@@ -25,18 +25,18 @@ public class PanelsDotween : MonoBehaviour
 
     public void ShowPanel()
     {
-        _panelRect.localScale = Vector3.zero;
+        _panelRect.localScale = Vector3.one * 0.7f;
         _panel.SetActive(true);
 
         _panelRect.DOScale(Vector3.one, _transitionDuration)
-            .SetEase(Ease.OutFlash);
+            .SetEase(Ease.OutBack);
     }
 
     public void HidePanel()
     {
         print("Will Close");
         _panelRect.DOScale(Vector3.zero, _transitionDuration)
-            .SetEase(Ease.InFlash)
+            .SetEase(Ease.InBack)
             .OnComplete(DeactivatePanel);
     }
 
