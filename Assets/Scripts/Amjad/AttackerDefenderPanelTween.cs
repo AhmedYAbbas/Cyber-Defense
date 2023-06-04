@@ -23,7 +23,7 @@ public class AttackerDefenderPanelTween : MonoBehaviour
         {
             _panelTweener?.Kill(); // Kill any previous tweens
             _panel.SetActive(true);
-            _panelTweener = _panel.transform.DOLocalMove(Vector3.zero, 1f);
+            _panelTweener = _panel.transform.DOLocalMove(new Vector3(0,70,0), 1f);
         }
         else if (Input.GetMouseButtonUp(0) && _panel.activeSelf)
         {
