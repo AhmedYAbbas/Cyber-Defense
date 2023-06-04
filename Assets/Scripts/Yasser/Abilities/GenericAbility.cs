@@ -31,25 +31,38 @@ public class GenericAbility : MonoBehaviour
         }
 
         DisplayTime(_timer);
-        if (CountActiveGameObjects() >= numberOfMalwareNeededToUse)
+        if (EnergyManager.Instance._energy < cost || _nextUseTime > Time.time )
         {
-            if (EnergyManager.Instance._energy < cost || _nextUseTime > Time.time )
-            {
-                _card.interactable = false;
-                cooldownText.gameObject.SetActive(true);
-                _isOnCooldown = true;
-            }
-            else
-            {
-                _card.interactable = true;
-                cooldownText.gameObject.SetActive(false);
-                _isOnCooldown = false;
-            }
+            _card.interactable = false;
+            cooldownText.gameObject.SetActive(true);
+            _isOnCooldown = true;
         }
         else
         {
-            _card.interactable = false;
+            _card.interactable = true;
+            cooldownText.gameObject.SetActive(false);
+            _isOnCooldown = false;
         }
+
+        //if (CountActiveGameObjects() >= numberOfMalwareNeededToUse)
+        //{
+        //    if (EnergyManager.Instance._energy < cost || _nextUseTime > Time.time)
+        //    {
+        //        _card.interactable = false;
+        //        cooldownText.gameObject.SetActive(true);
+        //        _isOnCooldown = true;
+        //    }
+        //    else
+        //    {
+        //        _card.interactable = true;
+        //        cooldownText.gameObject.SetActive(false);
+        //        _isOnCooldown = false;
+        //    }
+        //}
+        //else
+        //{
+        //    _card.interactable = false;
+        //}
 
 
 
@@ -68,27 +81,27 @@ public class GenericAbility : MonoBehaviour
 
 
 
-    private int CountActiveGameObjects()
-    {
-        int count = 0;
+    //private int CountActiveGameObjects()
+    //{
+    //    int count = 0;
 
-        // Get all active PhotonViews in the scene
-        photonViews = FindObjectsOfType<PhotonView>();
+    //    // Get all active PhotonViews in the scene
+    //    photonViews = FindObjectsOfType<PhotonView>();
 
-        foreach (PhotonView view in photonViews)
-        {
-            // Check if the PhotonView is active and has a valid GameObject
-            if (view != null && view.gameObject != null && view.gameObject.activeInHierarchy)
-            {
-                print(view.gameObject.name);
-                // Check if the GameObject has the name "Virus"
-                if (view.gameObject.name == nameOfMalwareNeededToUse)
-                {
-                    count++;
-                }
-            }
-        }
-        print("the count of virus" + count);
-        return count;
-    }
+    //    foreach (PhotonView view in photonViews)
+    //    {
+    //        // Check if the PhotonView is active and has a valid GameObject
+    //        if (view != null && view.gameObject != null && view.gameObject.activeInHierarchy)
+    //        {
+    //            print(view.gameObject.name);
+    //            // Check if the GameObject has the name "Virus"
+    //            if (view.gameObject.name == nameOfMalwareNeededToUse)
+    //            {
+    //                count++;
+    //            }
+    //        }
+    //    }
+    //    print("the count of virus" + count);
+    //    return count;
+    //}
 }
