@@ -25,7 +25,7 @@ public class PanelsDotween : MonoBehaviour
 
     public void ShowPanel()
     {
-        _panelRect.localScale = Vector3.one * 0.7f;
+        _panelRect.localScale = Vector3.one * 0.5f;
         _panel.SetActive(true);
 
         _panelRect.DOScale(Vector3.one, _transitionDuration)
@@ -34,8 +34,7 @@ public class PanelsDotween : MonoBehaviour
 
     public void HidePanel()
     {
-        print("Will Close");
-        _panelRect.DOScale(Vector3.zero, _transitionDuration)
+        _panelRect.DOScale(Vector3.one * 0.5f, _transitionDuration)
             .SetEase(Ease.InBack)
             .OnComplete(DeactivatePanel);
     }

@@ -35,6 +35,5 @@ public class ModificationCard : MonoBehaviour
     {
         TowerModificationManager.Instance.TowerModifications = _modificationCard;
         TowerModificationManager.Instance.ObjectEnergyCost = _modificationCard.EnergyCost;
-        print(_modificationCard.ModificationName);
     }
 }
