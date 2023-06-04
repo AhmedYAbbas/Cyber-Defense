@@ -144,7 +144,7 @@ public class GridBuildingSystem3D : MonoBehaviour
                 {
                     // Cannot build here
                     UtilsClass.CreateWorldTextPopup("Cannot Build Here!", new Vector3(mousePosition.x-12, mousePosition.y, mousePosition.z));
-                    //DeselectObjectType();
+                    DeselectObjectType();
                 }
             }
         }
