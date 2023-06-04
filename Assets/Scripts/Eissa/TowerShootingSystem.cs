@@ -104,10 +104,10 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
     
     private void Shoot()
     {
-          var projectile = _projectilePool.GetObject();
+          var projectile = _projectilePool.GetObject() as TowerHomingProjectile;
           _muzzleParticleSystem.Play();
           projectile.transform.position = shootingPoint.position;
-          projectile.GetComponent<TowerHomingProjectile>().GetTarget(_currentTarget.transform,_damage);
+          projectile.GetTarget(_currentTarget.transform,_damage);
     }
     private void OnTriggerEnter(Collider other)
     {
