@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 
   ModificationName: SSD Modification
   maxHealth: 250
-  EnergyCost: 550
+  EnergyCost: 450
   damage: 20
   range: 6
   attackSpeed: 3

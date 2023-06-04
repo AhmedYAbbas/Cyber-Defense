@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 
   ModificationName: SystemUpdateModification
   maxHealth: 250
-  EnergyCost: 500
+  EnergyCost: 350
   damage: 34
   range: 6
   attackSpeed: 1.3

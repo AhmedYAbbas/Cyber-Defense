@@ -18,7 +18,7 @@ MonoBehaviour:
     Base Or the first enemy entering his range."
   ModificationName: BaseTower
   maxHealth: 250
-  EnergyCost: 200
+  EnergyCost: 150
   damage: 20
   range: 6
   attackSpeed: 1.3
