@@ -53,7 +53,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 3c005940eed7b33439f3d598b3614e7a, type: 3}
   - {fileID: 21300000, guid: 46fe54801f3546e409f866c2c84e5ba1, type: 3}
   - {fileID: 21300000, guid: 64d097f0ffa4aaf4d9ece042bd82961f, type: 3}
-  - {fileID: 21300000, guid: 3e662e21dfe6e7e46aa5eefdb41e0e80, type: 3}
   - {fileID: 21300000, guid: 8e10f541753478c458401e4ec04beb16, type: 3}
   - {fileID: 21300000, guid: 82d3ebd1621194248bb4ab521cd35855, type: 3}
   - {fileID: 21300000, guid: 6e02c9e1388e50f4fbfb602acf96fe04, type: 3}
@@ -71,10 +70,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c29d436746e6e3149b63cf0d9e78d305, type: 3}
   - {fileID: 21300000, guid: c64f7b778bc800c49bb78c98c9e028ac, type: 3}
   - {fileID: 21300000, guid: be0072a7c58993e4d86463d046f55d1d, type: 3}
+  - {fileID: 21300000, guid: 7e931a08fcb8ed4489c6e2f2b374b469, type: 3}
   - {fileID: 21300000, guid: a7f21e18b14d86645970d0de8961c732, type: 3}
   - {fileID: 21300000, guid: f3534028e4337954098e42cf5d90c907, type: 3}
   - {fileID: 21300000, guid: 7b4827f8efe12a8459e700a171b7fe13, type: 3}
   - {fileID: 21300000, guid: 1d79011937b28654e94e9e8b529adac9, type: 3}
+  - {fileID: 21300000, guid: 2193ce19a4d1c3f4eba4f9aaf75c8d69, type: 3}
   - {fileID: 21300000, guid: ff389029dc2a6ee4a81c29a0d020c362, type: 3}
   - {fileID: 21300000, guid: fde54039ecdbc8049aa4f0a3f6cc5135, type: 3}
   - {fileID: 21300000, guid: 27339269de5afc14f9aa2bcc547b8fc5, type: 3}
@@ -90,6 +91,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1b3a930c86cb9414f964b28f8481dd77, type: 3}
   - {fileID: 21300000, guid: 0b0adc6c95186d64dabf07ebb7c3c02f, type: 3}
   - {fileID: 21300000, guid: 734f56bcbc0565f4585a64b3222fb661, type: 3}
+  - {fileID: 21300000, guid: 41a041dc428d77d4bba22dc0811ae8e2, type: 3}
   - {fileID: 21300000, guid: bd74895d7fcb90140b7ba4e4bb2a06de, type: 3}
   - {fileID: 21300000, guid: 28a9f8bd9de87ad4e9ae9001f5623437, type: 3}
   - {fileID: 21300000, guid: ca0a821e06cd00f4aa57ab76e5a00338, type: 3}
@@ -106,7 +108,6 @@ SpriteAtlas:
   - Button
   - DeepScanner
   - New_Virus
-  - NewBlankCard
   - Tower
   - Find_Match
   - Exit_Text
@@ -124,10 +125,12 @@ SpriteAtlas:
   - Virus
   - PV_Main_Menu
   - Play_Text
+  - NewBlankCard
   - NewEnergy_Fill
   - DisabledButton
   - Background
   - Update
+  - Energy
   - BlankCard
   - AD2
   - Exit
@@ -143,6 +146,7 @@ SpriteAtlas:
   - Highlighted_Create_Room
   - TrojanHorseCard
   - AD3
+  - ADS
   - Background
   - PV_Choose_Mode
   - Join_Room
