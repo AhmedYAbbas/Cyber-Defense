@@ -250,11 +250,6 @@ public class MatchManager : MonoBehaviourPunCallbacks
                 player.CustomProperties[CustomKeys.WINS] = wins;
             }
         }
-
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-        {
-            Debug.Log($"P{i + 1} wins: " + (int)PhotonNetwork.PlayerList[i].CustomProperties[CustomKeys.WINS]);
-        }
     }
 
     // Reset Match Data

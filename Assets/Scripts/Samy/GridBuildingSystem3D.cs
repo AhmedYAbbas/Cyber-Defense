@@ -28,13 +28,9 @@ public class GridBuildingSystem3D : MonoBehaviour
     private void Awake() {
         Instance = this;
         MyCamera = Camera.main;
-        //gridWidth = 10;
-        //gridHeight = 10;
-        //cellSize = 5f;
         grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, new Vector3(transform.position.x, transform.position.y, transform.position.z), (GridXZ<GridObject> g, int x, int y) => new GridObject(g, x, y));
 
         placedObjectTypeSO = null;
-        //placedObjectTypeSO = placedObjectTypeSOList[0];
     }
 
     public class GridObject {
@@ -77,7 +73,6 @@ public class GridBuildingSystem3D : MonoBehaviour
     }
 
     private void Update() {
-        //if (Input.GetKeyDown(KeyCode.Alpha1)) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); }
 
         InputHandler();
     }
@@ -128,7 +123,6 @@ public class GridBuildingSystem3D : MonoBehaviour
                 {
                     RayCastCheck = Mouse3D.Instance.CANBUILD();
                 }
-                print("Can build ===============================" + RayCastCheck);
                 if (canBuild && RayCastCheck)
                 {
                     Vector2Int rotationOffset = Vector2Int.zero;
@@ -185,9 +179,7 @@ public class GridBuildingSystem3D : MonoBehaviour
             mousePosition =  Mouse3D.Instance.GetMouseWorldPosition();
         }
         grid.GetXZ(mousePosition, out int x, out int z);
-        //print("Grid position" + x + z);
         if (placedObjectTypeSO != null) {
-            //Vector2Int rotationOffset = Vector2Int.zero;
             Vector3 placedObjectWorldPosition = grid.GetWorldPosition(x, z)  + Vector3.zero * grid.GetCellSize()/2;
             return placedObjectWorldPosition;
         } else {
@@ -208,7 +200,6 @@ public class GridBuildingSystem3D : MonoBehaviour
     }
     public void SetPlacedObjectTypeSO(int TypeNum)
     {
-        print("selected type " + TypeNum);
         placedObjectTypeSO = placedObjectTypeSOList[TypeNum];
         RefreshSelectedObjectType();
     }

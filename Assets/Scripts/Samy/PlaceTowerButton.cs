@@ -19,12 +19,10 @@ public class PlaceTowerButton : MonoBehaviour
         {
             //GridBuildingSystem = GridSystem.GetComponent<GridBuildingSystem3D>();
             // Do something with the game object
-            Debug.Log("Found the game object!");
         }
         else
         {
             // Game object not found
-            Debug.LogError("Unable to find the game object!");
         }
 
         myButton.onClick.AddListener(OnClick);
@@ -39,9 +37,6 @@ public class PlaceTowerButton : MonoBehaviour
 
     private void Update()
     {
-        print(EnergyManager.Instance._energy);
-        //print(towerBase.EnergyCost);
-
         if(EnergyManager.Instance._energy >= towerEnergy)
         {
             myButton.interactable= true;
