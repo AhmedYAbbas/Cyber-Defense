@@ -69,7 +69,7 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
                 _enemies.RemoveAt(i);
                 continue;
             }
-            float currentDangerousLevel = (-i + 1) * 0.6f + (0.5f * _enemies[i].MovementSpeed);
+            float currentDangerousLevel = (-i + 1) * 0.6f + (0.5f * _enemies[i].MovementSpeed) + (0.7f *_enemies[i].Health);
             if (dangerousLevel < currentDangerousLevel)
             {
                 dangerousLevel = currentDangerousLevel;
