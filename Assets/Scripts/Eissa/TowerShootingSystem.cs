@@ -64,7 +64,7 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
         GameObject tempEnemy = null;
         for (int i = 0; i < _enemies.Count; i++)
         {
-            if (!_enemies[i].gameObject.activeInHierarchy)
+            if (_enemies[i] == null) //!_enemies[i].gameObject.activeInHierarchy
             {
                 _enemies.RemoveAt(i);
                 continue;
