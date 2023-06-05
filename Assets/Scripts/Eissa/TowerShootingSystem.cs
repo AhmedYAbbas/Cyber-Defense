@@ -8,7 +8,7 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Tower _towerScript;
     private TowerModifications _towerModifications;
-    
+
     private float _range;
     private int _damage;
     private float _attackSpeed;
@@ -18,7 +18,7 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
     private ObjectPool _projectilePool;
     private GameObject _currentTarget;
     private List<Malware> _enemies = new List<Malware>();
-    
+
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private Transform towerHead;
     [SerializeField] private float towerHeadRotationSpeed;
@@ -43,10 +43,10 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
         }
     }
 
-    void GetTowerModification(object sender , EventArgs e)
+    void GetTowerModification(object sender, EventArgs e)
     {
-       _towerModifications = _towerScript.currentModifications;
-       UpdateTowerStats();
+        _towerModifications = _towerScript.currentModifications;
+        UpdateTowerStats();
     }
 
     private void UpdateTowerStats()
@@ -62,14 +62,14 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
     {
         float dangerousLevel = float.MinValue;
         GameObject tempEnemy = null;
-        for (int i = 0 ; i < _enemies.Count ;i++)
+        for (int i = 0; i < _enemies.Count; i++)
         {
             if (!_enemies[i].gameObject.activeInHierarchy)
             {
                 _enemies.RemoveAt(i);
                 continue;
             }
-            float currentDangerousLevel = (-i + 1) * 0.6f + (0.5f * _enemies[i].MovementSpeed) + (0.7f *_enemies[i].Health);
+            float currentDangerousLevel = (-i + 1) * 0.6f + (0.5f * _enemies[i].MovementSpeed) + (0.7f * _enemies[i].Health);
             if (dangerousLevel < currentDangerousLevel)
             {
                 dangerousLevel = currentDangerousLevel;
@@ -84,7 +84,7 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
         {
             Vector3 dir = _currentTarget.transform.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(dir);
-            Vector3 rotation = Quaternion.Lerp(towerHead.rotation,lookRotation,Time.deltaTime * towerHeadRotationSpeed).eulerAngles;
+            Vector3 rotation = Quaternion.Lerp(towerHead.rotation, lookRotation, Time.deltaTime * towerHeadRotationSpeed).eulerAngles;
             towerHead.rotation = Quaternion.Euler(0f, rotation.y, 0f);
         }
     }
@@ -101,28 +101,32 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
             _attackCountdown -= Time.deltaTime;
         }
     }
-    
+
     private void Shoot()
     {
-          var projectile = _projectilePool.GetObject() as TowerHomingProjectile;
-          _muzzleParticleSystem.Play();
-          projectile.transform.position = shootingPoint.position;
-          projectile.GetTarget(_currentTarget.transform,_damage);
+        var projectile = _projectilePool.GetObject() as TowerHomingProjectile;
+        _muzzleParticleSystem.Play();
+        projectile.transform.position = shootingPoint.position;
+        projectile.GetTarget(_currentTarget.transform, _damage);
+        if (_towerScript.currentModifications.ShootingSFX != null)
+        {
+            SoundManager.Instance.PlaySoundEffect(_towerScript.currentModifications.ShootingSFX);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") )
+        if (other.CompareTag("Enemy"))
         {
             _enemies.Add(other.GetComponent<Malware>());
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy") )
+        if (other.CompareTag("Enemy"))
         {
             _enemies.Remove(other.GetComponent<Malware>());
         }
     }
 
-    
+
 }

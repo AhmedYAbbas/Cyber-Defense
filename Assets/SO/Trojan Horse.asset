@@ -23,3 +23,7 @@ MonoBehaviour:
   Range: 5
   IsRanged: 0
   FireRate: 1
+  SpawnSFX: {fileID: 8300000, guid: 1be03f51eba87c94ea45e22a59eb0d11, type: 3}
+  WalkingSFX: {fileID: 0}
+  ShootingSFX: {fileID: 0}
+  DyingSFX: {fileID: 0}

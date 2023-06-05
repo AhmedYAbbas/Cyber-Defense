@@ -14,4 +14,6 @@ public class TowerModifications : ScriptableObject
     public float attackSpeed;
     public PoolableObject bulletPrefab;
     public GameObject towerIcon;
+    public AudioClip ShootingSFX;
+    public AudioClip SpawnSFX;
 }
