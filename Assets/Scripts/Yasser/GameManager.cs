@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         base.OnEnable();
         PhotonNetwork.NetworkingClient.EventReceived += ShowAds;
+        Application.targetFrameRate = 60;
     }
 
     public override void OnDisable()
