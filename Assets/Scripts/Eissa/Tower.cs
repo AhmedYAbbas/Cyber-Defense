@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Photon.Pun;
 using Unity.Mathematics;
 using UnityEngine;
@@ -64,7 +65,7 @@ public class Tower : MonoBehaviourPun
     private void UpdateHealthBar()
     {
         float healthPercentage  = (_currentHealth / _maxHealth) * 100;
-        healthBarSlider.value = healthPercentage / 100;
+        DOTween.To(() => healthBarSlider.value, x => healthBarSlider.value = x, healthPercentage / 100f, 1f);
     }
 
     #region RPCs
@@ -84,7 +85,6 @@ public class Tower : MonoBehaviourPun
         _towerIcon = _modificationsList[i].towerIcon;
         currentModifications = _modificationsList[i];
         TowerGotModified?.Invoke(this, EventArgs.Empty);
-        print("tower modified");
         SwitchTowerIcon();
     }
 

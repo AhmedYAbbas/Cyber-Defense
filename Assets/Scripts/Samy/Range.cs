@@ -11,7 +11,6 @@ public class Range : MonoBehaviour
     LineRenderer line;
     private void Awake()
     {
-        //Radius = GridBuildingSystem3D.Instance.GetPlacedObjectTypeSO().range;
         Radius = baseTowerSo.range;
 
     }

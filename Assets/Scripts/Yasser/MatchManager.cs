@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class MatchManager : MonoBehaviourPunCallbacks
 {
@@ -11,10 +14,11 @@ public class MatchManager : MonoBehaviourPunCallbacks
 
     private const byte RoundEndedEventCode = 1;
     private const byte MatchStartedEventCode = 2;
+    private const byte DisconnectPlayersEventCode = 3;
 
 
-    public const byte MiningUsedEventCode = 3;
-    public const byte AdwareAbilityEventCode = 4;
+    public const byte MiningUsedEventCode = 4;
+    public const byte AdwareAbilityEventCode = 5;
 
     #endregion
 
@@ -28,12 +32,12 @@ public class MatchManager : MonoBehaviourPunCallbacks
     public float roundTime;
     public int currentRound = 1;
     public static MatchManager Instance { get; private set; }
+    public string MAIN_MENU_SCENE_NAME;
+    public string GAMEPLAY_SCENE_NAME;
 
     #endregion
 
     #region Private Variables
-
-    [SerializeField] string GAMEPLAY_SCENE_NAME;
 
     private Side _pSide;
 
@@ -41,6 +45,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
     public static float ROUND_START_TIME = 150f;
     private int _p1Energy;
     private int _p2Energy;
+    private bool _disconnected = true;
 
     #endregion
 
@@ -51,6 +56,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
         base.OnEnable();
         PhotonNetwork.NetworkingClient.EventReceived += StartMatchDataSet;
         PhotonNetwork.NetworkingClient.EventReceived += SwitchSides;
+        PhotonNetwork.NetworkingClient.EventReceived += DisconnectPlayers;
     }
 
     public override void OnDisable()
@@ -58,6 +64,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
         base.OnDisable();
         PhotonNetwork.NetworkingClient.EventReceived -= StartMatchDataSet;
         PhotonNetwork.NetworkingClient.EventReceived -= SwitchSides;
+        PhotonNetwork.NetworkingClient.EventReceived -= DisconnectPlayers;
     }
 
     private void Awake()
@@ -70,6 +77,18 @@ public class MatchManager : MonoBehaviourPunCallbacks
         {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == MatchManager.Instance.GAMEPLAY_SCENE_NAME)
+        {
+            // TODO: Profiler: cache this list
+            if (PhotonNetwork.PlayerList.Length < 2)
+            {
+                DisconnectPlayersRaiseEvent();
+            }
         }
     }
 
@@ -123,6 +142,12 @@ public class MatchManager : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
+        if (_disconnected && SceneManager.GetActiveScene().name == GAMEPLAY_SCENE_NAME)
+        {
+            DisconnectPlayersRaiseEvent();
+            UILayer.Instance.EnableDisconnectionPanel();
+        }
+
         ResetMatch();
     }
 
@@ -158,6 +183,11 @@ public class MatchManager : MonoBehaviourPunCallbacks
             CheckWinner(isBaseDestroyed);
             RoundEndedRaiseEvent();
         }
+    }
+
+    public void SetPlayerDisconnected(bool disconnected)
+    {
+        _disconnected = disconnected;
     }
 
     #endregion
@@ -220,11 +250,6 @@ public class MatchManager : MonoBehaviourPunCallbacks
                 player.CustomProperties[CustomKeys.WINS] = wins;
             }
         }
-
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-        {
-            Debug.Log($"P{i + 1} wins: " + (int)PhotonNetwork.PlayerList[i].CustomProperties[CustomKeys.WINS]);
-        }
     }
 
     // Reset Match Data
@@ -245,6 +270,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
             {
                 UILayer.Instance.GameEndedPanel.SetActive(true);
                 UILayer.Instance.winnerText.text = $"<color=yellow>{(string)PhotonNetwork.PlayerList[0].CustomProperties[CustomKeys.User_Name]}</color> Won The Game";
+                SetPlayerDisconnected(false);
                 PhotonNetwork.Disconnect();
             }
             else if ((int)PhotonNetwork.PlayerList[0].CustomProperties[CustomKeys.WINS] <
@@ -252,6 +278,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
             {
                 UILayer.Instance.GameEndedPanel.SetActive(true);
                 UILayer.Instance.winnerText.text = $"<color=yellow>{(string)PhotonNetwork.PlayerList[1].CustomProperties[CustomKeys.User_Name]}</color> Won The Game";
+                SetPlayerDisconnected(false);
                 PhotonNetwork.Disconnect();
             }
 
@@ -260,7 +287,7 @@ public class MatchManager : MonoBehaviourPunCallbacks
     }
 
     // All
-    public void SwitchSides(EventData obj)
+    private void SwitchSides(EventData obj)
     {
         if (obj.Code == RoundEndedEventCode)
         {
@@ -291,5 +318,20 @@ public class MatchManager : MonoBehaviourPunCallbacks
         }
     }
 
+    private void DisconnectPlayersRaiseEvent()
+    {
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+        PhotonNetwork.RaiseEvent(DisconnectPlayersEventCode, null, raiseEventOptions, SendOptions.SendReliable);
+    }
+
+    private void DisconnectPlayers(EventData obj)
+    {
+        if (obj.Code == DisconnectPlayersEventCode)
+        {
+            PhotonNetwork.Disconnect();
+        }
+    }
+
     #endregion
+
 }

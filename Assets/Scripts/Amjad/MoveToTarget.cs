@@ -27,7 +27,6 @@ public class MoveToTarget : MonoBehaviour
     {
         if (_target != null)
         {
-            print("Target Found");
             _agent.SetDestination(_target.transform.position);
         }
     }

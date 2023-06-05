@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UILayer : MonoBehaviour
 {
@@ -13,15 +14,17 @@ public class UILayer : MonoBehaviour
     [SerializeField] private TMP_Text roundNumText;
     [SerializeField] private TMP_Text attackerDefenderTurnText;
     [SerializeField] private GameObject ads;
+    [SerializeField] private GameObject matchDisconnetedPanel;
 
     #endregion
 
     #region Public Variables
 
-    public GameObject timerGameObject;
     public TextMeshProUGUI roundText;
     public TextMeshProUGUI p1WinsText;
+    public TextMeshProUGUI p1NameText;
     public TextMeshProUGUI p2WinsText;
+    public TextMeshProUGUI p2NameText;
     public TMP_Text winnerText;
     public GameObject GameEndedPanel;
 
@@ -73,7 +76,7 @@ public class UILayer : MonoBehaviour
 
     public IEnumerator EnableSwitchingSidesPanel(int increment)
     {
-        roundNumText.text = $"Round: {MatchManager.Instance.currentRound+increment}";
+        roundNumText.text = $"Round: {MatchManager.Instance.currentRound + increment}";
         if ((MatchManager.Side)PhotonNetwork.LocalPlayer.CustomProperties[CustomKeys.P_SIDE] == MatchManager.Side.Attacker)
         {
             attackerDefenderTurnText.text = "Now You Are An <color=red>Attacker</color>";
@@ -97,7 +100,31 @@ public class UILayer : MonoBehaviour
 
     public void ShowAds()
     {
+        foreach (Transform AD in ads.transform)
+        {
+            AD.gameObject.SetActive(true);
+        }
         ads.SetActive(true);
+    }
+
+    public void EnableDisconnectionPanel()
+    {
+        if (SceneManager.GetActiveScene().name == MatchManager.Instance.GAMEPLAY_SCENE_NAME)
+        {
+            StartCoroutine(EnableDisconnectedPanel());
+        }
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    private IEnumerator EnableDisconnectedPanel()
+    {
+        matchDisconnetedPanel.SetActive(true);
+        yield return new WaitForSeconds(3.0f);
+        SceneManager.LoadScene(MatchManager.Instance.MAIN_MENU_SCENE_NAME);
+        Destroy(gameObject, 1.0f);
     }
 
     #endregion

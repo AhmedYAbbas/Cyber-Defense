@@ -51,7 +51,6 @@ public class TowerModificationManager : MonoBehaviour
                 {
                     if (ObjectEnergyCost <= EnergyManager.Instance._energy)
                     {
-                        print("Can Modify Tower");
                         hit.transform.GetComponent<Tower>().ModifyTower(TowerModifications);
                         EnergyManager.Instance.DecreaseEnergy(ObjectEnergyCost);
                     }

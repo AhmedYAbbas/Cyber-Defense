@@ -16,8 +16,8 @@ MonoBehaviour:
   CardImage: {fileID: 0}
   MalwareName: Virus
   AttackDamage: 10
-  MovementSpeed: 2.5
-  Health: 150
+  MovementSpeed: 4
+  Health: 100
   Shield: 150
   EnergyCost: 80
   Range: 5

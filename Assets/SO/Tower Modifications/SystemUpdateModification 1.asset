@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   ModificationName: SystemUpdateModification
-  maxHealth: 800
-  EnergyCost: 500
+  maxHealth: 250
+  EnergyCost: 350
   damage: 34
   range: 6
   attackSpeed: 1.3

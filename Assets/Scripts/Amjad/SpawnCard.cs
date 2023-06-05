@@ -30,7 +30,6 @@ public class SpawnCard : MonoBehaviour
     {
         SpawnManager.Instance.ObjectName = _malwareData.MalwareName;
         SpawnManager.Instance.ObjectEnergyCost = _malwareData.EnergyCost;
-        print(SpawnManager.Instance.ObjectName);
     }
 
 

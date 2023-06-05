@@ -1,12 +1,20 @@
+using System.Collections;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
-public class Timer : MonoBehaviour
+public class Timer : MonoBehaviourPunCallbacks
 {
-    public TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI timerText;
     private bool _canRaiseEvent;
-    private float remainingTime;
+
+    private void Start()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            StartCoroutine(SyncTimerCoroutine());
+        }
+    }
 
     private void Update()
     {
@@ -20,7 +28,6 @@ public class Timer : MonoBehaviour
             if (_canRaiseEvent)
             {
                 _canRaiseEvent = false;
-
                 if (PhotonNetwork.IsMasterClient)
                 {
                     MatchManager.Instance.EndRound(false);
@@ -28,12 +35,15 @@ public class Timer : MonoBehaviour
             }
         }
 
-        DisplayTime(MatchManager.Instance.roundTime);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            DisplayTime(MatchManager.Instance.roundTime);
+        }
     }
 
     public void DisplayTime(float timeToDisplay)
     {
-        if (timeToDisplay < 0)
+        if (timeToDisplay <= 0)
         {
             timeToDisplay = 0;
         }
@@ -41,5 +51,20 @@ public class Timer : MonoBehaviour
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    [PunRPC]
+    private void SyncTimer(float time)
+    {
+        DisplayTime(time);
+    }
+
+    private IEnumerator SyncTimerCoroutine()
+    {
+        while (true)
+        {
+            photonView.RPC("SyncTimer", RpcTarget.Others, MatchManager.Instance.roundTime);
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 }

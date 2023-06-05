@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   ModificationName: SSD Modification
-  maxHealth: 800
-  EnergyCost: 550
+  maxHealth: 250
+  EnergyCost: 450
   damage: 20
   range: 6
-  attackSpeed: 2.6
+  attackSpeed: 3
   bulletPrefab: {fileID: 1997412740616632572, guid: e3721398ade1cc5459c4b8a2c7c682b5,
     type: 3}
   towerIcon: {fileID: 7939077446957297283, guid: e61eb955cb337b24e87d6a1be53eb8f3,

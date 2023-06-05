@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class AdwareAbility : GenericAbility, IAbility
 {
+
     public void Use()
     {
         if (Time.time > _nextUseTime)
@@ -12,4 +13,5 @@ public class AdwareAbility : GenericAbility, IAbility
             _nextUseTime = Time.time + COOLDOWN_TIME;
         }
     }
+
 }
