@@ -73,7 +73,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.21192227, b: 0, a: 0}
+    - _Color: {r: 1, g: 0.72254944, b: 0, a: 0.54509807}
     - _HologramTiling: {r: 0.6, g: 0.6, b: 0, a: 0}
     - _MoveVelocity: {r: 0, g: 0.2, b: 0, a: 0}
     - _MovingSpeed: {r: 0.4, g: 0.4, b: 0, a: 0}

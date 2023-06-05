@@ -29,7 +29,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3005
+  m_CustomRenderQueue: 3050
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -72,7 +72,7 @@ Material:
     - _DstBlend: 1
     - _Float: 0
     - _QueueControl: 0
-    - _QueueOffset: 5
+    - _QueueOffset: 50
     - _SrcBlend: 5
     - _Surface: 1
     - _ZTest: 4
@@ -82,11 +82,11 @@ Material:
     - _fresnepower: 10
     - _vertexfrequancy: 0
     m_Colors:
-    - _back: {r: 2.6183176, g: 1.2625879, b: 0.16558531, a: 0}
+    - _back: {r: 0.16691588, g: 0.70788586, b: 5.055164, a: 0}
     - _dissolve_crtl: {r: 0, g: 0, b: 0, a: 0}
-    - _edg_color: {r: 0, g: 12.86275, b: 16, a: 0}
-    - _fresnecolor: {r: 4.6895905, g: 3.9717963, b: 1.0839149, a: 0.36862746}
-    - _front: {r: 0.07132784, g: 0.1307677, b: 0.15454365, a: 0.64705884}
+    - _edg_color: {r: 14.115295, g: 8.093152, b: 0.46607134, a: 0}
+    - _fresnecolor: {r: 0, g: 1.1721917, b: 9.734288, a: 1}
+    - _front: {r: 0, g: 0.07324317, b: 0.5471698, a: 0.64705884}
     - _vertex_amount: {r: 0.05, g: 0.05, b: 0.05, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7439308773690812545
