@@ -1,9 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting;
-using System.Collections.Generic;
-using static UnityEngine.GraphicsBuffer;
 using UnityEditor;
+using System.Collections.Generic;
 
 public class PanelsDotween : MonoBehaviour
 {
@@ -29,9 +27,14 @@ public class PanelsDotween : MonoBehaviour
     private Dictionary<TweenTypes, Ease> _outTweenTypes;
 
     // public variables
+    [SerializeField] // Add this attribute
     public TweenTypes SelectedOption;
-    [SerializeField] public GameObject Parent;
-    [SerializeField] public float TransitionDuration = 0.5f;
+
+    [SerializeField] // Add this attribute
+    public GameObject Parent;
+
+    [SerializeField] // Add this attribute
+    public float TransitionDuration = 0.5f;
 
 
     private void Awake()
@@ -95,8 +98,6 @@ public class PanelsDotween : MonoBehaviour
         Parent?.SetActive(false);
     }
 }
-
-#if UNITY_EDITOR
 [CustomEditor(typeof(PanelsDotween))]
 public class PanelsDotweenEditor : Editor
 {
@@ -121,4 +122,3 @@ public class PanelsDotweenEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
-#endif

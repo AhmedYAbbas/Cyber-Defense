@@ -1457,8 +1457,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d97f225544a124479a13b08a806b107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Parent: {fileID: 1610760101}
-  _transitionDuration: 0.5
+  SelectedOption: 0
+  Parent: {fileID: 1610760101}
+  TransitionDuration: 0.5
 --- !u!1 &462945385
 GameObject:
   m_ObjectHideFlags: 0
@@ -5009,8 +5010,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d97f225544a124479a13b08a806b107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Parent: {fileID: 1704003140}
-  _transitionDuration: 0.5
+  SelectedOption: 0
+  Parent: {fileID: 1704003140}
+  TransitionDuration: 0.5
 --- !u!1 &2091182658
 GameObject:
   m_ObjectHideFlags: 0
