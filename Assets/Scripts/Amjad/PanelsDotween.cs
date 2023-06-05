@@ -98,27 +98,3 @@ public class PanelsDotween : MonoBehaviour
         Parent?.SetActive(false);
     }
 }
-[CustomEditor(typeof(PanelsDotween))]
-public class PanelsDotweenEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        PanelsDotween script = (PanelsDotween)target;
-
-        // Display the dropdown field using EditorGUILayout.Popup
-        script.SelectedOption = (PanelsDotween.TweenTypes)EditorGUILayout.EnumPopup("Selected Option", script.SelectedOption);
-
-        EditorGUILayout.Space();
-
-        // Display the Parent field
-        script.Parent = (GameObject)EditorGUILayout.ObjectField("Parent", script.Parent, typeof(GameObject), true);
-
-        EditorGUILayout.Space();
-
-        // Display the Transition Duration field
-        script.TransitionDuration = EditorGUILayout.FloatField("Transition Duration", script.TransitionDuration);
-
-        // Update the serialized object
-        serializedObject.ApplyModifiedProperties();
-    }
-}
