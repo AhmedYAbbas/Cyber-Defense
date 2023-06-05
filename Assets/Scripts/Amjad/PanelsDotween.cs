@@ -95,6 +95,8 @@ public class PanelsDotween : MonoBehaviour
         Parent?.SetActive(false);
     }
 }
+
+#if UNITY_EDITOR
 [CustomEditor(typeof(PanelsDotween))]
 public class PanelsDotweenEditor : Editor
 {
@@ -119,3 +121,4 @@ public class PanelsDotweenEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif
