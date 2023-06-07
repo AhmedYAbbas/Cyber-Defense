@@ -24,6 +24,7 @@ public class SoundManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         _audioSource = GetComponent<AudioSource>();
+        PlayBackgroundMusic(GameplayMusic, .1f);
     }
 
     public void PlaySoundEffect(AudioClip SFX, float volume = 1f)
@@ -31,9 +32,9 @@ public class SoundManager : MonoBehaviour
         _audioSource.PlayOneShot(SFX, volume);
     }
 
-    public void PlayBackgroundMusic(float volume = 1f, bool loop = true)
+    public void PlayBackgroundMusic(AudioClip BackgroundMusic, float volume = 1f, bool loop = true)
     {
-        //_audioSource.clip = BackgroundMusic;
+        _audioSource.clip = BackgroundMusic;
         _audioSource.volume = volume;
         _audioSource.loop = loop;
         _audioSource.Play();

@@ -110,7 +110,7 @@ public class TowerShootingSystem : MonoBehaviourPunCallbacks
         projectile.GetTarget(_currentTarget.transform, _damage);
         if (_towerScript.currentModifications.ShootingSFX != null)
         {
-            SoundManager.Instance.PlaySoundEffect(_towerScript.currentModifications.ShootingSFX);
+            SoundManager.Instance.PlaySoundEffect(_towerScript.currentModifications.ShootingSFX , 1f);
         }
     }
     private void OnTriggerEnter(Collider other)

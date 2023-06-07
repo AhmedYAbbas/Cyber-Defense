@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     public static SpawnManager Instance => _instance;
     [HideInInspector] public string ObjectName;
     [HideInInspector] public int ObjectEnergyCost;
-    [HideInInspector] public AudioClip ObjectSpawnSFX;
+
     public Camera camera;
 
     void Start()
@@ -55,10 +55,6 @@ public class SpawnManager : MonoBehaviour
                     {
                         MalwaresManager.Instance.SpawnMalware(ObjectName, spawnPosition);
                         EnergyManager.Instance.DecreaseEnergy(ObjectEnergyCost);
-                        if (ObjectSpawnSFX != null)
-                        {
-                            SoundManager.Instance.PlaySoundEffect(ObjectSpawnSFX , 0.1f);
-                        }
                     }
                 }
             }

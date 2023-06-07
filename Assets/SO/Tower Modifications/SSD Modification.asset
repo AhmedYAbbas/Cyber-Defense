@@ -23,3 +23,5 @@ MonoBehaviour:
     type: 3}
   towerIcon: {fileID: 7939077446957297283, guid: e61eb955cb337b24e87d6a1be53eb8f3,
     type: 3}
+  ShootingSFX: {fileID: 8300000, guid: 4469103c3769d324794a2c74aad5d0d8, type: 3}
+  SpawnSFX: {fileID: 0}

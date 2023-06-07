@@ -71,13 +71,18 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 2c25656313dfb2942a783a0aaa6fab59, type: 3}
   - {fileID: 21300000, guid: e5671cd36346a9048b42dd8ac46f766f, type: 3}
   - {fileID: 21300000, guid: f048c354630a57849af4e0a32cea8ebb, type: 3}
+  - {fileID: 21300000, guid: f68b346429558204bbb99b3e98b6b0e4, type: 3}
+  - {fileID: 21300000, guid: 9b6c8cd4b5076df45b02386b11deec03, type: 3}
   - {fileID: 21300000, guid: 4a00a1358c2b4144686588beb33d2c77, type: 3}
+  - {fileID: 21300000, guid: ff1c13457ef0c9144b8ccd30d3a02a27, type: 3}
   - {fileID: 21300000, guid: 8a1e5c55290277b4ab5f134f63d06ce6, type: 3}
   - {fileID: 21300000, guid: 83096665ea2544249bed6320b56ec805, type: 3}
   - {fileID: 21300000, guid: a96cb4852cd730f42955b94e7c319042, type: 3}
+  - {fileID: 21300000, guid: 507ab5a519b256946928d61af2791ae7, type: 3}
   - {fileID: 21300000, guid: 323736063cec1e2419511381f2853377, type: 3}
   - {fileID: 21300000, guid: 2dd817969e7ad2749a249bc8cb0fadb3, type: 3}
   - {fileID: 21300000, guid: c3122817d503ab94db2354cea854b49b, type: 3}
+  - {fileID: 21300000, guid: 5fe8fd2778d0e644e9eb85eead6066cb, type: 3}
   - {fileID: 21300000, guid: 0e97526799293e446a9a0a0db1b2f529, type: 3}
   - {fileID: 21300000, guid: c29d436746e6e3149b63cf0d9e78d305, type: 3}
   - {fileID: 21300000, guid: c64f7b778bc800c49bb78c98c9e028ac, type: 3}
@@ -107,6 +112,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: bd74895d7fcb90140b7ba4e4bb2a06de, type: 3}
   - {fileID: 21300000, guid: 28a9f8bd9de87ad4e9ae9001f5623437, type: 3}
   - {fileID: 21300000, guid: ca0a821e06cd00f4aa57ab76e5a00338, type: 3}
+  - {fileID: 21300000, guid: bab1ee8e16e968f48801381ae41c2f98, type: 3}
   - {fileID: 21300000, guid: c3a1a29e593462b49a28b91b5504487c, type: 3}
   - {fileID: 21300000, guid: 8adebdbe1c8f77345b1cd58e00e0f6ab, type: 3}
   - {fileID: 21300000, guid: bdf546ce7ef991743909d9cf33444bff, type: 3}
@@ -126,13 +132,18 @@ SpriteAtlas:
   - Hard Edge Lobby UI
   - IMG_4127
   - AdwareCard
+  - HUD All Black
+  - Fill
   - NewEnergy_BG
+  - IMG_4163
   - New_Adware
   - IMG_4126
   - New_Trojan Horse
+  - HP
   - Lobby UI
   - Cofirm_Text
   - Highlighted_Join_Room
+  - IMG_4156
   - Blurred BG
   - Virus
   - PV_Main_Menu
@@ -162,6 +173,7 @@ SpriteAtlas:
   - Background
   - PV_Choose_Mode
   - Join_Room
+  - HUD Kinda Transparent
   - AD4
   - Button
   - Highlighted_Button

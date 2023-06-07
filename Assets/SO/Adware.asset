@@ -25,5 +25,5 @@ MonoBehaviour:
   FireRate: 1
   SpawnSFX: {fileID: 8300000, guid: 1be03f51eba87c94ea45e22a59eb0d11, type: 3}
   WalkingSFX: {fileID: 0}
-  ShootingSFX: {fileID: 0}
+  ShootingSFX: {fileID: 8300000, guid: 3b06c3672ff15874c81a086eba1e57f7, type: 3}
   DyingSFX: {fileID: 0}
