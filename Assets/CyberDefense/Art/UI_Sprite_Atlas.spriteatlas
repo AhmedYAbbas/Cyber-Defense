@@ -23,7 +23,7 @@ SpriteAtlas:
     platformSettings:
     - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
-      m_MaxTextureSize: 2048
+      m_MaxTextureSize: 1024
       m_ResizeAlgorithm: 0
       m_TextureFormat: -1
       m_TextureCompression: 1
@@ -179,7 +179,7 @@ SpriteAtlas:
   - Highlighted_Button
   - Text_Field_Blue
   - Mining_Ability
-  - FireWall
+  - Firewall
   - Main_Menu_Background
   - Adware_Ability
   - Fill
