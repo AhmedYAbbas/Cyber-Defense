@@ -102,6 +102,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: fba0ee0abbbc25e4b8eecc7e75096a8b, type: 3}
   - {fileID: 21300000, guid: 9225845a490b90b4ba4dce91666b7236, type: 3}
   - {fileID: 21300000, guid: 34f5dd5aee769654f9b96eeae9372356, type: 3}
+  - {fileID: 21300000, guid: 1c92fd8adbb134d4ca1d6f3e194293db, type: 3}
+  - {fileID: 21300000, guid: f39d81aa4e401564eab389cc1c7a71fa, type: 3}
   - {fileID: 21300000, guid: 059a9aaad4af4044e9b5d4594a9fb5e2, type: 3}
   - {fileID: 21300000, guid: 42b00cbae44a879498309afbb7d37536, type: 3}
   - {fileID: 21300000, guid: 502fa6bb77898c9479f955a1b123a088, type: 3}
@@ -122,6 +124,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 248a354f004f4ca4aa27bdfa4f67d540, type: 3}
   - {fileID: 21300000, guid: 745e17bfe3da292488a5be047541087d, type: 3}
   - {fileID: 21300000, guid: 5991ffbf380166743b512729f3d8c168, type: 3}
+  - {fileID: 21300000, guid: 475dd9ff25ad0fb429f2e45181967673, type: 3}
   m_PackedSpriteNamesToIndex:
   - Button
   - DeepScanner
@@ -163,6 +166,8 @@ SpriteAtlas:
   - Hard Edge Stylized Lobby UI
   - IMG_4123
   - PV_Welcome
+  - GreenFill
+  - NewHP
   - AD1
   - Options_Text
   - Welcome_Background
@@ -179,10 +184,11 @@ SpriteAtlas:
   - Highlighted_Button
   - Text_Field_Blue
   - Mining_Ability
-  - Firewall
+  - FireWall
   - Main_Menu_Background
   - Adware_Ability
   - Fill
+  - RedFill
   m_RenderDataMap: {}
   m_Tag: UI_Sprite_Atlas
   m_IsVariant: 0

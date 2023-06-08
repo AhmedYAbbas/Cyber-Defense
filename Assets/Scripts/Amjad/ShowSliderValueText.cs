@@ -11,6 +11,13 @@ public class ShowSliderValueText : MonoBehaviour
 
     public void ValueToText()
     {
-        SliderText.text = HpSlider.value.ToString();
+        if (HpSlider.maxValue == 1)
+        {
+            SliderText.text = $"{(HpSlider.value * 1000).ToString()}";
+        }
+        else
+        {
+            SliderText.text = $"{HpSlider.value.ToString()}";
+        }
     }
 }
