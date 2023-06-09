@@ -8,23 +8,41 @@ public class DamageTextAnimation : MonoBehaviour
 {
     // private variables
     [SerializeField] TextMeshProUGUI text;
-    [SerializeField] Slider Hp;
-    [SerializeField] float moveDistance = 3f;
     [SerializeField] float duration = 1f;
     [SerializeField] float delay = 1f;
+    private Tweener myTween;
 
-    public void GotDamaged()
+
+    public void GotDamaged(int damage)
     {
         text.gameObject.SetActive(true);
+        text.transform.localScale = Vector3.one * .5f;
+        text.text = damage.ToString();
+        myTween?.Kill();
+        TextTween();
+    }
 
-        // Move the text upwards
-        text.transform.DOMoveY(text.transform.position.y + moveDistance, duration)
-            .SetEase(Ease.OutQuad)
+    private void TextTween()
+    {
+        myTween = text.transform.DOScale(Vector3.one, duration)
+            .SetEase(Ease.OutBack)
             .SetDelay(delay)
+            .OnComplete(() =>
+            {
+                Dissapear();
+            });
+    }
+
+    private void Dissapear()
+    {
+        myTween = text.transform.DOScale(Vector3.one * .5f, duration)
+            .SetEase(Ease.InBack)
             .OnComplete(() =>
             {
                 // Set the text object to inactive
                 text.gameObject.SetActive(false);
             });
     }
+
+
 }

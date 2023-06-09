@@ -1278,7 +1278,6 @@ GameObject:
   - component: {fileID: 457070146004350275}
   - component: {fileID: 8621434678096721173}
   - component: {fileID: 4657932935382542381}
-  - component: {fileID: 348539289}
   m_Layer: 5
   m_Name: 'HP '
   m_TagString: Untagged
@@ -1395,36 +1394,7 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 348539289}
-        m_TargetAssemblyTypeName: DamageTextAnimation, Assembly-CSharp
-        m_MethodName: GotDamaged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &348539289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2482940886131216903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 244166428ac74f54398259fc91d5c7fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 1035788704}
-  Hp: {fileID: 4657932935382542381}
-  moveDistance: 3
-  duration: 1
-  delay: 1
+      m_Calls: []
 --- !u!1 &2494307767309474294
 GameObject:
   m_ObjectHideFlags: 0
@@ -2968,6 +2938,7 @@ GameObject:
   - component: {fileID: 4947552356043038982}
   - component: {fileID: 4947552356043038983}
   - component: {fileID: 4947552356043038980}
+  - component: {fileID: 4370718096502620967}
   m_Layer: 0
   m_Name: Trojan Horse
   m_TagString: Enemy
@@ -3124,6 +3095,21 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &4370718096502620967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947552356043038981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244166428ac74f54398259fc91d5c7fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1035788704}
+  duration: 0.5
+  delay: 0
 --- !u!1 &5114766220671368021
 GameObject:
   m_ObjectHideFlags: 0

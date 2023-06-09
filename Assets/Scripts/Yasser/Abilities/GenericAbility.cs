@@ -8,7 +8,7 @@ public class GenericAbility : MonoBehaviour
     public Button _card;
     public int cost = 5;
     public float _nextUseTime;
-    public const float COOLDOWN_TIME = 10.0f;
+    public const float COOLDOWN_TIME = 35.0f;
     public TextMeshProUGUI cooldownText;
     public float _timer = COOLDOWN_TIME;
     public bool _isOnCooldown;

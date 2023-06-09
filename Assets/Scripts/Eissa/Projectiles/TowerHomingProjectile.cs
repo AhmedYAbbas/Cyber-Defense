@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TowerHomingProjectile : PoolableObject
 {
-    
+
     private Transform _target;
     private Vector3 _targetDir;
     private int _damage;
@@ -17,7 +17,7 @@ public class TowerHomingProjectile : PoolableObject
         _target = null;
     }
 
-    public void GetTarget(Transform target,int dmg)
+    public void GetTarget(Transform target, int dmg)
     {
         _target = target;
         _damage = dmg;
@@ -45,6 +45,12 @@ public class TowerHomingProjectile : PoolableObject
             {
                 malwareScript.DamageMalware(_damage);
             }
+
+            if (other.TryGetComponent(out DamageTextAnimation damageText))
+            {
+                damageText.GotDamaged(_damage);
+            }
+
             this.gameObject.SetActive(false);
         }
     }

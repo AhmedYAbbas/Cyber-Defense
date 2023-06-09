@@ -452,6 +452,7 @@ GameObject:
   - component: {fileID: 1178094597315263715}
   - component: {fileID: 1178094597315263714}
   - component: {fileID: 1178094597315263713}
+  - component: {fileID: 3274605663675841522}
   m_Layer: 0
   m_Name: tower-combin
   m_TagString: Tower
@@ -553,6 +554,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.6, y: 4.5, z: 2.4}
   m_Center: {x: 0, y: 2.41, z: 0}
+--- !u!114 &3274605663675841522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060404640000065983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244166428ac74f54398259fc91d5c7fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1424054033}
+  duration: 0.5
+  delay: 0
 --- !u!1 &3845275479473561958
 GameObject:
   m_ObjectHideFlags: 0
@@ -5750,7 +5766,6 @@ GameObject:
   - component: {fileID: 4067083408375791760}
   - component: {fileID: 4960512298953242680}
   - component: {fileID: 2450818035965393167}
-  - component: {fileID: 1508513340}
   m_Layer: 5
   m_Name: 'HP '
   m_TagString: Untagged
@@ -5867,33 +5882,4 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1508513340}
-        m_TargetAssemblyTypeName: DamageTextAnimation, Assembly-CSharp
-        m_MethodName: GotDamaged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1508513340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8960077046333672895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 244166428ac74f54398259fc91d5c7fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 1424054033}
-  Hp: {fileID: 2450818035965393167}
-  moveDistance: 3
-  duration: 1
-  delay: 1
+      m_Calls: []
