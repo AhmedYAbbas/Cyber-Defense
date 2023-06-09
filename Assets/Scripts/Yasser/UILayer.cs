@@ -122,8 +122,8 @@ public class UILayer : MonoBehaviour
     private IEnumerator EnableDisconnectedPanel()
     {
         matchDisconnetedPanel.SetActive(true);
-        yield return new WaitForSeconds(3.0f);
         SceneManager.LoadScene(MatchManager.Instance.MAIN_MENU_SCENE_NAME);
+        yield return new WaitForSeconds(3.0f);
         Destroy(gameObject, 1.0f);
     }
 

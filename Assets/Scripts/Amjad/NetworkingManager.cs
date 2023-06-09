@@ -33,22 +33,34 @@ public class NetworkingManager : MonoBehaviourPunCallbacks
 
     public void QuickMatch()
     {
-        PhotonNetwork.JoinRandomRoom();
+        if (PhotonNetwork.NetworkClientState == ClientState.ConnectedToMasterServer)
+        {
+            PhotonNetwork.JoinRandomRoom();
+        }
     }
 
     public void CreateOrJoinRoom(string RoomName)
     {
-        PhotonNetwork.JoinOrCreateRoom(RoomName, new RoomOptions { MaxPlayers = 2 }, null, null);
+        if (PhotonNetwork.NetworkClientState == ClientState.ConnectedToMasterServer)
+        {
+            PhotonNetwork.JoinOrCreateRoom(RoomName, new RoomOptions { MaxPlayers = 2 }, null, null);
+        }
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 2 });
+        if (PhotonNetwork.NetworkClientState == ClientState.ConnectedToMasterServer)
+        {
+            PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 2 });
+        }
     }
 
     public void LeaveRoom()
     {
-        PhotonNetwork.LeaveRoom();
+        if (PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
     }
 
     public void SetNickName()
