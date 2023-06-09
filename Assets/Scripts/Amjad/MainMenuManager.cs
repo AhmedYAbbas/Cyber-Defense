@@ -22,7 +22,7 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    public void ChechIfPlayerEnteredHisName()
+    public void CheckIfPlayerEnteredHisName()
     {
         if (_ifPlayerNickName.text.Length > 0)
         {
