@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +15,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject _mainMenuPanel;
     [SerializeField] private GameObject _chooseModePanel;
     [SerializeField] private GameObject _waitingForPlayerPanel;
+    [SerializeField] private GameObject _rejoinPanel;
 
     void Start()
     {
@@ -42,24 +46,28 @@ public class MainMenuManager : MonoBehaviour
 
     public void CreateOrJoinRoom(TMP_InputField RoomName)
     {
-        if (string.IsNullOrEmpty(RoomName.text))
-        {
-            return;
-        }
-        else
+        if (!string.IsNullOrEmpty(RoomName.text) && PhotonNetwork.NetworkClientState == ClientState.ConnectedToMasterServer)
         {
             NetworkingManager.Instance.CreateOrJoinRoom(RoomName.text);
             _waitingForPlayerPanel.SetActive(true);
-            //_chooseModePanel.GetComponent<Canvas>().enabled = false;
+        }
+        else
+        {
+            StartCoroutine(RejoinCoroutine());
         }
     }
 
     public void JoinRandomRoom()
     {
-        NetworkingManager.Instance.QuickMatch();
-        _waitingForPlayerPanel.SetActive(true);
-        //_chooseModePanel.GetComponent<Canvas>().enabled = false;
-
+        if (PhotonNetwork.NetworkClientState == ClientState.ConnectedToMasterServer)
+        {
+            NetworkingManager.Instance.QuickMatch();
+            _waitingForPlayerPanel.SetActive(true);
+        }
+        else
+        {
+            StartCoroutine(RejoinCoroutine());
+        }
     }
 
     public void Options()
@@ -70,5 +78,12 @@ public class MainMenuManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    private IEnumerator RejoinCoroutine()
+    {
+        _rejoinPanel.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        _rejoinPanel.SetActive(false);
     }
 }
