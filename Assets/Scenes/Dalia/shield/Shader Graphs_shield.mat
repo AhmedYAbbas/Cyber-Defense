@@ -82,11 +82,11 @@ Material:
     - _fresnepower: 10
     - _vertexfrequancy: 0
     m_Colors:
-    - _back: {r: 0.16691588, g: 0.70788586, b: 5.055164, a: 0}
+    - _back: {r: 6.685371, g: 6.6520176, b: 0, a: 0}
     - _dissolve_crtl: {r: 0, g: 0, b: 0, a: 0}
     - _edg_color: {r: 14.115295, g: 8.093152, b: 0.46607134, a: 0}
-    - _fresnecolor: {r: 0, g: 1.1721917, b: 9.734288, a: 1}
-    - _front: {r: 0, g: 0.07324317, b: 0.5471698, a: 0.64705884}
+    - _fresnecolor: {r: 2.8370514, g: 10.877859, b: 66.82835, a: 1}
+    - _front: {r: 0.959038, g: 1, b: 0, a: 0.64705884}
     - _vertex_amount: {r: 0.05, g: 0.05, b: 0.05, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7439308773690812545
